@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Oriental Insurance - Click Test</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            color: white;
+            min-height: 100vh;
+        }
+        
+        .test-container {
+            text-align: center;
+            padding: 40px;
+        }
+        
+        .test-button {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border: none;
+            border-radius: 15px;
+            padding: 20px 40px;
+            font-size: 18px;
+            color: white;
+            cursor: pointer;
+            margin: 20px;
+            transition: all 0.3s ease;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+        }
+        
+        .test-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 25px rgba(0,0,0,0.3);
+        }
+        
+        .nav-card {
+            background: rgba(255,255,255,0.1);
+            border-radius: 15px;
+            padding: 30px;
+            margin: 20px;
+            display: inline-block;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            min-width: 200px;
+        }
+        
+        .nav-card:hover {
+            background: rgba(255,255,255,0.2);
+            transform: translateY(-5px);
+        }
+        
+        .door {
+            width: 150px;
+            height: 200px;
+            background: linear-gradient(135deg, #8B4513, #A0522D);
+            border-radius: 10px;
+            margin: 20px auto;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+        }
+        
+        .door:hover {
+            transform: scale(1.05);
+        }
+        
+        .door:before {
+            content: '🚪';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 40px;
+        }
+        
+        .log {
+            background: rgba(0,0,0,0.5);
+            border-radius: 10px;
+            padding: 20px;
+            margin: 20px 0;
+            text-align: left;
+            max-height: 300px;
+            overflow-y: auto;
+            font-family: monospace;
+        }
+        
+        .status {
+            font-size: 24px;
+            margin: 20px 0;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="test-container">
+        <h1>🧪 Oriental Insurance - JavaScript Click Test</h1>
+        <div class="status" id="status">🔍 Testing JavaScript functionality...</div>
+        
+        <h2>Test 1: Basic Button Click</h2>
+        <button class="test-button" onclick="testClick('Button')">🔥 Click Me!</button>
+        
+        <h2>Test 2: Door Click</h2>
+        <div class="door" onclick="testClick('Door')"></div>
+        
+        <h2>Test 3: Navigation Cards</h2>
+        <div class="nav-card" onclick="testClick('Policies Card')">
+            <h3>📄 Policies</h3>
+            <p>Click to test policies modal</p>
+        </div>
+        
+        <div class="nav-card" onclick="testClick('Claims Card')">
+            <h3>📝 Claims</h3>
+            <p>Click to test claims modal</p>
+        </div>
+        
+        <div class="nav-card" onclick="testClick('Support Card')">
+            <h3>🎧 Support</h3>
+            <p>Click to test support modal</p>
+        </div>
+        
+        <h2>Event Log</h2>
+        <div class="log" id="log">
+            <div>📊 JavaScript loading...</div>
+        </div>
+    </div>
+
+    <script>
+        console.log('🚀 JavaScript is loading...');
+        
+        let clickCount = 0;
+        const logDiv = document.getElementById('log');
+        const statusDiv = document.getElementById('status');
+        
+        function log(message) {
+            console.log(message);
+            const timestamp = new Date().toLocaleTimeString();
+            logDiv.innerHTML += `<div>[${timestamp}] ${message}</div>`;
+            logDiv.scrollTop = logDiv.scrollHeight;
+        }
+        
+        function testClick(element) {
+            clickCount++;
+            const message = `✅ ${element} clicked! (Click #${clickCount})`;
+            log(message);
+            
+            if (clickCount === 1) {
+                statusDiv.textContent = '🎉 JavaScript is working! All clicks detected.';
+                statusDiv.style.color = '#4ade80';
+            }
+            
+            // Visual feedback
+            event.target.style.animation = 'pulse 0.3s ease';
+            setTimeout(() => {
+                event.target.style.animation = '';
+            }, 300);
+            
+            // Alert for confirmation
+            alert(`🎉 ${element} click successful!\nTotal clicks: ${clickCount}`);
+        }
+        
+        // Test if JavaScript loads
+        document.addEventListener('DOMContentLoaded', function() {
+            log('🔥 DOM Content Loaded - JavaScript is working!');
+            log('🎯 All click handlers are ready');
+            
+            // Test basic JavaScript
+            log('🧪 Testing basic JavaScript functions...');
+            log(`✅ Math test: 2 + 2 = ${2 + 2}`);
+            log(`✅ Date test: ${new Date().toLocaleString()}`);
+            log('✅ All JavaScript tests passed!');
+            
+            statusDiv.textContent = '✅ JavaScript loaded successfully! Click any element to test.';
+            statusDiv.style.color = '#60a5fa';
+        });
+        
+        // Add CSS animation
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes pulse {
+                0% { transform: scale(1); }
+                50% { transform: scale(1.1); }
+                100% { transform: scale(1); }
+            }
+        `;
+        document.head.appendChild(style);
+        
+        log('📝 JavaScript file loaded completely');
+    </script>
+</body>
+</html>

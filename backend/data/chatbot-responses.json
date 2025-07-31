@@ -1,0 +1,127 @@
+{
+  "greetings": {
+    "hello": "Hello! Welcome to Oriental Insurance Company's Virtual Office. I'm your AI assistant. How can I help you today?",
+    "hi": "Hi there! I'm here to assist you with all your insurance needs. What would you like to know?",
+    "good morning": "Good morning! I hope you're having a great day. How can I assist you with your insurance queries?",
+    "good afternoon": "Good afternoon! Welcome to Oriental Insurance. What can I help you with today?",
+    "good evening": "Good evening! I'm here to help you with any insurance-related questions or services."
+  },
+  "policies": {
+    "motor insurance": {
+      "description": "Our comprehensive motor insurance covers private cars, commercial vehicles, and two-wheelers.",
+      "features": [
+        "Third-party liability coverage",
+        "Own damage protection",
+        "Personal accident cover",
+        "24/7 roadside assistance",
+        "Cashless garage network"
+      ],
+      "coverage": "Up to ₹50 lakhs coverage available",
+      "claim_process": "File claims online or call our 24/7 helpline. Most claims processed within 7 days."
+    },
+    "health insurance": {
+      "description": "Comprehensive health insurance plans for individuals and families.",
+      "features": [
+        "Cashless hospitalization",
+        "Pre and post hospitalization",
+        "Day care procedures",
+        "Ambulance charges",
+        "Health check-ups"
+      ],
+      "coverage": "Coverage from ₹2 lakhs to ₹1 crore",
+      "network": "5000+ network hospitals across India"
+    },
+    "home insurance": {
+      "description": "Protect your home and belongings with our comprehensive home insurance.",
+      "features": [
+        "Structure coverage",
+        "Contents protection",
+        "Personal liability",
+        "Additional living expenses",
+        "Natural disaster coverage"
+      ],
+      "coverage": "Covers fire, theft, natural calamities, and more"
+    },
+    "travel insurance": {
+      "description": "Travel worry-free with our domestic and international travel insurance.",
+      "features": [
+        "Medical emergencies",
+        "Trip cancellation",
+        "Baggage loss/delay",
+        "Flight delay compensation",
+        "Emergency evacuation"
+      ],
+      "coverage": "Domestic and international travel coverage"
+    }
+  },
+  "claims": {
+    "how to file": "You can file a claim through our virtual office, mobile app, website, or by calling our 24/7 helpline at 1800-11-9100.",
+    "documents required": [
+      "Policy document",
+      "Claim form (duly filled)",
+      "Police FIR (for theft/accident)",
+      "Medical reports (for health claims)",
+      "Bills and receipts",
+      "Identity proof",
+      "Address proof"
+    ],
+    "processing time": "Most claims are processed within 7-15 working days after submission of complete documents.",
+    "status check": "You can check your claim status online using your policy number and claim reference number.",
+    "helpline": "For claim assistance, call our dedicated claims helpline at 1800-11-9100 (toll-free)."
+  },
+  "services": {
+    "policy renewal": "Renew your policies online through our virtual office or website. Get instant renewal certificates.",
+    "premium calculator": "Use our premium calculator to get instant quotes for various insurance products.",
+    "branch locator": "Find the nearest Oriental Insurance branch using our branch locator tool.",
+    "customer support": "24/7 customer support available through phone, email, and chat.",
+    "grievance redressal": "File grievances through our virtual office or email us at grievance@orientalinsurance.co.in"
+  },
+  "contact": {
+    "customer care": "1800-11-9100 (toll-free)",
+    "claims helpline": "1800-11-9100",
+    "email": "info@orientalinsurance.co.in",
+    "grievance email": "grievance@orientalinsurance.co.in",
+    "website": "www.orientalinsurance.co.in",
+    "head office": "Oriental House, A-25/27, Asaf Ali Road, New Delhi - 110002"
+  },
+  "faq": {
+    "what is insurance": "Insurance is a contract that provides financial protection against specified risks in exchange for premium payments.",
+    "why need insurance": "Insurance protects you financially against unexpected events like accidents, illness, natural disasters, or theft.",
+    "how to buy policy": "You can buy policies online through our website, visit our branches, or contact our agents.",
+    "premium payment methods": "You can pay premiums online, through mobile banking, NEFT, cheque, or at our branches.",
+    "policy cancellation": "Policies can be cancelled as per terms and conditions. Cancellation charges may apply.",
+    "nominee changes": "Nominee details can be changed by submitting the required form and documents to our branch."
+  },
+  "features": {
+    "virtual office": "Our 3D virtual office provides an immersive experience to access all insurance services from the comfort of your home.",
+    "ai assistant": "I'm an AI-powered assistant that can help you with policies, claims, renewals, and general insurance queries.",
+    "interactive desks": "Visit different desks in our virtual office for specific services - Policy Desk, Claims Desk, and Grievance Desk.",
+    "real time chat": "Get instant responses to your queries through our real-time chat feature.",
+    "document upload": "Easily upload and manage your insurance documents through our secure platform."
+  },
+  "emergencies": {
+    "accident": "In case of an accident, ensure safety first, then call our emergency helpline at 1800-11-9100 for immediate assistance.",
+    "medical emergency": "For medical emergencies, contact the nearest network hospital or call our 24/7 medical helpline.",
+    "natural disaster": "Report natural disaster claims immediately through our helpline or online platform.",
+    "theft": "File a police complaint first, then report the theft claim to us with the FIR copy."
+  },
+  "fallback_responses": [
+    "I'm here to help! Could you please rephrase your question or ask about our insurance policies, claims, or services?",
+    "I didn't quite understand that. You can ask me about motor insurance, health insurance, claims process, or any other insurance-related queries.",
+    "Let me help you better. Try asking about policy details, claim procedures, premium calculations, or customer support.",
+    "I'm specialized in insurance assistance. Feel free to ask about our products, services, or how to file claims.",
+    "Could you please be more specific? I can help with policy information, claims guidance, or general insurance queries."
+  ],
+  "capabilities": [
+    "Policy information and details",
+    "Claims filing and tracking",
+    "Premium calculations",
+    "Renewal assistance",
+    "Document requirements",
+    "Branch and contact information",
+    "Grievance handling",
+    "General insurance guidance",
+    "Emergency assistance",
+    "Virtual office navigation"
+  ]
+}

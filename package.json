@@ -1,0 +1,19 @@
+{
+  "name": "oriental-virtual-office",
+  "version": "1.0.0",
+  "description": "Virtual Office for Oriental Insurance Company with 3D AI Model",
+  "main": "server.js",
+  "scripts": {
+    "dev": "concurrently \"npm run server\" \"npm run client\"",
+    "server": "cd backend && npm run dev",
+    "client": "cd frontend && npm start",
+    "build": "cd frontend && npm run build",
+    "install-all": "npm install && cd frontend && npm install && cd ../backend && npm install"
+  },
+  "keywords": ["virtual-office", "3d", "ai", "insurance", "react", "nodejs"],
+  "author": "Oriental Insurance Company",
+  "license": "MIT",
+  "devDependencies": {
+    "concurrently": "^8.2.2"
+  }
+}

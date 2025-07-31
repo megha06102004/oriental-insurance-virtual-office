@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Oriental Insurance - Virtual Office</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            color: white;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        .office-container {
+            min-height: 100vh;
+            position: relative;
+            padding: 20px;
+        }
+
+        /* Working Button Styles */
+        .test-btn {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: linear-gradient(135deg, #ff6b6b, #4ecdc4);
+            color: white;
+            border: none;
+            padding: 15px 25px;
+            border-radius: 50px;
+            cursor: pointer;
+            font-weight: bold;
+            font-size: 16px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+            z-index: 1000;
+            transition: all 0.3s ease;
+        }
+
+        .test-btn:hover {
+            transform: translateY(-2px) scale(1.05);
+            box-shadow: 0 6px 20px rgba(0,0,0,0.4);
+        }
+
+        /* Door Styles */
+        .office-door {
+            width: 150px;
+            height: 250px;
+            background: linear-gradient(135deg, #8B4513, #A0522D);
+            border-radius: 10px;
+            margin: 50px auto;
+            position: relative;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+        }
+
+        .office-door:hover {
+            transform: scale(1.05);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.4);
+        }
+
+        .office-door::before {
+            content: '🚪';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 60px;
+        }
+
+        /* Navigation Cards */
+        .nav-cards {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin: 50px 0;
+            flex-wrap: wrap;
+        }
+
+        .nav-card {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 30px;
+            min-width: 250px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+        }
+
+        .nav-card:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateY(-5px);
+            border-color: rgba(255, 255, 255, 0.3);
+        }
+
+        .nav-card h3 {
+            margin-bottom: 15px;
+            font-size: 24px;
+        }
+
+        .nav-card p {
+            opacity: 0.9;
+            line-height: 1.6;
+        }
+
+        /* Chat Bubble */
+        .chat-bubble {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 70px;
+            height: 70px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 30px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.3);
+            transition: all 0.3s ease;
+            z-index: 999;
+        }
+
+        .chat-bubble:hover {
+            transform: scale(1.1);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.4);
+        }
+
+        /* Simple Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.8);
+            backdrop-filter: blur(5px);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal-content {
+            background: white;
+            color: black;
+            padding: 40px;
+            border-radius: 20px;
+            text-align: center;
+            max-width: 500px;
+            width: 90%;
+            position: relative;
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 15px;
+            right: 20px;
+            background: none;
+            border: none;
+            font-size: 30px;
+            cursor: pointer;
+            color: #999;
+        }
+
+        .modal-close:hover {
+            color: #333;
+        }
+
+        .title {
+            text-align: center;
+            margin: 30px 0;
+            font-size: 36px;
+            font-weight: bold;
+        }
+
+        .subtitle {
+            text-align: center;
+            margin-bottom: 40px;
+            font-size: 18px;
+            opacity: 0.9;
+        }
+    </style>
+</head>
+<body>
+    <!-- Test Button -->
+    <button class="test-btn" onclick="testClick()">🧪 JS TEST</button>
+
+    <div class="office-container">
+        <h1 class="title">🏢 Oriental Insurance - Virtual Office</h1>
+        <p class="subtitle">Click any element to test functionality</p>
+
+        <!-- Door -->
+        <div class="office-door" onclick="doorClick()"></div>
+
+        <!-- Navigation Cards -->
+        <div class="nav-cards">
+            <div class="nav-card" onclick="cardClick('policies')">
+                <h3>📄 Policies</h3>
+                <p>Manage your insurance policies, view coverage details, and renew existing policies.</p>
+            </div>
+            <div class="nav-card" onclick="cardClick('claims')">
+                <h3>📝 Claims</h3>
+                <p>Submit new claims, track existing claims, and upload required documents.</p>
+            </div>
+            <div class="nav-card" onclick="cardClick('support')">
+                <h3>🎧 Support</h3>
+                <p>Get help from our customer service team and access frequently asked questions.</p>
+            </div>
+        </div>
+
+        <!-- Chat Bubble -->
+        <div class="chat-bubble" onclick="chatClick()">💬</div>
+    </div>
+
+    <!-- Simple Modal -->
+    <div id="modal" class="modal">
+        <div class="modal-content">
+            <button class="modal-close" onclick="closeModal()">&times;</button>
+            <h2 id="modal-title">Modal Title</h2>
+            <p id="modal-text">Modal content</p>
+            <button onclick="closeModal()" style="margin-top: 20px; padding: 10px 20px; background: #4CAF50; color: white; border: none; border-radius: 5px; cursor: pointer;">Close</button>
+        </div>
+    </div>
+
+    <script>
+        console.log('🚀 Oriental Insurance Virtual Office - JavaScript Loading...');
+
+        // Test function
+        function testClick() {
+            const timestamp = new Date().toLocaleTimeString();
+            alert(`🎉 SUCCESS!\n\nJavaScript is working perfectly!\n\nTime: ${timestamp}\n\nAll clicking should work now.`);
+            console.log('🎉 Test button clicked - JavaScript confirmed working!');
+        }
+
+        // Door click
+        function doorClick() {
+            console.log('🚪 Door clicked!');
+            showModal('🚪 Door Access', 'Welcome to Oriental Insurance Virtual Office!\n\nDoor functionality is working.\nAuthentication system can be added here.');
+        }
+
+        // Card click
+        function cardClick(type) {
+            console.log('🎯 Card clicked:', type);
+            const messages = {
+                'policies': 'Policies section would open here.\nView and manage your insurance policies.',
+                'claims': 'Claims section would open here.\nSubmit and track your insurance claims.',
+                'support': 'Support section would open here.\nGet help from our customer service team.'
+            };
+            showModal(`📋 ${type.charAt(0).toUpperCase() + type.slice(1)}`, messages[type] || 'Feature coming soon!');
+        }
+
+        // Chat click
+        function chatClick() {
+            console.log('💬 Chat clicked!');
+            showModal('💬 Virtual Assistant', 'Chat functionality is working!\n\nVirtual assistant features can be added here.');
+        }
+
+        // Modal functions
+        function showModal(title, text) {
+            document.getElementById('modal-title').textContent = title;
+            document.getElementById('modal-text').textContent = text;
+            document.getElementById('modal').style.display = 'flex';
+        }
+
+        function closeModal() {
+            document.getElementById('modal').style.display = 'none';
+        }
+
+        // Initialize when page loads
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('✅ DOM loaded successfully');
+            console.log('🎯 All click handlers ready');
+            
+            // Test basic functionality
+            console.log('🧪 Testing basic JavaScript...');
+            console.log('✅ JavaScript execution confirmed');
+        });
+
+        // Close modal when clicking outside
+        window.onclick = function(event) {
+            const modal = document.getElementById('modal');
+            if (event.target === modal) {
+                closeModal();
+            }
+        }
+
+        console.log('📝 JavaScript loaded successfully');
+    </script>
+</body>
+</html>

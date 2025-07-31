@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JS Debug Test</title>
+    <style>
+        .test-button {
+            padding: 20px;
+            background: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 18px;
+            cursor: pointer;
+            margin: 20px;
+            display: block;
+        }
+        .test-button:hover {
+            background: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <h1>JavaScript Debug Test</h1>
+    <button class="test-button" onclick="testClick()">Test Click Handler</button>
+    <button class="test-button" id="eventListenerTest">Test Event Listener</button>
+    <div id="output"></div>
+
+    <script>
+        console.log('🧪 Debug test page loaded');
+        
+        function testClick() {
+            console.log('✅ Onclick handler working!');
+            document.getElementById('output').innerHTML += '<p>✅ Onclick handler working!</p>';
+            alert('✅ Onclick handler working!');
+        }
+        
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('🚀 DOM Content Loaded');
+            
+            const button = document.getElementById('eventListenerTest');
+            if (button) {
+                button.addEventListener('click', function() {
+                    console.log('✅ Event listener working!');
+                    document.getElementById('output').innerHTML += '<p>✅ Event listener working!</p>';
+                    alert('✅ Event listener working!');
+                });
+                console.log('📝 Event listener added to button');
+            }
+        });
+    </script>
+</body>
+</html>

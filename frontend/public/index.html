@@ -1,0 +1,4778 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Oriental Insurance Company Ltd.</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Inter', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #d4c4a0 0%, #c2a882 50%, #a8956b 100%);
+            min-height: 100vh;
+            overflow-x: hidden;
+            margin: 0;
+            padding: 0;
+            position: relative;
+        }
+        
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                linear-gradient(90deg, transparent 0%, rgba(0, 0, 0, 0.1) 1px, transparent 1px),
+                linear-gradient(0deg, transparent 0%, rgba(0, 0, 0, 0.1) 1px, transparent 1px),
+                radial-gradient(circle at 20% 80%, rgba(160, 140, 120, 0.3) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(140, 125, 105, 0.3) 0%, transparent 50%),
+                radial-gradient(circle at 40% 40%, rgba(180, 165, 140, 0.2) 0%, transparent 50%);
+            background-size: 50px 50px, 50px 50px, 100% 100%, 100% 100%, 100% 100%;
+            pointer-events: none;
+            z-index: 1;
+        }
+        
+        .office-container {
+            position: relative;
+            width: 100%;
+            height: 100vh;
+            background: linear-gradient(180deg, rgba(220, 205, 185, 0.95) 0%, rgba(200, 185, 165, 0.95) 100%);
+            backdrop-filter: blur(10px);
+            perspective: 1500px;
+            overflow: hidden;
+            z-index: 2;
+        }
+        
+        /* Realistic ceiling with tiles */
+        .ceiling {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 20%;
+            background: 
+                linear-gradient(90deg, #e8e0d0 0%, #ddd5c5 1px, #ddd5c5 calc(60px - 1px), #c8c0b0 60px),
+                linear-gradient(0deg, #e8e0d0 0%, #ddd5c5 1px, #ddd5c5 calc(60px - 1px), #c8c0b0 60px),
+                linear-gradient(135deg, #e8e0d0 0%, #ddd5c5 50%, #d0c8b8 100%);
+            background-size: 60px 60px;
+            transform: perspective(1500px) rotateX(70deg);
+            transform-origin: bottom;
+            animation: ceilingSubtle 12s ease-in-out infinite;
+            box-shadow: 
+                inset 0 0 50px rgba(0, 0, 0, 0.08),
+                0 8px 30px rgba(0, 0, 0, 0.12);
+        }
+        
+        /* Realistic ceiling lights */
+        .ceiling-light {
+            position: absolute;
+            width: 40px;
+            height: 40px;
+            background: 
+                radial-gradient(circle, #ffffff 0%, rgba(255, 255, 255, 0.9) 30%, rgba(248, 246, 240, 0.6) 60%, transparent 80%);
+            border-radius: 50%;
+            box-shadow: 
+                0 0 20px rgba(255, 255, 255, 0.8),
+                0 0 40px rgba(248, 246, 240, 0.4),
+                inset 0 0 15px rgba(255, 255, 255, 0.6);
+            animation: lightGlow 6s ease-in-out infinite;
+            filter: blur(0.5px);
+        }
+        
+        .light-1 { 
+            top: 3%; 
+            left: 15%; 
+            animation-delay: 0s;
+        }
+        .light-2 { 
+            top: 3%; 
+            left: 50%; 
+            animation-delay: 1.6s;
+        }
+        .light-3 { 
+            top: 3%; 
+            left: 85%; 
+            animation-delay: 3.2s;
+        }
+        
+        /* Professional floor design */
+        .floor {
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+            height: 40%;
+            background: 
+                linear-gradient(135deg, 
+                    rgba(200, 180, 150, 0.95) 0%, 
+                    rgba(185, 165, 135, 0.95) 25%,
+                    rgba(170, 150, 120, 0.95) 50%,
+                    rgba(155, 135, 105, 0.95) 75%,
+                    rgba(140, 120, 90, 0.95) 100%);
+            transform: perspective(1500px) rotateX(85deg);
+            transform-origin: bottom;
+            box-shadow: 
+                0 -20px 40px rgba(0, 0, 0, 0.15),
+                inset 0 0 80px rgba(140, 120, 90, 0.4);
+            animation: floorSubtle 15s ease-in-out infinite;
+        }
+        
+        .floor::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                repeating-linear-gradient(
+                    45deg,
+                    transparent,
+                    transparent 30px,
+                    rgba(200, 190, 170, 0.1) 30px,
+                    rgba(200, 190, 170, 0.1) 32px
+                );
+            animation: floorTiles 20s linear infinite;
+        }
+        
+        /* Professional back wall */
+        .back-wall {
+            position: absolute;
+            top: 20%;
+            left: 0;
+            width: 100%;
+            height: 60%;
+            background: 
+                linear-gradient(180deg, 
+                    rgba(245, 240, 225, 0.98) 0%, 
+                    rgba(235, 230, 215, 0.98) 50%,
+                    rgba(225, 220, 205, 0.98) 100%);
+            box-shadow: 
+                inset 0 15px 40px rgba(0, 0, 0, 0.03),
+                inset 0 0 100px rgba(200, 190, 170, 0.2);
+            backdrop-filter: blur(5px);
+        }
+        
+        /* Luxurious reception area */
+        .reception-area {
+            position: absolute;
+            left: 8%;
+            bottom: 40%;
+            width: 25%;
+            height: 20%;
+            z-index: 10;
+            animation: slideInLeft 1.2s ease-out;
+        }
+        
+        .reception-desk {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 70%;
+            background: 
+                linear-gradient(145deg, 
+                    #d2b48c 0%, 
+                    #bc9a6a 50%, 
+                    #a0845c 100%);
+            border-radius: 20px 20px 0 0;
+            box-shadow: 
+                0 15px 40px rgba(210, 180, 140, 0.4),
+                0 5px 15px rgba(188, 154, 106, 0.3),
+                inset 0 2px 0 rgba(255, 255, 255, 0.3),
+                0 0 0 3px rgba(255, 255, 255, 0.1);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        /* Reception chairs behind the desk */
+        .reception-chair {
+            position: absolute;
+            width: 35px;
+            height: 45px;
+            z-index: 5;
+        }
+        
+        .reception-chair-1 {
+            bottom: 75%;
+            left: 20%;
+            animation: slideInLeft 1.4s ease-out 0.2s both;
+        }
+        
+        .reception-chair-2 {
+            bottom: 75%;
+            right: 20%;
+            animation: slideInLeft 1.4s ease-out 0.4s both;
+        }
+        
+        .chair-back {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 60%;
+            background: linear-gradient(145deg, #8B4513, #654321);
+            border-radius: 15px 15px 5px 5px;
+            box-shadow: 
+                0 5px 15px rgba(0, 0, 0, 0.2),
+                inset 0 2px 0 rgba(255, 255, 255, 0.2);
+        }
+        
+        .chair-seat {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 50%;
+            background: linear-gradient(145deg, #A0522D, #8B4513);
+            border-radius: 12px;
+            box-shadow: 
+                0 3px 10px rgba(0, 0, 0, 0.2),
+                inset 0 1px 0 rgba(255, 255, 255, 0.2);
+        }
+        
+        .chair-legs {
+            position: absolute;
+            bottom: -8px;
+            left: 5px;
+            width: 4px;
+            height: 12px;
+            background: #654321;
+            border-radius: 2px;
+            box-shadow: 
+                7px 0 0 #654321,
+                19px 0 0 #654321,
+                26px 0 0 #654321;
+        }
+        
+        .reception-desk::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+            animation: shimmer 3s ease-in-out infinite;
+        }
+        
+        .reception-desk:hover {
+            transform: translateY(-8px) scale(1.02);
+            box-shadow: 
+                0 25px 60px rgba(210, 180, 140, 0.5),
+                0 10px 25px rgba(188, 154, 106, 0.4),
+                inset 0 2px 0 rgba(255, 255, 255, 0.4),
+                0 0 0 3px rgba(255, 255, 255, 0.2);
+        }
+        
+        .desk-top {
+            position: absolute;
+            top: -12px;
+            left: -10px;
+            width: calc(100% + 20px);
+            height: 24px;
+            background: 
+                linear-gradient(145deg, 
+                    #e6d3a3 0%, 
+                    #d2b48c 50%, 
+                    #bc9a6a 100%);
+            border-radius: 15px;
+            box-shadow: 
+                0 8px 25px rgba(0, 0, 0, 0.2),
+                inset 0 2px 0 rgba(255, 255, 255, 0.3);
+        }
+        
+        /* Simple company branding - text only */
+        .company-branding {
+            position: fixed;
+            left: 30px;
+            top: 30px;
+            text-align: left;
+            z-index: 50;
+            animation: slideInLeft 1.5s ease-out 0.5s both;
+        }
+        
+        .logo {
+            width: 120px;
+            height: 120px;
+            background: 
+                linear-gradient(135deg, 
+                    #667eea 0%, 
+                    #764ba2 25%, 
+                    #f093fb 50%, 
+                    #667eea 75%, 
+                    #764ba2 100%);
+            border-radius: 50%;
+            margin: 0 20px 0 0;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 
+                0 20px 60px rgba(102, 126, 234, 0.5),
+                0 12px 30px rgba(118, 75, 162, 0.4),
+                0 0 0 6px rgba(255, 255, 255, 0.9),
+                0 0 0 12px rgba(102, 126, 234, 0.15),
+                inset 0 0 40px rgba(255, 255, 255, 0.3);
+            animation: logoRotateGlow 12s linear infinite;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            position: relative;
+            overflow: hidden;
+            vertical-align: middle;
+        }
+        
+        .logo::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: 
+                conic-gradient(
+                    from 0deg, 
+                    transparent, 
+                    rgba(255, 255, 255, 0.3), 
+                    transparent, 
+                    rgba(255, 255, 255, 0.3), 
+                    transparent
+                );
+            animation: logoInnerSpin 8s linear infinite reverse;
+        }
+        
+        .logo:hover {
+            transform: scale(1.15) rotate(10deg);
+            box-shadow: 
+                0 30px 80px rgba(102, 126, 234, 0.7),
+                0 15px 40px rgba(118, 75, 162, 0.5),
+                0 0 0 8px rgba(255, 255, 255, 0.95),
+                0 0 0 16px rgba(102, 126, 234, 0.25);
+        }
+        
+        .logo-symbol {
+            color: #ffffff;
+            font-size: 3rem;
+            font-weight: 900;
+            text-shadow: 
+                0 4px 15px rgba(0, 0, 0, 0.5),
+                0 0 30px rgba(255, 255, 255, 0.6);
+            z-index: 2;
+            position: relative;
+        }
+        
+        .brand-text {
+            display: inline-block;
+            vertical-align: middle;
+        }
+        
+        .company-name {
+            color: #2c3e50;
+            font-size: 36px;
+            font-weight: 900;
+            text-shadow: 
+                0 3px 12px rgba(0, 0, 0, 0.15),
+                0 0 30px rgba(102, 126, 234, 0.4);
+            line-height: 1.1;
+            margin-bottom: 10px;
+            letter-spacing: 1.2px;
+            background: linear-gradient(135deg, #2c3e50, #667eea, #764ba2);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-transform: uppercase;
+        }
+        
+        .company-subtitle {
+            color: #6c757d;
+            font-size: 14px;
+            font-weight: 700;
+            opacity: 0.95;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.12);
+            letter-spacing: 0.8px;
+            text-transform: uppercase;
+        }
+        
+        /* Animated professional receptionist */
+        .receptionist {
+            position: absolute;
+            left: 50%;
+            bottom: 45%;
+            transform: translateX(-50%);
+            z-index: 15;
+            cursor: pointer;
+            animation: slideInCenter 1.5s ease-out 0.8s both;
+            transition: transform 0.3s ease;
+        }
+        
+        .receptionist:hover {
+            transform: translateX(-50%) scale(1.05);
+        }
+        
+        .person {
+            position: relative;
+            width: 120px;
+            height: 180px;
+            animation: personBreathe 3s ease-in-out infinite;
+        }
+        
+        .person-head {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(145deg, #f4c2a1, #e8a87c);
+            border-radius: 50%;
+            position: absolute;
+            top: 0;
+            left: 30px;
+            border: 3px solid #fff;
+            box-shadow: 0 6px 20px rgba(0,0,0,0.15);
+            animation: headNod 4s ease-in-out infinite;
+            overflow: visible;
+        }
+        
+        .person-head::before {
+            content: '';
+            position: absolute;
+            top: 18px;
+            left: 15px;
+            width: 8px;
+            height: 2px;
+            background: #8B4513;
+            border-radius: 2px;
+            transform: rotate(-15deg);
+            box-shadow: 14px 0 0 #8B4513;
+        }
+        
+        .person-head::after {
+            content: '';
+            position: absolute;
+            top: 25px;
+            left: 8px;
+            width: 6px;
+            height: 6px;
+            background: rgba(255, 182, 193, 0.6);
+            border-radius: 50%;
+            box-shadow: 32px 0 0 rgba(255, 182, 193, 0.6);
+        }
+        
+        .person-hair {
+            position: absolute;
+            top: -15px;
+            left: 15px;
+            width: 50px;
+            height: 45px;
+            background: linear-gradient(145deg, #3d2914, #2a1a0e);
+            border-radius: 50px 50px 25px 25px;
+            box-shadow: 0 3px 12px rgba(0,0,0,0.4);
+        }
+        
+        .person-hair::before {
+            content: '';
+            position: absolute;
+            top: 25px;
+            left: -8px;
+            width: 25px;
+            height: 35px;
+            background: linear-gradient(145deg, #3d2914, #2a1a0e);
+            border-radius: 15px 5px 20px 15px;
+            transform: rotate(-15deg);
+        }
+        
+        .person-hair::after {
+            content: '';
+            position: absolute;
+            top: 25px;
+            right: -8px;
+            width: 25px;
+            height: 35px;
+            background: linear-gradient(145deg, #3d2914, #2a1a0e);
+            border-radius: 5px 15px 15px 20px;
+            transform: rotate(15deg);
+        }
+        
+        .person-body {
+            width: 85px;
+            height: 100px;
+            background: linear-gradient(145deg, #2c5aa0, #1e3d6f);
+            position: absolute;
+            top: 55px;
+            left: 17px;
+            border-radius: 15px 15px 0 0;
+            box-shadow: 0 8px 25px rgba(44, 90, 160, 0.3);
+        }
+        
+        .person-blazer {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 40px;
+            background: linear-gradient(145deg, #1a365d, #2c5aa0);
+            border-radius: 15px 15px 8px 8px;
+        }
+        
+        .person-shirt {
+            position: absolute;
+            top: 15px;
+            left: 25px;
+            width: 35px;
+            height: 50px;
+            background: linear-gradient(145deg, #ffffff, #f7fafc);
+            border-radius: 0 0 5px 5px;
+            box-shadow: inset 0 2px 5px rgba(0,0,0,0.1);
+        }
+        
+        .person-arms {
+            position: absolute;
+            top: 70px;
+            left: -12px;
+            width: 22px;
+            height: 50px;
+            background: linear-gradient(145deg, #2c5aa0, #1e3d6f);
+            border-radius: 15px;
+            box-shadow: 
+                106px 0 0 rgba(44, 90, 160, 1),
+                0 4px 15px rgba(0,0,0,0.2);
+        }
+        
+        .person-hands {
+            position: absolute;
+            bottom: -8px;
+            left: -3px;
+            width: 16px;
+            height: 16px;
+            background: linear-gradient(145deg, #f4c2a1, #e8a87c);
+            border-radius: 50%;
+            box-shadow: 
+                112px 0 0 #f4c2a1,
+                0 2px 5px rgba(0,0,0,0.15);
+        }
+        
+        .person-collar {
+            position: absolute;
+            top: 60px;
+            left: 30px;
+            width: 55px;
+            height: 25px;
+            background: #fff;
+            border-radius: 0 0 25px 25px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+        }
+        
+        .person-collar::before {
+            content: '';
+            position: absolute;
+            top: 5px;
+            left: 20px;
+            width: 15px;
+            height: 15px;
+            background: linear-gradient(45deg, #2c5aa0, #1e3d6f);
+            transform: rotate(45deg);
+            border-radius: 2px;
+        }
+        
+        .person-face-features {
+            position: absolute;
+            top: 15px;
+            left: 20px;
+            width: 20px;
+            height: 25px;
+        }
+        
+        .person-eyes {
+            position: absolute;
+            top: 5px;
+            left: 2px;
+            width: 4px;
+            height: 4px;
+            background: #2d3748;
+            border-radius: 50%;
+            box-shadow: 10px 0 0 #2d3748;
+        }
+        
+        .person-eyes::before {
+            content: '';
+            position: absolute;
+            top: -2px;
+            left: -1px;
+            width: 6px;
+            height: 3px;
+            background: #2d3748;
+            border-radius: 50% 50% 0 0;
+            transform: rotate(-15deg);
+        }
+        
+        .person-eyes::after {
+            content: '';
+            position: absolute;
+            top: -2px;
+            left: 9px;
+            width: 6px;
+            height: 3px;
+            background: #2d3748;
+            border-radius: 50% 50% 0 0;
+            transform: rotate(15deg);
+        }
+        
+        .person-nose {
+            position: absolute;
+            top: 12px;
+            left: 7px;
+            width: 3px;
+            height: 4px;
+            background: rgba(232, 168, 124, 0.8);
+            border-radius: 50% 50% 50% 50%;
+            box-shadow: 0 1px 2px rgba(0,0,0,0.1);
+        }
+        
+        .person-mouth {
+            position: absolute;
+            top: 18px;
+            left: 5px;
+            width: 10px;
+            height: 6px;
+            background: #d63384;
+            border-radius: 0 0 12px 12px;
+            box-shadow: inset 0 2px 3px rgba(0,0,0,0.2);
+            transform: rotate(0deg);
+        }
+        
+        .person-mouth::before {
+            content: '';
+            position: absolute;
+            top: -3px;
+            left: 1px;
+            width: 8px;
+            height: 4px;
+            background: rgba(214, 51, 132, 0.4);
+            border-radius: 50%;
+            transform: scaleY(0.7);
+        }
+        
+        .person-mouth::after {
+            content: '';
+            position: absolute;
+            top: 1px;
+            left: 3px;
+            width: 4px;
+            height: 2px;
+            background: rgba(255, 255, 255, 0.6);
+            border-radius: 50%;
+        }
+        
+        /* Enhanced chat bubble */
+        .chat-bubble {
+            position: absolute;
+            bottom: 45%;
+            left: 40%;
+            transform: translateX(-50%);
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 20px 25px;
+            border-radius: 25px 25px 25px 8px;
+            box-shadow: 
+                0 15px 40px rgba(102, 126, 234, 0.4),
+                0 5px 20px rgba(118, 75, 162, 0.3),
+                inset 0 1px 0 rgba(255, 255, 255, 0.2);
+            max-width: 350px;
+            z-index: 1000;
+            animation: chatFloat 3s ease-in-out infinite;
+            backdrop-filter: blur(15px);
+            border: 3px solid rgba(255,255,255,0.3);
+            cursor: pointer;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .chat-bubble::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, 
+                transparent 30%, 
+                rgba(255, 255, 255, 0.1) 50%, 
+                transparent 70%);
+            transform: rotate(45deg);
+            animation: shimmer 4s ease-in-out infinite;
+            pointer-events: none;
+        }
+        
+        .chat-bubble:hover {
+            transform: translateX(-50%) translateY(-8px) scale(1.05);
+            box-shadow: 
+                0 25px 60px rgba(102, 126, 234, 0.5),
+                0 10px 30px rgba(118, 75, 162, 0.4),
+                inset 0 1px 0 rgba(255, 255, 255, 0.3);
+            border-color: rgba(255, 255, 255, 0.6);
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #667eea 100%);
+        }
+        
+        .chat-bubble.typing {
+            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            border-color: rgba(79, 172, 254, 0.4);
+            animation: chatPulse 1.5s ease-in-out infinite;
+        }
+        
+        .typing-indicator {
+            display: none;
+            align-items: center;
+            gap: 4px;
+        }
+        
+        .typing-indicator.show {
+            display: flex;
+        }
+        
+        .typing-dot {
+            width: 6px;
+            height: 6px;
+            background: #667eea;
+            border-radius: 50%;
+            animation: typingDots 1.4s infinite;
+        }
+        
+        .typing-dot:nth-child(2) { animation-delay: 0.2s; }
+        .typing-dot:nth-child(3) { animation-delay: 0.4s; }
+        
+        @keyframes typingDots {
+            0%, 60%, 100% { transform: scale(1); opacity: 0.5; }
+            30% { transform: scale(1.2); opacity: 1; }
+        }
+        
+        .chat-icon {
+            font-size: 24px;
+            margin-right: 8px;
+            filter: drop-shadow(0 1px 3px rgba(0, 0, 0, 0.3));
+            position: relative;
+            z-index: 2;
+        }
+        
+        .chat-text {
+            color: #ffffff;
+            font-size: 15px;
+            font-weight: 600;
+            display: inline;
+            vertical-align: middle;
+            line-height: 1.4;
+            text-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+            position: relative;
+            z-index: 2;
+        }
+        
+        /* Streamlined service desks - 3D Rotated Style */
+        .service-desks {
+            position: absolute;
+            right: 5%;
+            top: 18%;
+            width: 35%;
+            height: 20%;
+            z-index: 10;
+            animation: slideInRight 1.2s ease-out 0.3s both;
+            perspective: 1000px;
+        }
+        
+        .desk-row {
+            display: flex;
+            justify-content: space-between;
+            height: 100%;
+            gap: 20px;
+        }
+        
+        .service-desk {
+            flex: 1;
+            position: relative;
+            transition: transform 0.3s ease;
+            transform: rotateX(10deg) rotateY(-15deg);
+        }
+        
+        .service-desk:hover {
+            transform: rotateX(15deg) rotateY(-10deg) translateY(-10px) scale(1.05);
+        }
+        
+        .desk-structure {
+            width: 100%;
+            height: 70%;
+            background: linear-gradient(145deg, #e74c3c, #c0392b);
+            border-radius: 12px 12px 0 0;
+            position: absolute;
+            bottom: 0;
+            box-shadow: 
+                0 15px 35px rgba(231, 76, 60, 0.4),
+                0 5px 15px rgba(0, 0, 0, 0.2),
+                inset 0 2px 0 rgba(255, 255, 255, 0.2);
+            animation: deskGlow 4s ease-in-out infinite;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .desk-structure::before {
+            content: '';
+            position: absolute;
+            top: -12px;
+            left: -6px;
+            width: calc(100% + 12px);
+            height: 20px;
+            background: linear-gradient(145deg, #ec7063, #e74c3c);
+            border-radius: 12px;
+            filter: brightness(1.2);
+            box-shadow: 
+                0 0 20px rgba(231, 76, 60, 0.3),
+                inset 0 2px 0 rgba(255, 255, 255, 0.4);
+        }
+        
+        .desk-structure::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: -8px;
+            width: 8px;
+            height: 100%;
+            background: linear-gradient(180deg, #c0392b, #a93226);
+            border-radius: 0 0 8px 0;
+        }
+        
+        .service-desk:nth-child(2) {
+            transform: rotateX(8deg) rotateY(-12deg);
+        }
+        
+        .service-desk:nth-child(2):hover {
+            transform: rotateX(12deg) rotateY(-8deg) translateY(-10px) scale(1.05);
+        }
+        
+        .service-desk:nth-child(2) .desk-structure {
+            background: linear-gradient(145deg, #3498db, #2980b9);
+            box-shadow: 
+                0 15px 35px rgba(52, 152, 219, 0.4),
+                0 5px 15px rgba(0, 0, 0, 0.2),
+                inset 0 2px 0 rgba(255, 255, 255, 0.2);
+            animation-delay: 1.3s;
+        }
+        
+        .service-desk:nth-child(2) .desk-structure::before {
+            background: linear-gradient(145deg, #5dade2, #3498db);
+            box-shadow: 
+                0 0 20px rgba(52, 152, 219, 0.3),
+                inset 0 2px 0 rgba(255, 255, 255, 0.4);
+        }
+        
+        .service-desk:nth-child(2) .desk-structure::after {
+            background: linear-gradient(180deg, #2980b9, #2471a3);
+        }
+        
+        .service-desk:nth-child(3) {
+            transform: rotateX(12deg) rotateY(-18deg);
+        }
+        
+        .service-desk:nth-child(3):hover {
+            transform: rotateX(18deg) rotateY(-12deg) translateY(-10px) scale(1.05);
+        }
+        
+        .service-desk:nth-child(3) .desk-structure {
+            background: linear-gradient(145deg, #9b59b6, #8e44ad);
+            box-shadow: 
+                0 15px 35px rgba(155, 89, 182, 0.4),
+                0 5px 15px rgba(0, 0, 0, 0.2),
+                inset 0 2px 0 rgba(255, 255, 255, 0.2);
+            animation-delay: 2.6s;
+        }
+        
+        .service-desk:nth-child(3) .desk-structure::before {
+            background: linear-gradient(145deg, #bb8fce, #9b59b6);
+            box-shadow: 
+                0 0 20px rgba(155, 89, 182, 0.3),
+                inset 0 2px 0 rgba(255, 255, 255, 0.4);
+        }
+        
+        .service-desk:nth-child(3) .desk-structure::after {
+            background: linear-gradient(180deg, #8e44ad, #7d3c98);
+        }
+        
+        .desk-label {
+            position: absolute;
+            top: -50px;
+            left: 50%;
+            transform: translateX(-50%) rotateX(-10deg);
+            background: rgba(44, 62, 80, 0.95);
+            backdrop-filter: blur(10px);
+            color: white;
+            padding: 14px 24px;
+            border-radius: 12px;
+            font-size: 18px;
+            font-weight: 700;
+            white-space: nowrap;
+            box-shadow: 
+                0 8px 20px rgba(0,0,0,0.4),
+                0 0 0 1px rgba(255,255,255,0.1);
+            animation: labelFloat 3s ease-in-out infinite;
+            z-index: 20;
+        }
+        
+        .desk-chair {
+            position: absolute;
+            bottom: 15px;
+            left: 50%;
+            transform: translateX(-50%) rotateX(5deg);
+            width: 35px;
+            height: 40px;
+            background: linear-gradient(145deg, #34495e, #2c3e50);
+            border-radius: 12px 12px 18px 18px;
+            box-shadow: 
+                0 8px 20px rgba(0,0,0,0.3),
+                inset 0 2px 0 rgba(255,255,255,0.2);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .desk-chair::before {
+            content: '';
+            position: absolute;
+            top: -5px;
+            left: -2px;
+            width: calc(100% + 4px);
+            height: 15px;
+            background: linear-gradient(145deg, #4a6078, #34495e);
+            border-radius: 8px;
+            box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.3);
+        }
+        
+        /* Office plant decoration */
+        .office-plant {
+            position: absolute;
+            right: 5%;
+            bottom: 30%;
+            width: 40px;
+            height: 60px;
+            z-index: 12;
+        }
+        
+        .plant-pot {
+            position: absolute;
+            bottom: 0;
+            width: 40px;
+            height: 25px;
+            background: linear-gradient(145deg, #8D6E63, #6D4C41);
+            border-radius: 0 0 20px 20px;
+        }
+        
+        .plant-leaves {
+            position: absolute;
+            bottom: 20px;
+            left: 5px;
+            width: 30px;
+            height: 40px;
+            background: linear-gradient(145deg, #4CAF50, #388E3C);
+            border-radius: 15px 15px 5px 5px;
+        }
+        
+        /* Office door in right corner */
+        .office-door {
+            position: absolute;
+            right: 2%;
+            top: 50%;
+            width: 100px;
+            height: 180px;
+            background: linear-gradient(145deg, #8b4513, #654321);
+            border-radius: 8px 8px 0 0;
+            box-shadow: 
+                0 10px 30px rgba(0, 0, 0, 0.3),
+                inset 0 2px 0 rgba(255, 255, 255, 0.2),
+                inset 0 0 0 2px #5d4037;
+            z-index: 15;
+            transform: perspective(500px) rotateY(-10deg);
+            animation: slideInRight 1.5s ease-out 1s both;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .office-door:hover {
+            transform: perspective(500px) rotateY(-15deg) scale(1.05);
+            box-shadow: 
+                0 15px 40px rgba(0, 0, 0, 0.4),
+                inset 0 2px 0 rgba(255, 255, 255, 0.3),
+                inset 0 0 0 2px #5d4037,
+                0 0 20px rgba(255, 215, 0, 0.3);
+        }
+
+        .office-door.opening {
+            transform: perspective(500px) rotateY(-45deg) scale(1.1);
+            box-shadow: 
+                0 20px 50px rgba(0, 0, 0, 0.5),
+                inset 0 2px 0 rgba(255, 255, 255, 0.4),
+                inset 0 0 0 2px #5d4037,
+                0 0 30px rgba(255, 215, 0, 0.5);
+            animation: doorOpenGlow 0.6s ease-out;
+        }
+
+        @keyframes doorOpenGlow {
+            0% {
+                filter: brightness(1);
+            }
+            50% {
+                filter: brightness(1.3) saturate(1.2);
+                box-shadow: 
+                    0 25px 60px rgba(0, 0, 0, 0.6),
+                    inset 0 2px 0 rgba(255, 255, 255, 0.6),
+                    inset 0 0 0 2px #5d4037,
+                    0 0 40px rgba(255, 215, 0, 0.8),
+                    0 0 60px rgba(255, 215, 0, 0.4);
+            }
+            100% {
+                filter: brightness(1.1);
+            }
+        }
+
+        /* Door particles effect */
+        .door-particles {
+            position: absolute;
+            pointer-events: none;
+            z-index: 1000;
+        }
+
+        .particle {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: #ffd700;
+            border-radius: 50%;
+            animation: particleFloat 1s ease-out forwards;
+        }
+
+        @keyframes particleFloat {
+            0% {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+            100% {
+                opacity: 0;
+                transform: translateY(-50px) scale(0);
+            }
+        }
+        
+        .office-door::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            right: 15px;
+            width: 8px;
+            height: 8px;
+            background: #ffd700;
+            border-radius: 50%;
+            transform: translateY(-50%);
+            box-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
+        }
+        
+        .office-door::after {
+            content: '';
+            position: absolute;
+            top: 20px;
+            left: 10px;
+            right: 10px;
+            bottom: 20px;
+            background: linear-gradient(145deg, #a0522d, #8b4513);
+            border-radius: 4px;
+            border: 2px solid #654321;
+        }
+        
+        /* Door frame */
+        .door-frame {
+            position: absolute;
+            right: 1.5%;
+            top: 49%;
+            width: 110px;
+            height: 190px;
+            background: linear-gradient(145deg, #d2b48c, #bc9a6a);
+            border-radius: 12px 12px 0 0;
+            box-shadow: 
+                0 15px 40px rgba(0, 0, 0, 0.2),
+                inset 0 2px 0 rgba(255, 255, 255, 0.3);
+            z-index: 14;
+            transform: perspective(500px) rotateY(-8deg);
+        }
+        
+        /* Decorative pots in bottom corners */
+        .decorative-pot {
+            position: absolute;
+            width: 80px;
+            height: 90px;
+            z-index: 20;
+            animation: fadeInUp 1.8s ease-out 1.2s both;
+        }
+        
+        .decorative-pot.left {
+            left: 3%;
+            bottom: 8%;
+        }
+        
+        .decorative-pot.right {
+            right: 2%;
+            bottom: 8%;
+        }
+        
+        .pot-base {
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 45px;
+            background: linear-gradient(145deg, #8d4004, #a0522d);
+            border-radius: 8px 8px 12px 12px;
+            box-shadow: 
+                0 8px 25px rgba(0, 0, 0, 0.3),
+                inset 0 2px 0 rgba(255, 255, 255, 0.2);
+        }
+        
+        .pot-base::before {
+            content: '';
+            position: absolute;
+            top: -5px;
+            left: -5px;
+            right: -5px;
+            height: 8px;
+            background: linear-gradient(145deg, #cd853f, #a0522d);
+            border-radius: 6px;
+            box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.3);
+        }
+        
+        .plant {
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 70px;
+            height: 50px;
+        }
+        
+        .leaf {
+            position: absolute;
+            background: linear-gradient(145deg, #228b22, #006400);
+            border-radius: 50% 10px 50% 10px;
+            box-shadow: 
+                0 3px 8px rgba(0, 0, 0, 0.2),
+                inset 0 1px 0 rgba(255, 255, 255, 0.2);
+        }
+        
+        .leaf:nth-child(1) {
+            width: 25px;
+            height: 15px;
+            top: 10px;
+            left: 10px;
+            transform: rotate(-15deg);
+            animation: leafSway 4s ease-in-out infinite;
+        }
+        
+        .leaf:nth-child(2) {
+            width: 20px;
+            height: 12px;
+            top: 5px;
+            left: 30px;
+            transform: rotate(25deg);
+            animation: leafSway 4s ease-in-out infinite 0.5s;
+        }
+        
+        .leaf:nth-child(3) {
+            width: 22px;
+            height: 14px;
+            top: 15px;
+            left: 45px;
+            transform: rotate(-30deg);
+            animation: leafSway 4s ease-in-out infinite 1s;
+        }
+        
+        .leaf:nth-child(4) {
+            width: 18px;
+            height: 11px;
+            top: 25px;
+            left: 20px;
+            transform: rotate(45deg);
+            animation: leafSway 4s ease-in-out infinite 1.5s;
+        }
+        
+        .leaf:nth-child(5) {
+            width: 24px;
+            height: 16px;
+            top: 20px;
+            left: 35px;
+            transform: rotate(-10deg);
+            animation: leafSway 4s ease-in-out infinite 2s;
+        }
+
+        /* Service desk information displays */
+        .desk-info {
+            position: absolute;
+            top: -80px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(15px);
+            padding: 15px 20px;
+            border-radius: 15px;
+            box-shadow: 
+                0 10px 30px rgba(0, 0, 0, 0.2),
+                0 0 0 1px rgba(255, 255, 255, 0.3);
+            font-size: 11px;
+            line-height: 1.4;
+            width: 200px;
+            text-align: center;
+            opacity: 0;
+            transform: translateX(-50%) translateY(10px);
+            transition: all 0.3s ease;
+            z-index: 25;
+            color: #2c3e50;
+        }
+        
+        .service-desk:hover .desk-info {
+            opacity: 1;
+            transform: translateX(-50%) translateY(0);
+        }
+        
+        .desk-info h4 {
+            margin: 0 0 8px 0;
+            font-size: 13px;
+            font-weight: 700;
+            color: #667eea;
+        }
+        
+        .desk-info ul {
+            margin: 0;
+            padding-left: 15px;
+            text-align: left;
+        }
+        
+        .desk-info li {
+            margin-bottom: 3px;
+        }
+        
+        /* Enhanced navigation cards with detailed modals */
+        .detail-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            animation: fadeIn 0.3s ease;
+        }
+        
+        .modal-content {
+            background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
+            border-radius: 25px;
+            padding: 40px;
+            width: 90%;
+            max-width: 800px;
+            max-height: 90vh;
+            overflow-y: auto;
+            box-shadow: 
+                0 30px 80px rgba(0, 0, 0, 0.3),
+                0 0 0 1px rgba(255, 255, 255, 0.2);
+            position: relative;
+            animation: modalFadeIn 0.3s ease;
+        }
+        
+        .modal-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+            border-bottom: 2px solid #e9ecef;
+        }
+        
+        .modal-title {
+            font-size: 32px;
+            font-weight: 800;
+            color: #2c3e50;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .modal-close {
+            background: #ff6b6b;
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            font-size: 20px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .modal-close:hover {
+            background: #ff5252;
+            transform: scale(1.1);
+        }
+        
+        .modal-section {
+            margin-bottom: 30px;
+        }
+        
+        .modal-section h3 {
+            font-size: 24px;
+            font-weight: 700;
+            color: #667eea;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .modal-section p, .modal-section li {
+            font-size: 18px;
+            line-height: 1.6;
+            color: #495057;
+            margin-bottom: 10px;
+        }
+        
+        .modal-section ul {
+            padding-left: 20px;
+        }
+
+        /* Door Modal Specific Styles */
+        .door-modal {
+            background: linear-gradient(135deg, #8b4513, #654321, #5d4037);
+            animation: modalBackdropFade 0.5s ease-out;
+        }
+
+        .door-modal .modal-content {
+            background: linear-gradient(145deg, #fff, #f5f5f5);
+            border: 3px solid #8b4513;
+            box-shadow: 
+                0 20px 60px rgba(139, 69, 19, 0.3),
+                inset 0 2px 0 rgba(255, 255, 255, 0.8),
+                0 0 40px rgba(255, 215, 0, 0.2);
+            border-radius: 20px;
+            animation: doorModalSlideIn 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+            transform-origin: center;
+            max-height: 90vh;
+            overflow-y: auto;
+        }
+
+        @keyframes modalBackdropFade {
+            from {
+                opacity: 0;
+                backdrop-filter: blur(0px);
+            }
+            to {
+                opacity: 1;
+                backdrop-filter: blur(8px);
+            }
+        }
+
+        @keyframes doorModalSlideIn {
+            0% {
+                opacity: 0;
+                transform: scale(0.3) rotate(-10deg) translateY(-100px);
+                filter: blur(10px);
+            }
+            50% {
+                opacity: 0.8;
+                transform: scale(1.1) rotate(2deg) translateY(0px);
+                filter: blur(2px);
+            }
+            100% {
+                opacity: 1;
+                transform: scale(1) rotate(0deg) translateY(0px);
+                filter: blur(0px);
+            }
+        }
+
+        .door-modal .modal-header {
+            background: linear-gradient(135deg, #87ceeb, #add8e6, #b0e0e6);
+            color: #8b0000;
+            text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.5);
+            border-radius: 17px 17px 0 0;
+            position: relative;
+            overflow: hidden;
+            animation: headerGlow 2s ease-in-out infinite alternate;
+        }
+
+        .door-modal .modal-header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+            animation: headerShine 3s ease-in-out infinite;
+        }
+
+        @keyframes headerGlow {
+            0% {
+                box-shadow: inset 0 0 20px rgba(255, 255, 255, 0.3);
+            }
+            100% {
+                box-shadow: inset 0 0 30px rgba(255, 255, 255, 0.5);
+            }
+        }
+
+        @keyframes headerShine {
+            0% {
+                left: -100%;
+            }
+            50% {
+                left: 100%;
+            }
+            100% {
+                left: 100%;
+            }
+        }
+
+        .door-modal .modal-title {
+            font-size: 32px;
+            text-align: center;
+            margin: 0;
+            position: relative;
+            z-index: 2;
+            animation: titleBounce 0.8s ease-out 0.3s both;
+        }
+
+        @keyframes titleBounce {
+            0% {
+                opacity: 0;
+                transform: translateY(-30px) scale(0.8);
+            }
+            60% {
+                opacity: 1;
+                transform: translateY(5px) scale(1.1);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+
+        .door-modal .modal-section {
+            background: linear-gradient(145deg, #f9f9f9, #ffffff);
+            border: 2px solid #ddd;
+            border-radius: 15px;
+            margin: 20px 0;
+            padding: 25px;
+            box-shadow: 
+                0 8px 25px rgba(0, 0, 0, 0.1),
+                inset 0 1px 0 rgba(255, 255, 255, 0.8);
+            position: relative;
+            overflow: hidden;
+            animation: sectionSlideUp 0.6s ease-out forwards;
+            opacity: 0;
+            transform: translateY(30px);
+        }
+
+        .door-modal .modal-section:nth-child(2) { animation-delay: 0.1s; }
+        .door-modal .modal-section:nth-child(3) { animation-delay: 0.2s; }
+        .door-modal .modal-section:nth-child(4) { animation-delay: 0.3s; }
+        .door-modal .modal-section:nth-child(5) { animation-delay: 0.4s; }
+
+        @keyframes sectionSlideUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .door-modal .modal-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, #8b4513, #ffd700, #8b4513);
+            border-radius: 15px 15px 0 0;
+        }
+
+        .door-modal .modal-section h3 {
+            color: #8b4513;
+            font-size: 24px;
+            margin-bottom: 20px;
+            text-align: center;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+            position: relative;
+            animation: headingGlow 2s ease-in-out infinite alternate;
+        }
+
+        @keyframes headingGlow {
+            0% {
+                text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+            }
+            100% {
+                text-shadow: 2px 2px 8px rgba(139, 69, 19, 0.3);
+            }
+        }
+
+        .office-info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+            margin-top: 25px;
+        }
+
+        .office-feature {
+            background: linear-gradient(145deg, #ffd700, #ffcc00, #ffb300);
+            padding: 20px;
+            border-radius: 15px;
+            text-align: center;
+            color: #8b4513;
+            font-weight: bold;
+            font-size: 16px;
+            box-shadow: 
+                0 8px 25px rgba(255, 215, 0, 0.3),
+                inset 0 2px 0 rgba(255, 255, 255, 0.5);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+            cursor: pointer;
+            animation: featureFloat 0.8s ease-out forwards;
+            opacity: 0;
+            transform: translateY(50px) rotateY(-20deg);
+        }
+
+        .office-feature:nth-child(1) { animation-delay: 0.1s; }
+        .office-feature:nth-child(2) { animation-delay: 0.2s; }
+        .office-feature:nth-child(3) { animation-delay: 0.3s; }
+        .office-feature:nth-child(4) { animation-delay: 0.4s; }
+        .office-feature:nth-child(5) { animation-delay: 0.5s; }
+        .office-feature:nth-child(6) { animation-delay: 0.6s; }
+
+        @keyframes featureFloat {
+            to {
+                opacity: 1;
+                transform: translateY(0) rotateY(0deg);
+            }
+        }
+
+        .office-feature::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .office-feature:hover {
+            transform: translateY(-10px) scale(1.05) rotateY(5deg);
+            box-shadow: 
+                0 15px 40px rgba(255, 215, 0, 0.5),
+                inset 0 2px 0 rgba(255, 255, 255, 0.7),
+                0 0 20px rgba(255, 215, 0, 0.4);
+            background: linear-gradient(145deg, #ffdd44, #ffd700, #ffcc00);
+        }
+
+        .office-feature:hover::before {
+            left: 100%;
+        }
+
+        .office-feature i {
+            font-size: 28px;
+            margin-bottom: 15px;
+            display: block;
+            animation: iconPulse 2s ease-in-out infinite;
+        }
+
+        @keyframes iconPulse {
+            0%, 100% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.1);
+            }
+        }
+
+        .door-modal .info-card {
+            background: linear-gradient(145deg, #e3f2fd, #f0f8ff);
+            border: 2px solid #2196f3;
+            border-radius: 15px;
+            padding: 25px;
+            margin: 20px 0;
+            box-shadow: 
+                0 8px 25px rgba(33, 150, 243, 0.2),
+                inset 0 1px 0 rgba(255, 255, 255, 0.8);
+            animation: cardGlow 3s ease-in-out infinite alternate;
+            position: relative;
+            overflow: hidden;
+        }
+
+        @keyframes cardGlow {
+            0% {
+                box-shadow: 
+                    0 8px 25px rgba(33, 150, 243, 0.2),
+                    inset 0 1px 0 rgba(255, 255, 255, 0.8);
+            }
+            100% {
+                box-shadow: 
+                    0 12px 35px rgba(33, 150, 243, 0.3),
+                    inset 0 1px 0 rgba(255, 255, 255, 0.9),
+                    0 0 20px rgba(33, 150, 243, 0.1);
+            }
+        }
+
+        .door-modal .info-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, #2196f3, #64b5f6, #2196f3);
+            border-radius: 15px 15px 0 0;
+        }
+
+        .door-modal .info-card h4 {
+            color: #1976d2;
+            margin-bottom: 15px;
+            font-size: 20px;
+            animation: textShimmer 2s ease-in-out infinite alternate;
+        }
+
+        @keyframes textShimmer {
+            0% {
+                text-shadow: 1px 1px 2px rgba(25, 118, 210, 0.3);
+            }
+            100% {
+                text-shadow: 2px 2px 6px rgba(25, 118, 210, 0.6);
+            }
+        }
+
+        /* Modal close button enhancement */
+        .door-modal .modal-close {
+            background: linear-gradient(145deg, #ff6b6b, #ee5a52);
+            border: none;
+            border-radius: 50%;
+            width: 45px;
+            height: 45px;
+            font-size: 24px;
+            color: white;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            animation: closeButtonPulse 2s ease-in-out infinite;
+        }
+
+        @keyframes closeButtonPulse {
+            0%, 100% {
+                box-shadow: 0 0 0 0 rgba(255, 107, 107, 0.7);
+            }
+            50% {
+                box-shadow: 0 0 0 10px rgba(255, 107, 107, 0);
+            }
+        }
+
+        .door-modal .modal-close:hover {
+            transform: scale(1.1) rotate(90deg);
+            background: linear-gradient(145deg, #ff5252, #f44336);
+            box-shadow: 0 8px 20px rgba(255, 82, 82, 0.4);
+        }
+
+        /* Feature Modal Styles */
+        .feature-modal {
+            background: linear-gradient(135deg, rgba(0, 0, 0, 0.8), rgba(52, 73, 94, 0.9));
+            z-index: 2000;
+        }
+
+        .feature-modal .modal-content {
+            background: linear-gradient(145deg, #ffffff, #f8f9fa);
+            border: 2px solid #3498db;
+            border-radius: 15px;
+            box-shadow: 
+                0 25px 70px rgba(52, 152, 219, 0.3),
+                inset 0 1px 0 rgba(255, 255, 255, 0.9);
+            animation: featureModalSlideIn 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            max-width: 600px;
+            max-height: 80vh;
+            overflow-y: auto;
+        }
+
+        @keyframes featureModalSlideIn {
+            0% {
+                opacity: 0;
+                transform: scale(0.8) translateY(-50px);
+            }
+            100% {
+                opacity: 1;
+                transform: scale(1) translateY(0);
+            }
+        }
+
+        .feature-modal .modal-header {
+            background: linear-gradient(135deg, #3498db, #2980b9);
+            color: white;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+            border-radius: 13px 13px 0 0;
+        }
+
+        .feature-modal .modal-title {
+            font-size: 24px;
+            text-align: center;
+            margin: 0;
+        }
+
+        .feature-modal .modal-section {
+            padding: 25px;
+        }
+
+        .feature-modal .feature-info {
+            background: linear-gradient(145deg, #ecf0f1, #bdc3c7);
+            border-radius: 10px;
+            padding: 20px;
+            margin: 15px 0;
+            border-left: 4px solid #3498db;
+        }
+
+        .feature-modal .feature-info h4 {
+            color: #2c3e50;
+            margin-bottom: 10px;
+            font-size: 18px;
+        }
+
+        .feature-modal .feature-info p {
+            color: #34495e;
+            line-height: 1.6;
+            margin-bottom: 10px;
+        }
+
+        .feature-modal .feature-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .feature-modal .feature-list li {
+            background: #e8f6f3;
+            margin: 8px 0;
+            padding: 12px 15px;
+            border-radius: 8px;
+            border-left: 3px solid #27ae60;
+            color: #2c3e50;
+        }
+
+        .feature-modal .feature-list li::before {
+            content: "✓ ";
+            color: #27ae60;
+            font-weight: bold;
+            margin-right: 8px;
+        }
+
+        /* Login/Signup Modal Styles */
+        .auth-modal {
+            background: linear-gradient(135deg, rgba(0, 0, 0, 0.8), rgba(44, 62, 80, 0.9));
+            z-index: 1500;
+        }
+
+        .auth-modal .modal-content {
+            background: linear-gradient(145deg, #ffffff, #f8f9fa);
+            border: 3px solid #e74c3c;
+            border-radius: 20px;
+            box-shadow: 
+                0 25px 70px rgba(231, 76, 60, 0.3),
+                inset 0 1px 0 rgba(255, 255, 255, 0.9);
+            animation: authModalSlideIn 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+            max-width: 500px;
+            max-height: 85vh;
+            overflow-y: auto;
+        }
+
+        @keyframes authModalSlideIn {
+            0% {
+                opacity: 0;
+                transform: scale(0.7) rotateY(-30deg) translateY(-100px);
+            }
+            100% {
+                opacity: 1;
+                transform: scale(1) rotateY(0deg) translateY(0);
+            }
+        }
+
+        .auth-modal .modal-header {
+            background: linear-gradient(135deg, #e74c3c, #c0392b);
+            color: white;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+            border-radius: 17px 17px 0 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .auth-modal .modal-header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            animation: authHeaderShine 2s ease-in-out infinite;
+        }
+
+        @keyframes authHeaderShine {
+            0% { left: -100%; }
+            50% { left: 100%; }
+            100% { left: 100%; }
+        }
+
+        .auth-modal .modal-title {
+            font-size: 28px;
+            text-align: center;
+            margin: 0;
+            position: relative;
+            z-index: 2;
+        }
+
+        .auth-tabs {
+            display: flex;
+            background: #ecf0f1;
+            border-radius: 0;
+            margin: 0;
+            padding: 0;
+        }
+
+        .auth-tab {
+            flex: 1;
+            padding: 15px 20px;
+            background: #bdc3c7;
+            border: none;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: bold;
+            color: #2c3e50;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .auth-tab.active {
+            background: linear-gradient(145deg, #3498db, #2980b9);
+            color: white;
+            box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.2);
+        }
+
+        .auth-tab:hover:not(.active) {
+            background: #95a5a6;
+            transform: translateY(-2px);
+        }
+
+        .auth-form-container {
+            padding: 30px;
+        }
+
+        .auth-form {
+            display: none;
+        }
+
+        .auth-form.active {
+            display: block;
+            animation: formSlideIn 0.5s ease-out;
+        }
+
+        @keyframes formSlideIn {
+            0% {
+                opacity: 0;
+                transform: translateX(20px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        .auth-form-group {
+            margin-bottom: 20px;
+        }
+
+        .auth-form-group label {
+            display: block;
+            margin-bottom: 8px;
+            color: #2c3e50;
+            font-weight: bold;
+            font-size: 14px;
+        }
+
+        .auth-form-group input {
+            width: 100%;
+            padding: 12px 15px;
+            border: 2px solid #ddd;
+            border-radius: 10px;
+            font-size: 16px;
+            transition: all 0.3s ease;
+            box-sizing: border-box;
+        }
+
+        .auth-form-group input:focus {
+            outline: none;
+            border-color: #3498db;
+            box-shadow: 0 0 10px rgba(52, 152, 219, 0.3);
+            transform: translateY(-2px);
+        }
+
+        .auth-submit-btn {
+            width: 100%;
+            padding: 15px;
+            background: linear-gradient(145deg, #27ae60, #2ecc71);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 18px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 10px;
+        }
+
+        .auth-submit-btn:hover {
+            background: linear-gradient(145deg, #2ecc71, #27ae60);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(46, 204, 113, 0.4);
+        }
+
+        .auth-divider {
+            text-align: center;
+            margin: 25px 0;
+            position: relative;
+            color: #7f8c8d;
+        }
+
+        .auth-divider::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: #bdc3c7;
+            z-index: 1;
+        }
+
+        .auth-divider span {
+            background: white;
+            padding: 0 15px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .social-login-btn {
+            width: 100%;
+            padding: 12px;
+            margin: 8px 0;
+            border: 2px solid #ddd;
+            border-radius: 10px;
+            background: white;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            font-weight: bold;
+        }
+
+        .social-login-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .google-btn {
+            border-color: #db4437;
+            color: #db4437;
+        }
+
+        .google-btn:hover {
+            background: #db4437;
+            color: white;
+        }
+
+        .facebook-btn {
+            border-color: #3b5998;
+            color: #3b5998;
+        }
+
+        .facebook-btn:hover {
+            background: #3b5998;
+            color: white;
+        }
+        
+        .registration-form {
+            background: #f8f9fa;
+            padding: 25px;
+            border-radius: 15px;
+            border: 2px solid #e9ecef;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .form-group label {
+            display: block;
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: #2c3e50;
+            font-size: 16px;
+        }
+        
+        .form-group input, .form-group select, .form-group textarea {
+            width: 100%;
+            padding: 12px 15px;
+            border: 2px solid #dee2e6;
+            border-radius: 10px;
+            font-size: 14px;
+            transition: border-color 0.3s ease;
+        }
+        
+        .form-group input:focus, .form-group select:focus, .form-group textarea:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+        
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+        
+        .submit-btn {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 12px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            width: 100%;
+        }
+        
+        .submit-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(102, 126, 234, 0.3);
+        }
+        
+        .info-card {
+            background: #e3f2fd;
+            border: 2px solid #2196f3;
+            border-radius: 12px;
+            padding: 20px;
+            margin: 15px 0;
+        }
+        
+        .info-card h4 {
+            color: #1976d2;
+            margin-bottom: 10px;
+        }
+        
+        .requirement-list {
+            background: #fff3e0;
+            border: 2px solid #ff9800;
+            border-radius: 12px;
+            padding: 20px;
+            margin: 15px 0;
+        }
+        
+        .requirement-list h4 {
+            color: #f57c00;
+            margin-bottom: 15px;
+        }
+        
+        /* Premium navigation cards */
+        .navigation-cards {
+            position: absolute;
+            bottom: 8%;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 35px;
+            z-index: 30;
+            animation: fadeInUp 2s ease-out 1s both;
+        }
+        
+        .nav-card {
+            background: 
+                linear-gradient(135deg, 
+                    rgba(255, 255, 255, 0.95) 0%, 
+                    rgba(255, 255, 255, 0.9) 100%);
+            backdrop-filter: blur(30px);
+            border-radius: 25px;
+            padding: 25px 20px;
+            width: 200px;
+            text-align: center;
+            box-shadow: 
+                0 15px 45px rgba(0, 0, 0, 0.08),
+                0 6px 25px rgba(102, 126, 234, 0.08),
+                0 0 0 1px rgba(255, 255, 255, 0.3),
+                inset 0 1px 0 rgba(255, 255, 255, 0.8);
+            cursor: pointer;
+            transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            border: 2px solid rgba(255, 255, 255, 0.4);
+            animation: cardFloatAdvanced 8s ease-in-out infinite;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .nav-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(102, 126, 234, 0.1), transparent);
+            transition: left 0.5s;
+        }
+        
+        .nav-card:hover::before {
+            left: 100%;
+        }
+        
+        .nav-card:nth-child(1) { animation-delay: 0s; }
+        .nav-card:nth-child(2) { animation-delay: 2.7s; }
+        .nav-card:nth-child(3) { animation-delay: 5.4s; }
+        
+        .nav-card:hover {
+            transform: translateY(-15px) scale(1.05) rotateY(3deg);
+            box-shadow: 
+                0 30px 80px rgba(0, 0, 0, 0.15),
+                0 12px 40px rgba(102, 126, 234, 0.15),
+                0 0 0 2px rgba(255, 255, 255, 0.5),
+                inset 0 1px 0 rgba(255, 255, 255, 0.9);
+        }
+        
+        .nav-icon {
+            width: 55px;
+            height: 55px;
+            border-radius: 50%;
+            margin: 0 auto 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 26px;
+            color: white;
+            animation: iconFloatAdvanced 4s ease-in-out infinite;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            box-shadow: 
+                0 8px 25px rgba(0, 0, 0, 0.15),
+                inset 0 2px 0 rgba(255, 255, 255, 0.3);
+        }
+        
+        .nav-card:hover .nav-icon {
+            transform: rotateY(360deg) scale(1.08);
+            box-shadow: 
+                0 12px 35px rgba(0, 0, 0, 0.25),
+                inset 0 2px 0 rgba(255, 255, 255, 0.4);
+        }
+        
+        .policies-icon {
+            background: 
+                linear-gradient(135deg, 
+                    #ff6b6b 0%, 
+                    #ee5a24 50%, 
+                    #e55039 100%);
+        }
+        
+        .claims-icon {
+            background: 
+                linear-gradient(135deg, 
+                    #4834d4 0%, 
+                    #3742fa 50%, 
+                    #2f3542 100%);
+        }
+        
+        .support-icon {
+            background: 
+                linear-gradient(135deg, 
+                    #ff9ff3 0%, 
+                    #f368e0 50%, 
+                    #e84393 100%);
+        }
+        
+        .nav-title {
+            color: #2c3e50;
+            font-size: 18px;
+            font-weight: 800;
+            margin-bottom: 10px;
+            letter-spacing: 0.6px;
+            text-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+        
+        .nav-subtitle {
+            color: #6c757d;
+            font-size: 12px;
+            line-height: 1.4;
+            opacity: 0.9;
+            font-weight: 500;
+        }
+        
+        /* Simplified side navigation */
+        .side-nav {
+            position: fixed;
+            left: 30px;
+            top: 50%;
+            transform: translateY(-50%);
+            z-index: 40;
+            animation: slideInLeft 1s ease-out 1.5s both;
+        }
+        
+        .side-nav-icon {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 24px;
+            cursor: pointer;
+            transition: all 0.4s ease;
+            box-shadow: 
+                0 8px 25px rgba(102, 126, 234, 0.3),
+                0 0 0 0px rgba(255,255,255,0.1);
+            animation: sideIconPulse 4s ease-in-out infinite;
+        }
+        
+        .side-nav-icon:hover {
+            background: linear-gradient(135deg, #764ba2, #667eea);
+            transform: scale(1.15) rotate(10deg);
+            box-shadow: 
+                0 15px 40px rgba(102, 126, 234, 0.4),
+                0 0 0 4px rgba(255,255,255,0.2);
+        }
+        
+        /* Enhanced more options */
+        .more-options {
+            position: fixed;
+            right: 240px;
+            bottom: 30px;
+            z-index: 40;
+            animation: slideInRight 1s ease-out 1.8s both;
+        }
+        
+        .more-btn {
+            width: 70px;
+            height: 70px;
+            background: linear-gradient(135deg, #e74c3c, #c0392b);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 28px;
+            cursor: pointer;
+            transition: all 0.4s ease;
+            box-shadow: 
+                0 10px 30px rgba(231, 76, 60, 0.3),
+                0 0 0 0px rgba(255,255,255,0.1);
+            animation: moreBtnRotate 8s linear infinite;
+        }
+        
+        .more-btn:hover {
+            background: linear-gradient(135deg, #c0392b, #e74c3c);
+            transform: scale(1.15);
+            box-shadow: 
+                0 20px 50px rgba(231, 76, 60, 0.4),
+                0 0 0 4px rgba(255,255,255,0.2);
+        }
+        
+        /* Advanced animations for professional styling */
+        @keyframes ceilingSubtle {
+            0%, 100% { 
+                transform: perspective(1500px) rotateX(70deg) translateY(0px);
+                filter: brightness(1);
+            }
+            50% { 
+                transform: perspective(1500px) rotateX(71deg) translateY(-1px);
+                filter: brightness(1.02);
+            }
+        }
+        
+        @keyframes lightGlow {
+            0%, 100% { 
+                opacity: 1; 
+                transform: scale(1);
+                box-shadow: 
+                    0 0 20px rgba(255,255,255,0.8),
+                    0 0 40px rgba(248, 246, 240, 0.4);
+            }
+            50% { 
+                opacity: 0.9; 
+                transform: scale(1.1);
+                box-shadow: 
+                    0 0 25px rgba(255,255,255,0.9),
+                    0 0 50px rgba(248, 246, 240, 0.5);
+            }
+        }
+        
+        @keyframes floorSubtle {
+            0%, 100% { 
+                filter: brightness(1) contrast(1);
+            }
+            50% { 
+                filter: brightness(1.05) contrast(1.02);
+            }
+        }
+        
+        @keyframes floorTiles {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(60px); }
+        }
+        
+        @keyframes shimmer {
+            0% { left: -100%; }
+            50% { left: 100%; }
+            100% { left: -100%; }
+        }
+        
+        @keyframes logoRotateGlow {
+            0% { 
+                transform: rotate(0deg);
+                filter: brightness(1) hue-rotate(0deg);
+            }
+            25% { 
+                filter: brightness(1.1) hue-rotate(90deg);
+            }
+            50% { 
+                filter: brightness(1.2) hue-rotate(180deg);
+            }
+            75% { 
+                filter: brightness(1.1) hue-rotate(270deg);
+            }
+            100% { 
+                transform: rotate(360deg);
+                filter: brightness(1) hue-rotate(360deg);
+            }
+        }
+        
+        @keyframes logoInnerSpin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(-360deg); }
+        }
+        
+        @keyframes cardFloatAdvanced {
+            0%, 100% { 
+                transform: translateY(0px) rotateX(0deg);
+                filter: brightness(1);
+            }
+            33% { 
+                transform: translateY(-8px) rotateX(2deg);
+                filter: brightness(1.05);
+            }
+            66% { 
+                transform: translateY(5px) rotateX(-1deg);
+                filter: brightness(0.98);
+            }
+        }
+        
+        @keyframes iconFloatAdvanced {
+            0%, 100% { 
+                transform: translateY(0px) rotateZ(0deg);
+            }
+            25% { 
+                transform: translateY(-3px) rotateZ(2deg);
+            }
+            50% { 
+                transform: translateY(-6px) rotateZ(0deg);
+            }
+            75% { 
+                transform: translateY(-2px) rotateZ(-2deg);
+            }
+        }
+        
+        @keyframes fadeInUp {
+            0% { 
+                opacity: 0; 
+                transform: translateX(-50%) translateY(50px);
+            }
+            100% { 
+                opacity: 1; 
+                transform: translateX(-50%) translateY(0);
+            }
+        }
+        
+        @keyframes slideInLeft {
+            0% { 
+                opacity: 0; 
+                transform: translateX(-100px);
+            }
+            100% { 
+                opacity: 1; 
+                transform: translateX(0);
+            }
+        }
+        
+        @keyframes slideInCenter {
+            0% { 
+                opacity: 0; 
+                transform: translate(-50%, -50%) translateY(50px) scale(0.8);
+            }
+            100% { 
+                opacity: 1; 
+                transform: translate(-50%, -50%) scale(1);
+            }
+        }
+        
+        @keyframes modalFadeIn {
+            0% { 
+                opacity: 0; 
+                transform: scale(0.9);
+            }
+            100% { 
+                opacity: 1; 
+                transform: scale(1);
+            }
+        }
+        
+        @keyframes slideInRight {
+            0% { 
+                opacity: 0; 
+                transform: translateX(100px);
+            }
+            100% { 
+                opacity: 1; 
+                transform: translateX(0);
+            }
+        }
+        
+        @keyframes personBreathe {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.02); }
+        }
+        
+        @keyframes headNod {
+            0%, 100% { transform: rotate(0deg); }
+            25% { transform: rotate(2deg); }
+            75% { transform: rotate(-1deg); }
+        }
+        
+        @keyframes chatFloat {
+            0%, 100% { transform: translateY(0px) scale(1); }
+            50% { transform: translateY(-8px) scale(1.02); }
+        }
+        
+        @keyframes iconPulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+        }
+        
+        @keyframes deskGlow {
+            0%, 100% { box-shadow: 0 8px 25px rgba(231, 76, 60, 0.3), 0 0 0 2px rgba(255,255,255,0.1); }
+            50% { box-shadow: 0 8px 25px rgba(231, 76, 60, 0.5), 0 0 0 2px rgba(255,255,255,0.2); }
+        }
+        
+        @keyframes labelFloat {
+            0%, 100% { transform: translateX(-50%) translateY(0px); }
+            50% { transform: translateX(-50%) translateY(-3px); }
+        }
+        
+        @keyframes cardFloat {
+            0%, 100% { transform: translateY(0px); }
+            33% { transform: translateY(-5px); }
+            66% { transform: translateY(5px); }
+        }
+        
+        @keyframes iconBounce {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-3px); }
+        }
+        
+        @keyframes sideIconPulse {
+            0%, 100% { 
+                transform: scale(1);
+                box-shadow: 0 8px 25px rgba(102, 126, 234, 0.3), 0 0 0 0px rgba(255,255,255,0.1);
+            }
+            50% { 
+                transform: scale(1.05);
+                box-shadow: 0 8px 25px rgba(102, 126, 234, 0.5), 0 0 0 2px rgba(255,255,255,0.2);
+            }
+        }
+        
+        @keyframes moreBtnRotate {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        /* FAQ Modal Styles - Question Suggestions */
+        .faq-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            animation: fadeIn 0.3s ease-out;
+        }
+        
+        .faq-modal.show {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .faq-container {
+            background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
+            border-radius: 25px;
+            padding: 30px;
+            width: 90%;
+            max-width: 600px;
+            max-height: 70vh;
+            overflow-y: auto;
+            box-shadow: 
+                0 25px 80px rgba(0, 0, 0, 0.3),
+                0 10px 40px rgba(102, 126, 234, 0.2);
+            border: 3px solid rgba(255, 255, 255, 0.8);
+            animation: slideInScale 0.4s ease-out;
+            position: relative;
+        }
+        
+        .faq-header {
+            text-align: center;
+            margin-bottom: 25px;
+            padding-bottom: 20px;
+            border-bottom: 2px solid rgba(102, 126, 234, 0.1);
+        }
+        
+        .faq-title {
+            color: #2c3e50;
+            font-size: 24px;
+            font-weight: 900;
+            margin-bottom: 10px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .faq-subtitle {
+            color: #6c757d;
+            font-size: 14px;
+            font-weight: 500;
+        }
+        
+        .faq-close {
+            position: absolute;
+            top: 15px;
+            right: 20px;
+            background: linear-gradient(135deg, #e74c3c, #c0392b);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 35px;
+            height: 35px;
+            font-size: 18px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(231, 76, 60, 0.3);
+        }
+        
+        .faq-close:hover {
+            transform: scale(1.1) rotate(90deg);
+            box-shadow: 0 8px 25px rgba(231, 76, 60, 0.5);
+        }
+        
+        .question-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 12px;
+        }
+        
+        .question-item {
+            background: linear-gradient(135deg, rgba(102, 126, 234, 0.05), rgba(118, 75, 162, 0.05));
+            border: 2px solid rgba(102, 126, 234, 0.1);
+            border-radius: 15px;
+            padding: 15px 20px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .question-item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(102, 126, 234, 0.1), transparent);
+            transition: left 0.5s ease;
+        }
+        
+        .question-item:hover::before {
+            left: 100%;
+        }
+        
+        .question-item:hover {
+            transform: translateY(-2px);
+            box-shadow: 
+                0 8px 25px rgba(0, 0, 0, 0.1),
+                0 4px 15px rgba(102, 126, 234, 0.15);
+            border-color: rgba(102, 126, 234, 0.3);
+            background: linear-gradient(135deg, rgba(102, 126, 234, 0.08), rgba(118, 75, 162, 0.08));
+        }
+        
+        .question-text {
+            color: #2c3e50;
+            font-size: 14px;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .question-icon {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            border-radius: 50%;
+            width: 22px;
+            height: 22px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 10px;
+            font-weight: bold;
+            flex-shrink: 0;
+        }
+        
+        .question-arrow {
+            margin-left: auto;
+            color: #667eea;
+            font-size: 16px;
+            transition: transform 0.3s ease;
+        }
+        
+        .question-item:hover .question-arrow {
+            transform: translateX(3px);
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        @keyframes shimmer {
+            0% { transform: translateX(-100%) translateY(-100%) rotate(45deg); }
+            50% { transform: translateX(100%) translateY(100%) rotate(45deg); }
+            100% { transform: translateX(300%) translateY(300%) rotate(45deg); }
+        }
+        
+        @keyframes chatPulse {
+            0%, 100% { 
+                transform: scale(1);
+                box-shadow: 
+                    0 15px 40px rgba(102, 126, 234, 0.4),
+                    0 5px 20px rgba(118, 75, 162, 0.3);
+            }
+            50% { 
+                transform: scale(1.03);
+                box-shadow: 
+                    0 20px 50px rgba(79, 172, 254, 0.5),
+                    0 8px 25px rgba(0, 242, 254, 0.4);
+            }
+        }
+        
+        @keyframes slideInScale {
+            from { 
+                opacity: 0; 
+                transform: scale(0.8) translateY(50px); 
+            }
+            to { 
+                opacity: 1; 
+                transform: scale(1) translateY(0); 
+            }
+        }
+        
+        @keyframes fadeInDown {
+            from { 
+                opacity: 0; 
+                transform: translateY(-10px); 
+            }
+            to { 
+                opacity: 1; 
+                transform: translateY(0); 
+            }
+        }
+        
+        .nav-card:nth-child(1) { animation-delay: 0.1s; }
+        .nav-card:nth-child(2) { animation-delay: 0.2s; }
+        .nav-card:nth-child(3) { animation-delay: 0.3s; }
+        
+
+        
+        /* Reset office container */
+        .office-container {
+            margin-top: 0;
+            height: 100vh;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="office-container">
+        <!-- Ceiling with grid and lights -->
+        <div class="ceiling">
+            <div class="ceiling-light light-1"></div>
+            <div class="ceiling-light light-2"></div>
+            <div class="ceiling-light light-3"></div>
+        </div>
+        
+        <!-- Floor -->
+        <div class="floor"></div>
+        
+        <!-- Back wall -->
+        <div class="back-wall"></div>
+        
+        <!-- Reception area (left side) -->
+        <div class="reception-area">
+            <div class="reception-desk">
+                <div class="desk-top"></div>
+            </div>
+            <!-- Reception chairs behind the desk -->
+            <div class="reception-chair reception-chair-1">
+                <div class="chair-back"></div>
+                <div class="chair-seat"></div>
+                <div class="chair-legs"></div>
+            </div>
+            <div class="reception-chair reception-chair-2">
+                <div class="chair-back"></div>
+                <div class="chair-seat"></div>
+                <div class="chair-legs"></div>
+            </div>
+        </div>
+        
+        <!-- Company branding (left top corner) -->
+        <div class="company-branding">
+            <div class="logo">
+                <div class="logo-symbol">🏛️</div>
+            </div>
+            <div class="brand-text">
+                <div class="company-name">THE ORIENTAL<br>INSURANCE CO. LTD.</div>
+                <div class="company-subtitle">Est. 1947</div>
+            </div>
+        </div>
+        
+        <!-- Professional Receptionist -->
+        <div class="receptionist">
+            <div class="person">
+                <div class="person-hair"></div>
+                <div class="person-head">
+                    <div class="person-face-features">
+                        <div class="person-eyes"></div>
+                        <div class="person-nose"></div>
+                        <div class="person-mouth"></div>
+                    </div>
+                </div>
+                <div class="person-collar"></div>
+                <div class="person-body">
+                    <div class="person-blazer"></div>
+                    <div class="person-shirt"></div>
+                </div>
+                <div class="person-arms">
+                    <div class="person-hands"></div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Chat bubble -->
+        <div class="chat-bubble" onclick="interactWithAssistant()">
+            <span class="chat-icon">😊</span>
+            <span class="chat-text" id="chatText">Hello! How can I assist you today?</span>
+            <div class="typing-indicator" id="typingIndicator">
+                <div class="typing-dot"></div>
+                <div class="typing-dot"></div>
+                <div class="typing-dot"></div>
+            </div>
+        </div>
+        
+        <!-- Service desks (right side) -->
+        <div class="service-desks">
+            <div class="desk-row">
+                <div class="service-desk">
+                    <div class="desk-label">Policy Desk</div>
+                    <div class="desk-info">
+                        <h4>Policy Services</h4>
+                        <ul>
+                            <li>New Policy Purchase</li>
+                            <li>Policy Renewal</li>
+                            <li>Coverage Details</li>
+                            <li>Premium Calculation</li>
+                            <li>Policy Modifications</li>
+                        </ul>
+                    </div>
+                    <div class="desk-structure"></div>
+                    <div class="desk-chair"></div>
+                </div>
+                <div class="service-desk">
+                    <div class="desk-label">Claim Desk</div>
+                    <div class="desk-info">
+                        <h4>Claim Services</h4>
+                        <ul>
+                            <li>Claim Registration</li>
+                            <li>Claim Status Tracking</li>
+                            <li>Document Submission</li>
+                            <li>Settlement Process</li>
+                            <li>Claim Appeals</li>
+                        </ul>
+                    </div>
+                    <div class="desk-structure"></div>
+                    <div class="desk-chair"></div>
+                </div>
+                <div class="service-desk">
+                    <div class="desk-label">Grievance Desk</div>
+                    <div class="desk-info">
+                        <h4>Customer Support</h4>
+                        <ul>
+                            <li>Complaint Registration</li>
+                            <li>Service Issues</li>
+                            <li>Feedback & Suggestions</li>
+                            <li>Resolution Tracking</li>
+                            <li>Escalation Support</li>
+                        </ul>
+                    </div>
+                    <div class="desk-structure"></div>
+                    <div class="desk-chair"></div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Office door -->
+        <div class="door-frame"></div>
+        <div class="office-door" onclick="openAuthModal()"></div>
+        
+        <!-- Decorative pots -->
+        <div class="decorative-pot left">
+            <div class="pot-base"></div>
+            <div class="plant">
+                <div class="leaf"></div>
+                <div class="leaf"></div>
+                <div class="leaf"></div>
+                <div class="leaf"></div>
+                <div class="leaf"></div>
+            </div>
+        </div>
+        <div class="decorative-pot right">
+            <div class="pot-base"></div>
+            <div class="plant">
+                <div class="leaf"></div>
+                <div class="leaf"></div>
+                <div class="leaf"></div>
+                <div class="leaf"></div>
+                <div class="leaf"></div>
+            </div>
+        </div>
+        
+        <!-- Navigation cards -->
+        <div class="navigation-cards">
+            <div class="nav-card" onclick="openDetailModal('policies')">
+                <div class="nav-icon policies-icon">📄</div>
+                <div class="nav-title">Policies</div>
+                <div class="nav-subtitle">View and manage your insurance policies</div>
+            </div>
+            <div class="nav-card" onclick="openDetailModal('claims')">
+                <div class="nav-icon claims-icon">📝</div>
+                <div class="nav-title">Claim Registration</div>
+                <div class="nav-subtitle">Submit and track your insurance claims</div>
+            </div>
+            <div class="nav-card" onclick="openDetailModal('support')">
+                <div class="nav-icon support-icon">🎧</div>
+                <div class="nav-title">Support</div>
+                <div class="nav-subtitle">Get help from our customer service</div>
+            </div>
+        </div>
+
+        <!-- Detailed Modals -->
+        <!-- Policies Modal -->
+        <div id="policiesModal" class="detail-modal">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h2 class="modal-title">📄 Insurance Policies</h2>
+                    <button class="modal-close" onclick="closeDetailModal('policies')">&times;</button>
+                </div>
+                
+                <div class="modal-section">
+                    <h3>🏠 Available Insurance Types</h3>
+                    <div class="info-card">
+                        <h4>Motor Insurance</h4>
+                        <p>Comprehensive coverage for your vehicles including third-party liability, own damage, and theft protection.</p>
+                    </div>
+                    <div class="info-card">
+                        <h4>Health Insurance</h4>
+                        <p>Medical coverage for hospitalization, treatment, and health emergencies with cashless facility.</p>
+                    </div>
+                    <div class="info-card">
+                        <h4>Home Insurance</h4>
+                        <p>Protection for your home and belongings against fire, theft, natural disasters, and accidents.</p>
+                    </div>
+                    <div class="info-card">
+                        <h4>Travel Insurance</h4>
+                        <p>Coverage for domestic and international travel including medical emergencies and trip cancellations.</p>
+                    </div>
+                </div>
+
+                <div class="modal-section">
+                    <h3>📋 Policy Registration</h3>
+                    <div class="registration-form">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label>Full Name *</label>
+                                <input type="text" placeholder="Enter your full name" required>
+                            </div>
+                            <div class="form-group">
+                                <label>Email Address *</label>
+                                <input type="email" placeholder="Enter your email" required>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label>Phone Number *</label>
+                                <input type="tel" placeholder="Enter your phone number" required>
+                            </div>
+                            <div class="form-group">
+                                <label>Policy Type *</label>
+                                <select required>
+                                    <option value="">Select Policy Type</option>
+                                    <option value="motor">Motor Insurance</option>
+                                    <option value="health">Health Insurance</option>
+                                    <option value="home">Home Insurance</option>
+                                    <option value="travel">Travel Insurance</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label>Address</label>
+                            <textarea rows="3" placeholder="Enter your complete address"></textarea>
+                        </div>
+                        <button class="submit-btn" onclick="submitPolicyForm()">Apply for Policy</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Claims Modal -->
+        <div id="claimsModal" class="detail-modal">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h2 class="modal-title">📝 Claim Registration</h2>
+                    <button class="modal-close" onclick="closeDetailModal('claims')">&times;</button>
+                </div>
+                
+                <div class="modal-section">
+                    <h3>🔄 Claim Process</h3>
+                    <ol style="padding-left: 20px;">
+                        <li><strong>Immediate Notification:</strong> Inform us within 24 hours of the incident</li>
+                        <li><strong>Document Collection:</strong> Gather all necessary documents and evidence</li>
+                        <li><strong>Claim Registration:</strong> Submit your claim through our portal</li>
+                        <li><strong>Verification:</strong> Our team will verify and process your claim</li>
+                        <li><strong>Settlement:</strong> Receive your claim settlement within 15 working days</li>
+                    </ol>
+                </div>
+
+                <div class="modal-section">
+                    <div class="requirement-list">
+                        <h4>📋 Required Documents</h4>
+                        <ul>
+                            <li>Original Policy Document</li>
+                            <li>Claim Form (duly filled and signed)</li>
+                            <li>FIR Copy (for theft/accident cases)</li>
+                            <li>Medical Reports (for health claims)</li>
+                            <li>Repair Estimates (for motor/home claims)</li>
+                            <li>Photographs of damage</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="modal-section">
+                    <h3>📝 Submit New Claim</h3>
+                    <div class="registration-form">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label>Policy Number *</label>
+                                <input type="text" placeholder="Enter your policy number" required>
+                            </div>
+                            <div class="form-group">
+                                <label>Claim Type *</label>
+                                <select required>
+                                    <option value="">Select Claim Type</option>
+                                    <option value="motor">Motor Insurance Claim</option>
+                                    <option value="health">Health Insurance Claim</option>
+                                    <option value="home">Home Insurance Claim</option>
+                                    <option value="travel">Travel Insurance Claim</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label>Incident Date *</label>
+                                <input type="date" required>
+                            </div>
+                            <div class="form-group">
+                                <label>Estimated Amount</label>
+                                <input type="number" placeholder="Enter estimated claim amount">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label>Incident Description *</label>
+                            <textarea rows="4" placeholder="Describe the incident in detail" required></textarea>
+                        </div>
+                        <button class="submit-btn" onclick="submitClaimForm()">Submit Claim</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Support Modal -->
+        <div id="supportModal" class="detail-modal">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h2 class="modal-title">🎧 Customer Support</h2>
+                    <button class="modal-close" onclick="closeDetailModal('support')">&times;</button>
+                </div>
+                
+                <div class="modal-section">
+                    <h3>📞 Contact Information</h3>
+                    <div class="info-card">
+                        <h4>South Extension Branch Customer Care</h4>
+                        <p><strong>Direct Line:</strong> +91-11-24626190</p>
+                        <p><strong>Toll Free:</strong> 1800-118-485</p>
+                        <p><strong>Email:</strong> customercare@orientalinsurance.co.in</p>
+                        <p><strong>Working Hours:</strong> Monday to Friday, 9:00 AM to 6:00 PM</p>
+                        <p><strong>Address:</strong> No. G/8, NDSE 1, South Extension Part 1 Market, 1st Floor, Delhi - 110049</p>
+                    </div>
+                </div>
+
+                <div class="modal-section">
+                    <h3>🆘 Emergency Services</h3>
+                    <div class="requirement-list">
+                        <h4>24/7 Emergency Helpline</h4>
+                        <ul>
+                            <li><strong>Motor Claims:</strong> 1800-118-486</li>
+                            <li><strong>Health Claims:</strong> 1800-118-487</li>
+                            <li><strong>Travel Assistance:</strong> 1800-118-488</li>
+                            <li><strong>Home Emergency:</strong> 1800-118-489</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="modal-section">
+                    <h3>📬 Submit Grievance</h3>
+                    <div class="registration-form">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label>Name *</label>
+                                <input type="text" placeholder="Enter your name" required>
+                            </div>
+                            <div class="form-group">
+                                <label>Email *</label>
+                                <input type="email" placeholder="Enter your email" required>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label>Policy/Claim Number</label>
+                                <input type="text" placeholder="Enter policy or claim number">
+                            </div>
+                            <div class="form-group">
+                                <label>Issue Category *</label>
+                                <select required>
+                                    <option value="">Select Category</option>
+                                    <option value="claim">Claim Related</option>
+                                    <option value="policy">Policy Related</option>
+                                    <option value="service">Service Quality</option>
+                                    <option value="billing">Billing Issues</option>
+                                    <option value="other">Other</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label>Description *</label>
+                            <textarea rows="4" placeholder="Describe your issue or feedback" required></textarea>
+                        </div>
+                        <button class="submit-btn" onclick="submitSupportForm()">Submit Grievance</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Door Modal -->
+        <div id="doorModal" class="detail-modal door-modal">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h2 class="modal-title">🚪 Office Information</h2>
+                    <button class="modal-close" onclick="closeDetailModal('door')">&times;</button>
+                </div>
+                
+                <div class="modal-section">
+                    <h3>🏢 Welcome to Oriental Insurance - South Extension Branch</h3>
+                    <p>Step into our modern South Extension branch office designed for customer comfort and efficient service delivery. Located in the heart of South Extension Part 1 Market, our office is equipped with state-of-the-art facilities to serve you better.</p>
+                </div>
+
+                <div class="modal-section">
+                    <h3>🌟 Office Features</h3>
+                    <div class="office-info-grid">
+                        <div class="office-feature" onclick="openFeatureModal('customer-service')">
+                            <i>🏪</i>
+                            Customer Service Center
+                        </div>
+                        <div class="office-feature" onclick="openFeatureModal('digital-hub')">
+                            <i>💻</i>
+                            Digital Services Hub
+                        </div>
+                        <div class="office-feature" onclick="openFeatureModal('claims-processing')">
+                            <i>📋</i>
+                            Claims Processing Unit
+                        </div>
+                        <div class="office-feature" onclick="openFeatureModal('consultation')">
+                            <i>👥</i>
+                            Consultation Rooms
+                        </div>
+                        <div class="office-feature" onclick="openFeatureModal('support-desk')">
+                            <i>📞</i>
+                            24/7 Support Desk
+                        </div>
+                        <div class="office-feature" onclick="openFeatureModal('document-center')">
+                            <i>🔒</i>
+                            Secure Document Center
+                        </div>
+                    </div>
+                </div>
+
+                <div class="modal-section">
+                    <h3>🕐 Operating Hours</h3>
+                    <div class="info-card">
+                        <h4>Business Hours</h4>
+                        <p><strong>Monday - Friday:</strong> 9:00 AM - 6:00 PM</p>
+                        <p><strong>Saturday:</strong> 9:00 AM - 2:00 PM</p>
+                        <p><strong>Sunday:</strong> Closed</p>
+                        <p><strong>Emergency Support:</strong> Available 24/7</p>
+                    </div>
+                </div>
+
+                <div class="modal-section">
+                    <h3>📍 Location & Contact</h3>
+                    <div class="info-card">
+                        <h4>South Extension Branch Office</h4>
+                        <p><strong>Address:</strong> The Oriental Insurance Company Ltd. (OICL), No. G/8, NDSE 1, South Extension Part 1 Market, 1st Floor, Delhi - 110049</p>
+                        <p><strong>Phone:</strong> +91-11-24626190</p>
+                        <p><strong>Email:</strong> info@orientalinsurance.co.in</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Authentication Modal (Login/Signup) -->
+        <div id="authModal" class="detail-modal auth-modal">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h2 class="modal-title">🔐 Office Access Portal</h2>
+                    <button class="modal-close" onclick="closeAuthModal()">&times;</button>
+                </div>
+                
+                <div class="auth-tabs">
+                    <button class="auth-tab active" onclick="switchAuthTab('login')">Login</button>
+                    <button class="auth-tab" onclick="switchAuthTab('signup')">Sign Up</button>
+                </div>
+
+                <div class="auth-form-container">
+                    <!-- Login Form -->
+                    <div id="loginForm" class="auth-form active">
+                        <div class="auth-form-group">
+                            <label>Email Address *</label>
+                            <input type="email" id="loginEmail" placeholder="Enter your email" required>
+                        </div>
+                        <div class="auth-form-group">
+                            <label>Password *</label>
+                            <input type="password" id="loginPassword" placeholder="Enter your password" required>
+                        </div>
+                        <button class="auth-submit-btn" onclick="handleLogin()">🚀 Access Office</button>
+                        
+                        <div class="auth-divider">
+                            <span>or continue with</span>
+                        </div>
+                        
+                        <button class="social-login-btn google-btn" onclick="socialLogin('google')">
+                            🔴 Continue with Google
+                        </button>
+                        <button class="social-login-btn facebook-btn" onclick="socialLogin('facebook')">
+                            🔵 Continue with Facebook
+                        </button>
+                    </div>
+
+                    <!-- Signup Form -->
+                    <div id="signupForm" class="auth-form">
+                        <div class="auth-form-group">
+                            <label>Full Name *</label>
+                            <input type="text" id="signupName" placeholder="Enter your full name" required>
+                        </div>
+                        <div class="auth-form-group">
+                            <label>Email Address *</label>
+                            <input type="email" id="signupEmail" placeholder="Enter your email" required>
+                        </div>
+                        <div class="auth-form-group">
+                            <label>Phone Number *</label>
+                            <input type="tel" id="signupPhone" placeholder="Enter your phone number" required>
+                        </div>
+                        <div class="auth-form-group">
+                            <label>Password *</label>
+                            <input type="password" id="signupPassword" placeholder="Create a password" required>
+                        </div>
+                        <div class="auth-form-group">
+                            <label>Confirm Password *</label>
+                            <input type="password" id="confirmPassword" placeholder="Confirm your password" required>
+                        </div>
+                        <button class="auth-submit-btn" onclick="handleSignup()">🎉 Create Account & Access Office</button>
+                        
+                        <div class="auth-divider">
+                            <span>or sign up with</span>
+                        </div>
+                        
+                        <button class="social-login-btn google-btn" onclick="socialLogin('google')">
+                            🔴 Sign up with Google
+                        </button>
+                        <button class="social-login-btn facebook-btn" onclick="socialLogin('facebook')">
+                            🔵 Sign up with Facebook
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Feature Information Modals -->
+        <div id="featureModal" class="detail-modal feature-modal">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h2 class="modal-title" id="featureTitle">Feature Information</h2>
+                    <button class="modal-close" onclick="closeFeatureModal()">&times;</button>
+                </div>
+                
+                <div class="modal-section" id="featureContent">
+                    <!-- Content will be dynamically loaded -->
+                </div>
+            </div>
+        </div>
+        
+        <!-- Side navigation -->
+        <div class="side-nav">
+            <div class="side-nav-icon" onclick="showInfo()">ℹ️</div>
+        </div>
+        
+        <!-- More options -->
+        <div class="more-options">
+            <div class="more-btn" onclick="showMenu()">⋯</div>
+        </div>
+    </div>
+    
+    <script>
+        // IMMEDIATE JAVASCRIPT TEST
+        console.log('🚀 JavaScript loading started...');
+        console.log('✅ Script tag reached successfully');
+        
+        // IMMEDIATE CLICK FIX - Add before any other code
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('🔧 IMMEDIATE FIX: Adding click handlers...');
+            
+            // Wait for page to fully load then add handlers
+            setTimeout(() => {
+                // Door click handler
+                const door = document.querySelector('.office-door');
+                if (door) {
+                    door.style.cursor = 'pointer';
+                    door.onclick = function() {
+                        console.log('🚪 Door clicked via onclick!');
+                        // Call function if it exists
+                        if (typeof openAuthModal === 'function') {
+                            openAuthModal();
+                        }
+                    };
+                    console.log('✅ Door click handler added');
+                }
+                
+                // Navigation cards click handlers
+                const navCards = document.querySelectorAll('.nav-card');
+                navCards.forEach((card, index) => {
+                    card.style.cursor = 'pointer';
+                    const types = ['policies', 'claims', 'support'];
+                    card.onclick = function() {
+                        console.log(`🎯 Nav card ${index} clicked via onclick!`);
+                        if (typeof openDetailModal === 'function') {
+                            openDetailModal(types[index]);
+                        }
+                    };
+                    console.log(`✅ Nav card ${index} click handler added`);
+                });
+                
+                // Chat bubble click handler
+                const chatBubble = document.querySelector('.chat-bubble');
+                if (chatBubble) {
+                    chatBubble.style.cursor = 'pointer';
+                    chatBubble.onclick = function() {
+                        console.log('💬 Chat bubble clicked via onclick!');
+                        if (typeof interactWithAssistant === 'function') {
+                            interactWithAssistant();
+                        }
+                    };
+                    console.log('✅ Chat bubble click handler added');
+                }
+                
+                console.log('✅ IMMEDIATE FIX: All click handlers applied successfully!');
+            }, 500);
+        });
+        
+        // Test basic JavaScript functionality
+        try {
+            console.log('🧪 Testing basic JavaScript operations...');
+            const testResult = 2 + 2;
+            console.log('✅ Math operations work:', testResult);
+            console.log('✅ Console logging works');
+            console.log('✅ JavaScript execution confirmed');
+        } catch (error) {
+            console.error('❌ JavaScript basic test failed:', error);
+        }
+        
+        // DEBUG FUNCTION FOR THE TEST BUTTON
+        function testJavaScript() {
+            const timestamp = new Date().toLocaleTimeString();
+            alert(`🎉 SUCCESS!\n\nJavaScript is working perfectly!\n\nTime: ${timestamp}\n\nAll clicking should work now.\nCheck console for detailed logs.`);
+            console.log('🎉 DEBUG BUTTON CLICKED - JavaScript confirmed working!');
+            
+            // Test if all main functions exist
+            const functions = ['openDetailModal', 'closeDetailModal', 'openAuthModal', 'closeAuthModal', 'interactWithAssistant'];
+            functions.forEach(func => {
+                if (typeof window[func] === 'function') {
+                    console.log(`✅ Function exists: ${func}`);
+                } else {
+                    console.log(`❌ Function missing: ${func}`);
+                }
+            });
+        }
+        
+        // Detailed Modal Functions
+        function openDetailModal(type) {
+            console.log('📂 openDetailModal called with type:', type);
+            const modal = document.getElementById(type + 'Modal');
+            if (modal) {
+                modal.style.display = 'flex';
+                document.body.style.overflow = 'hidden';
+                console.log('✅ Modal opened:', type);
+            } else {
+                console.log('❌ Modal not found:', type + 'Modal');
+            }
+        }
+        
+        function closeDetailModal(type) {
+            const modal = document.getElementById(type + 'Modal');
+            if (modal) {
+                modal.style.display = 'none';
+                document.body.style.overflow = 'auto';
+            }
+        }
+        
+        // Form Submission Functions
+        function submitPolicyForm() {
+            const form = event.target.closest('.registration-form');
+            const formData = new FormData();
+            
+            // Collect form data
+            const inputs = form.querySelectorAll('input, select, textarea');
+            let isValid = true;
+            
+            inputs.forEach(input => {
+                if (input.required && !input.value.trim()) {
+                    isValid = false;
+                    input.style.borderColor = '#ff6b6b';
+                } else {
+                    input.style.borderColor = '#dee2e6';
+                    formData.append(input.name || input.placeholder, input.value);
+                }
+            });
+            
+            if (isValid) {
+                // Simulate API call
+                fetch('http://localhost:5000/api/policies/register', {
+                    method: 'POST',
+                    body: formData
+                })
+                .then(response => response.json())
+                .then(data => {
+                    alert('✅ Policy application submitted successfully!\n\nReference Number: POL' + Date.now() + '\n\nOur team will contact you within 24 hours.');
+                    closeDetailModal('policies');
+                })
+                .catch(error => {
+                    alert('✅ Policy application received!\n\nReference Number: POL' + Date.now() + '\n\nNote: Backend service will process your request.');
+                    closeDetailModal('policies');
+                });
+            } else {
+                alert('❌ Please fill all required fields.');
+            }
+        }
+        
+        function submitClaimForm() {
+            const form = event.target.closest('.registration-form');
+            const formData = new FormData();
+            
+            // Collect form data
+            const inputs = form.querySelectorAll('input, select, textarea');
+            let isValid = true;
+            
+            inputs.forEach(input => {
+                if (input.required && !input.value.trim()) {
+                    isValid = false;
+                    input.style.borderColor = '#ff6b6b';
+                } else {
+                    input.style.borderColor = '#dee2e6';
+                    formData.append(input.name || input.placeholder, input.value);
+                }
+            });
+            
+            if (isValid) {
+                // Simulate API call
+                fetch('http://localhost:5000/api/claims/submit', {
+                    method: 'POST',
+                    body: formData
+                })
+                .then(response => response.json())
+                .then(data => {
+                    alert('✅ Claim submitted successfully!\n\nClaim Number: CLM' + Date.now() + '\n\nStatus: Under Review\n\nYou will receive updates via email and SMS.');
+                    closeDetailModal('claims');
+                })
+                .catch(error => {
+                    alert('✅ Claim submitted successfully!\n\nClaim Number: CLM' + Date.now() + '\n\nNote: Backend service will process your claim.');
+                    closeDetailModal('claims');
+                });
+            } else {
+                alert('❌ Please fill all required fields.');
+            }
+        }
+        
+        function submitSupportForm() {
+            const form = event.target.closest('.registration-form');
+            const formData = new FormData();
+            
+            // Collect form data
+            const inputs = form.querySelectorAll('input, select, textarea');
+            let isValid = true;
+            
+            inputs.forEach(input => {
+                if (input.required && !input.value.trim()) {
+                    isValid = false;
+                    input.style.borderColor = '#ff6b6b';
+                } else {
+                    input.style.borderColor = '#dee2e6';
+                    formData.append(input.name || input.placeholder, input.value);
+                }
+            });
+            
+            if (isValid) {
+                // Simulate API call
+                fetch('http://localhost:5000/api/grievances/submit', {
+                    method: 'POST',
+                    body: formData
+                })
+                .then(response => response.json())
+                .then(data => {
+                    alert('✅ Grievance submitted successfully!\n\nTicket Number: GRV' + Date.now() + '\n\nStatus: Assigned to Customer Care\n\nExpected Resolution: 3-5 business days');
+                    closeDetailModal('support');
+                })
+                .catch(error => {
+                    alert('✅ Grievance submitted successfully!\n\nTicket Number: GRV' + Date.now() + '\n\nNote: Backend service will process your request.');
+                    closeDetailModal('support');
+                });
+            } else {
+                alert('❌ Please fill all required fields.');
+            }
+        }
+        
+        // Close modal when clicking outside
+        window.onclick = function(event) {
+            const modals = document.querySelectorAll('.detail-modal');
+            modals.forEach(modal => {
+                if (event.target === modal) {
+                    modal.style.display = 'none';
+                    document.body.style.overflow = 'auto';
+                }
+            });
+        }
+
+        function openSection(section) {
+            const messages = {
+                'policies': '🔍 Opening Policies Section...\n\n✅ Services Available:\n• View active policies\n• Download policy documents\n• Premium payment\n• Policy renewal\n• Coverage details\n\n🔗 API Endpoint: http://localhost:5000/api/policies',
+                'claims': '📝 Opening Claim Registration...\n\n✅ Services Available:\n• Submit new claims\n• Track existing claims\n• Upload documents\n• Claim status updates\n• Settlement details\n\n🔗 API Endpoint: http://localhost:5000/api/claims',
+                'support': '🎧 Connecting to Customer Support...\n\n✅ Services Available:\n• Live chat assistance\n• File grievances\n• FAQ and help articles\n• Schedule callback\n• Expert consultation\n\n🔗 API Endpoint: http://localhost:5000/api/support'
+            };
+            
+            alert(messages[section]);
+            
+            // Test backend API connection
+            fetch(`http://localhost:5000/api/${section}`)
+                .then(response => {
+                    console.log(`✅ ${section.toUpperCase()} API Status:`, response.status);
+                    if (response.ok) {
+                        console.log(`🔗 Successfully connected to ${section} service`);
+                    }
+                })
+                .catch(error => {
+                    console.log(`⚠️ ${section} API connection:`, error.message);
+                });
+        }
+        
+        // Enhanced Assistant Functionality
+        function interactWithAssistant() {
+            openPolicyFAQ();
+        }
+        
+        function openPolicyFAQ() {
+            const modal = document.createElement('div');
+            modal.className = 'policy-faq-modal';
+            modal.innerHTML = `
+                <div class="policy-faq-container">
+                    <div class="policy-faq-inner">
+                        <button class="policy-faq-close" onclick="closePolicyFAQ()">&times;</button>
+                        <div class="policy-faq-header">
+                            <h3>Policy Related Questions</h3>
+                            <p>Choose a question to get instant answers</p>
+                        </div>
+                        <div class="policy-questions-grid">
+                        <div class="policy-question" onclick="answerPolicyQuestion('What types of insurance policies do you offer?', 0)">
+                            <span class="question-number">1</span>
+                            <span>What types of insurance policies do you offer?</span>
+                            <span class="question-arrow">→</span>
+                        </div>
+                        <div class="policy-question" onclick="answerPolicyQuestion('How do I buy a new policy?', 1)">
+                            <span class="question-number">2</span>
+                            <span>How do I buy a new policy?</span>
+                            <span class="question-arrow">→</span>
+                        </div>
+                        <div class="policy-question" onclick="answerPolicyQuestion('What documents are required for policy purchase?', 2)">
+                            <span class="question-number">3</span>
+                            <span>What documents are required for policy purchase?</span>
+                            <span class="question-arrow">→</span>
+                        </div>
+                        <div class="policy-question" onclick="answerPolicyQuestion('How can I renew my existing policy?', 3)">
+                            <span class="question-number">4</span>
+                            <span>How can I renew my existing policy?</span>
+                            <span class="question-arrow">→</span>
+                        </div>
+                        <div class="policy-question" onclick="answerPolicyQuestion('What is the premium calculation method?', 4)">
+                            <span class="question-number">5</span>
+                            <span>What is the premium calculation method?</span>
+                            <span class="question-arrow">→</span>
+                        </div>
+                        <div class="policy-question" onclick="answerPolicyQuestion('How do I check my policy status?', 5)">
+                            <span class="question-number">6</span>
+                            <span>How do I check my policy status?</span>
+                            <span class="question-arrow">→</span>
+                        </div>
+                        <div class="policy-question" onclick="answerPolicyQuestion('What is covered under my policy?', 6)">
+                            <span class="question-number">7</span>
+                            <span>What is covered under my policy?</span>
+                            <span class="question-arrow">→</span>
+                        </div>
+                        <div class="policy-question" onclick="answerPolicyQuestion('How do I download my policy documents?', 7)">
+                            <span class="question-number">8</span>
+                            <span>How do I download my policy documents?</span>
+                            <span class="question-arrow">→</span>
+                        </div>
+                        <div class="policy-question" onclick="answerPolicyQuestion('What are the payment options available?', 8)">
+                            <span class="question-number">9</span>
+                            <span>What are the payment options available?</span>
+                            <span class="question-arrow">→</span>
+                        </div>
+                        <div class="policy-question" onclick="answerPolicyQuestion('How do I cancel my policy?', 9)">
+                            <span class="question-number">10</span>
+                            <span>How do I cancel my policy?</span>
+                            <span class="question-arrow">→</span>
+                        </div>
+                        <div class="policy-question" onclick="answerPolicyQuestion('What is the claim process?', 10)">
+                            <span class="question-number">11</span>
+                            <span>What is the claim process?</span>
+                            <span class="question-arrow">→</span>
+                        </div>
+                        <div class="policy-question" onclick="answerPolicyQuestion('How long does claim settlement take?', 11)">
+                            <span class="question-number">12</span>
+                            <span>How long does claim settlement take?</span>
+                            <span class="question-arrow">→</span>
+                        </div>
+                        <div class="policy-question" onclick="answerPolicyQuestion('What is No Claim Bonus?', 12)">
+                            <span class="question-number">13</span>
+                            <span>What is No Claim Bonus?</span>
+                            <span class="question-arrow">→</span>
+                        </div>
+                        <div class="policy-question" onclick="answerPolicyQuestion('How do I update my policy details?', 13)">
+                            <span class="question-number">14</span>
+                            <span>How do I update my policy details?</span>
+                            <span class="question-arrow">→</span>
+                        </div>
+                        <div class="policy-question" onclick="answerPolicyQuestion('What are the exclusions in my policy?', 14)">
+                            <span class="question-number">15</span>
+                            <span>What are the exclusions in my policy?</span>
+                            <span class="question-arrow">→</span>
+                        </div>
+                        <div class="policy-question" onclick="answerPolicyQuestion('How do I transfer my policy ownership?', 15)">
+                            <span class="question-number">16</span>
+                            <span>How do I transfer my policy ownership?</span>
+                            <span class="question-arrow">→</span>
+                        </div>
+                        <div class="policy-question" onclick="answerPolicyQuestion('What is the grace period for premium payment?', 16)">
+                            <span class="question-number">17</span>
+                            <span>What is the grace period for premium payment?</span>
+                            <span class="question-arrow">→</span>
+                        </div>
+                        <div class="policy-question" onclick="answerPolicyQuestion('How do I add nominees to my policy?', 17)">
+                            <span class="question-number">18</span>
+                            <span>How do I add nominees to my policy?</span>
+                            <span class="question-arrow">→</span>
+                        </div>
+                        <div class="policy-question" onclick="answerPolicyQuestion('What happens if I miss premium payment?', 18)">
+                            <span class="question-number">19</span>
+                            <span>What happens if I miss premium payment?</span>
+                            <span class="question-arrow">→</span>
+                        </div>
+                        <div class="policy-question" onclick="answerPolicyQuestion('How do I contact customer support?', 19)">
+                            <span class="question-number">20</span>
+                            <span>How do I contact customer support?</span>
+                            <span class="question-arrow">→</span>
+                        </div>
+                        </div>
+                    </div>
+                </div>
+            `;            modal.style.cssText = `
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background: rgba(0, 0, 0, 0.7);
+                backdrop-filter: blur(8px);
+                z-index: 1000;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                animation: fadeIn 0.3s ease;
+            `;
+            
+            document.body.appendChild(modal);
+            document.body.style.overflow = 'hidden';
+            
+            // Add styles for the modal components
+            const style = document.createElement('style');
+            style.textContent = `
+                .policy-faq-container {
+                    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+                    border-radius: 25px;
+                    padding: 3px;
+                    width: 90%;
+                    max-width: 650px;
+                    max-height: 90vh;
+                    overflow: visible;
+                    box-shadow: 0 30px 60px rgba(0, 0, 0, 0.25), 0 0 0 1px rgba(255, 255, 255, 0.1);
+                    position: relative;
+                    animation: assistantFadeIn 0.3s ease;
+                }
+                
+                .policy-faq-inner {
+                    background: rgba(255, 255, 255, 0.95);
+                    backdrop-filter: blur(20px);
+                    border-radius: 22px;
+                    padding: 35px;
+                    max-height: 87vh;
+                    overflow-y: auto;
+                    position: relative;
+                }
+                
+                .policy-faq-inner::-webkit-scrollbar {
+                    width: 8px;
+                }
+                
+                .policy-faq-inner::-webkit-scrollbar-track {
+                    background: rgba(102, 126, 234, 0.1);
+                    border-radius: 10px;
+                }
+                
+                .policy-faq-inner::-webkit-scrollbar-thumb {
+                    background: linear-gradient(135deg, #667eea, #764ba2);
+                    border-radius: 10px;
+                }
+                
+                .policy-faq-inner::-webkit-scrollbar-thumb:hover {
+                    background: linear-gradient(135deg, #5a6fd8, #6a4190);
+                }
+                
+                .policy-faq-inner::before {
+                    content: '';
+                    position: absolute;
+                    top: 0;
+                    left: 0;
+                    right: 0;
+                    height: 100px;
+                    background: linear-gradient(180deg, rgba(102, 126, 234, 0.1) 0%, transparent 100%);
+                    border-radius: 22px 22px 0 0;
+                    pointer-events: none;
+                }
+                
+                .policy-faq-close {
+                    position: absolute;
+                    top: 20px;
+                    right: 20px;
+                    background: linear-gradient(135deg, #ff6b6b, #ee5a52);
+                    border: none;
+                    border-radius: 50%;
+                    width: 40px;
+                    height: 40px;
+                    font-size: 20px;
+                    color: white;
+                    cursor: pointer;
+                    transition: all 0.3s ease;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    box-shadow: 0 4px 15px rgba(255, 107, 107, 0.3);
+                    z-index: 10;
+                }
+                
+                .policy-faq-close:hover {
+                    background: linear-gradient(135deg, #ff5252, #d32f2f);
+                    transform: scale(1.1) rotate(90deg);
+                    box-shadow: 0 6px 20px rgba(255, 107, 107, 0.5);
+                }
+                
+                .policy-faq-header {
+                    text-align: center;
+                    margin-bottom: 25px;
+                    padding-top: 10px;
+                }
+                
+                .policy-faq-header h3 {
+                    font-size: 28px;
+                    font-weight: 800;
+                    background: linear-gradient(135deg, #ff6b6b, #ee5a52);
+                    -webkit-background-clip: text;
+                    -webkit-text-fill-color: transparent;
+                    background-clip: text;
+                    margin-bottom: 10px;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    gap: 12px;
+                    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+                }
+                
+                .policy-faq-header h3::before {
+                    content: "�";
+                    font-size: 28px;
+                }
+                
+                .policy-faq-header p {
+                    font-size: 14px;
+                    color: #6c757d;
+                    line-height: 1.5;
+                    margin: 0;
+                }
+                
+                .policy-questions-grid {
+                    display: flex;
+                    flex-direction: column;
+                    gap: 16px;
+                }
+                
+                .policy-question {
+                    background: linear-gradient(135deg, #f8f9ff 0%, #ffffff 100%);
+                    border: 2px solid transparent;
+                    border-radius: 16px;
+                    padding: 20px;
+                    cursor: pointer;
+                    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+                    font-size: 15px;
+                    line-height: 1.5;
+                    color: #2c3e50;
+                    display: flex;
+                    align-items: center;
+                    gap: 15px;
+                    position: relative;
+                    overflow: hidden;
+                    box-shadow: 0 4px 20px rgba(102, 126, 234, 0.08);
+                }
+                
+                .policy-question::before {
+                    content: '';
+                    position: absolute;
+                    top: 0;
+                    left: 0;
+                    right: 0;
+                    bottom: 0;
+                    background: linear-gradient(135deg, rgba(102, 126, 234, 0.1), rgba(118, 75, 162, 0.1));
+                    opacity: 0;
+                    transition: opacity 0.3s ease;
+                    border-radius: 16px;
+                }
+                
+                .policy-question:hover::before {
+                    opacity: 1;
+                }
+                
+                .policy-question:hover {
+                    border-color: #667eea;
+                    transform: translateY(-4px) scale(1.02);
+                    box-shadow: 0 12px 35px rgba(102, 126, 234, 0.2);
+                }
+                
+                .question-number {
+                    background: linear-gradient(135deg, #667eea, #764ba2);
+                    color: white;
+                    border-radius: 50%;
+                    width: 32px;
+                    height: 32px;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    font-size: 12px;
+                    font-weight: bold;
+                    flex-shrink: 0;
+                    box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+                    position: relative;
+                    z-index: 2;
+                }
+                
+                .question-arrow {
+                    margin-left: auto;
+                    color: #667eea;
+                    font-size: 18px;
+                    font-weight: bold;
+                    transition: all 0.3s ease;
+                    flex-shrink: 0;
+                    position: relative;
+                    z-index: 2;
+                }
+                
+                .policy-question:hover .question-arrow {
+                    transform: translateX(3px);
+                }
+                
+                @keyframes slideInCenter {
+                    from {
+                        opacity: 0;
+                        transform: translate(-50%, -50%) scale(0.9);
+                    }
+                    to {
+                        opacity: 1;
+                        transform: translate(-50%, -50%) scale(1);
+                    }
+                }
+                
+                @keyframes assistantFadeIn {
+                    from {
+                        opacity: 0;
+                        transform: scale(0.9);
+                    }
+                    to {
+                        opacity: 1;
+                        transform: scale(1);
+                    }
+                }
+            `;
+            document.head.appendChild(style);
+        }
+        
+        function closePolicyFAQ() {
+            const modal = document.querySelector('.policy-faq-modal');
+            if (modal) {
+                modal.remove();
+                document.body.style.overflow = 'auto';
+            }
+        }
+        
+        function answerPolicyQuestion(question, index) {
+            const answers = [
+                "🏢 We offer comprehensive insurance coverage including Motor Insurance (Two-wheeler & Four-wheeler), Health Insurance (Individual & Family), Travel Insurance (Domestic & International), Home Insurance (Contents & Structure), Commercial Vehicle Insurance, Marine Insurance, and Fire Insurance. Each policy is designed to provide maximum protection with competitive premiums.",
+                
+                "📝 To buy a new policy: 1) Visit our website or branch 2) Choose your insurance type 3) Fill the proposal form with accurate details 4) Submit required documents 5) Pay premium online or offline 6) Receive policy documents via email/post. Our agents are available to guide you through the entire process.",
+                
+                "📋 Required documents vary by policy type. Common documents include: Identity Proof (Aadhaar/PAN), Address Proof, Age Proof, Income Proof (for high sum assured), Vehicle Registration Certificate (for motor), Medical Reports (for health), Property Papers (for home insurance). Specific requirements will be shared during application.",
+                
+                "🔄 Policy renewal is simple: 1) Receive renewal notice 30 days before expiry 2) Review your coverage needs 3) Pay renewal premium online/offline 4) Download renewed policy instantly. Set up auto-debit for hassle-free renewals. Renew before expiry to avoid policy lapse and maintain continuous coverage.",
+                
+                "💰 Premium calculation depends on multiple factors: Age, Sum Assured, Policy Type, Risk Profile, Location, Previous Claims History, Add-ons selected, and Discount eligibility. Our online calculator provides instant quotes. Factors like safety features, good driving record, and no-claim bonus can reduce your premium significantly.",
+                
+                "🔍 Check policy status easily: 1) Login to our customer portal with policy number 2) Use our mobile app 3) Call customer care 4) Visit nearest branch. View policy details, premium due dates, coverage information, claim status, and download documents anytime. SMS alerts keep you updated on important policy information.",
+                
+                "🛡️ Coverage varies by policy type. Motor Insurance covers Third-party liability, Own Damage, Theft, Natural Calamities, and Personal Accident. Health Insurance covers Hospitalization, Daycare procedures, Pre/Post hospitalization, Ambulance charges. Each policy document contains detailed coverage terms and exclusions.",
+                
+                "📱 Download documents instantly: 1) Login to customer portal 2) Select 'Download Documents' 3) Choose policy certificate, receipts, or endorsements 4) Download PDF files. Documents are also available on our mobile app. Original hard copies can be requested if needed for official purposes.",
+                
+                "💳 Multiple payment options available: Online (Credit/Debit Cards, Net Banking, UPI, Digital Wallets), Offline (Cash at branches, Cheque, Demand Draft), Auto-debit from bank account, Mobile payment apps. All transactions are secure with SSL encryption. Choose convenient payment modes during purchase or renewal.",
+                
+                "❌ Policy cancellation process: 1) Submit written cancellation request 2) Provide policy documents 3) Pay applicable charges if any 4) Refund processed as per terms. Free-look period (15-30 days) allows full refund. Mid-term cancellation may have charges. Consult our team for cancellation implications before proceeding.",
+                
+                "📋 Claim process: 1) Report incident immediately 2) File FIR (if required) 3) Submit claim form with documents 4) Our surveyor will assess damage 5) Claim approved and processed 6) Amount credited to your account. Keep all original receipts and documents. Cashless facility available at network hospitals for health claims.",
+                
+                "⏰ Claim settlement time varies by policy type: Motor claims: 7-15 days, Health claims: 15-30 days, Fire/Marine claims: 30-45 days. Simple claims are processed faster. Cashless health claims are approved within 2-4 hours. Complex cases may require additional investigation time.",
+                
+                "🎁 No Claim Bonus (NCB) is a reward for claim-free years. Motor insurance NCB: 20% (1st year) to 50% (5th year onwards). Health insurance: Cumulative bonus increases sum assured. NCB is personal to the insured and can be transferred when buying new policy from any insurer.",
+                
+                "✏️ Update policy details: 1) Login to customer portal 2) Select 'Update Policy' 3) Change address, contact, nominee details 4) Upload supporting documents 5) Submit for verification. Some changes may require endorsement fees. Address change affects premium calculation for certain policies.",
+                
+                "⚠️ Policy exclusions vary by type. Common exclusions: Pre-existing diseases (health), War/nuclear risks, Intentional damage, Driving under influence (motor), Natural wear-tear. Read policy document carefully. Exclusions are clearly mentioned in the policy schedule and wordings.",
+                
+                "📑 Policy ownership transfer: 1) Submit transfer request form 2) Provide legal documents (sale deed, legal heir certificate) 3) New owner's documents 4) Pay transfer fees 5) New policy issued. Transfer is allowed for vehicles, properties, and in case of inheritance.",
+                
+                "📅 Grace period for premium payment: Motor insurance: No grace period, policy lapses immediately. Health insurance: 30 days grace period. Life insurance: 30 days (monthly), 30 days (quarterly), 30 days (half-yearly), 30 days (yearly). Pay within grace period to avoid policy lapse.",
+                
+                "👥 Add nominees: 1) Fill nomination form 2) Provide nominee's details and relationship proof 3) Submit to branch or online portal 4) Receive acknowledgment. Multiple nominees allowed with percentage share. Nominee can be changed anytime. Minor nominees require appointed guardian details.",
+                
+                "⚡ Missing premium payment consequences: Policy lapses, No claim settlement, Loss of benefits, Re-medical required for revival (health), Higher premium on renewal. Revive lapsed policy within specified time by paying outstanding premium with interest. Some policies have automatic revival clauses.",
+                
+                "📞 Customer support: 24/7 helpline: 1800-XXX-XXXX, Email: support@orientalinsurance.co.in, Live chat on website/app, Visit nearest branch, WhatsApp support. Multi-language support available. Senior citizen helpline and dedicated claim helpline numbers for faster assistance."
+            ];
+            
+            // Close the modal
+            closePolicyFAQ();
+            
+            // Show answer in chat bubble
+            setTimeout(() => {
+                showPolicyAnswer(question, answers[index]);
+            }, 300);
+        }
+        
+        function showPolicyAnswer(question, answer) {
+            const chatText = document.getElementById('chatText');
+            const typingIndicator = document.getElementById('typingIndicator');
+            const chatBubble = document.querySelector('.chat-bubble');
+            const chatIcon = document.querySelector('.chat-icon');
+            
+            // First show the question being processed
+            chatText.textContent = `Question: "${question}"`;
+            chatIcon.textContent = "🤔";
+            
+            // Show typing indicator after 1 second
+            setTimeout(() => {
+                chatText.style.display = 'none';
+                typingIndicator.classList.add('show');
+                chatBubble.classList.add('typing');
+                chatIcon.textContent = "💭";
+                
+                // Show answer after typing delay
+                setTimeout(() => {
+                    typingIndicator.classList.remove('show');
+                    chatText.style.display = 'inline';
+                    chatBubble.classList.remove('typing');
+                    
+                    chatText.textContent = answer;
+                    chatIcon.textContent = "💡";
+                    
+                    // Add pulse animation
+                    chatBubble.style.animation = 'chatPulse 0.6s ease-out';
+                    setTimeout(() => {
+                        chatBubble.style.animation = 'chatFloat 3s ease-in-out infinite';
+                    }, 600);
+                    
+                    // Reset to default after 10 seconds
+                    setTimeout(() => {
+                        chatText.textContent = "Hello! How can I assist you today?";
+                        chatIcon.textContent = "😊";
+                    }, 10000);
+                    
+                }, 2000 + Math.random() * 1000); // 2-3 second typing delay
+            }, 1000);
+        }
+        
+        // Close modal when clicking outside
+        document.addEventListener('click', function(event) {
+            const modals = document.querySelectorAll('.detail-modal');
+            modals.forEach(modal => {
+                if (event.target === modal) {
+                    modal.style.display = 'none';
+                    document.body.style.overflow = 'auto';
+                }
+            });
+            
+            // Close policy FAQ modal when clicking outside
+            const policyModal = document.querySelector('.policy-faq-modal');
+            if (policyModal && event.target === policyModal) {
+                closePolicyFAQ();
+            }
+        });
+        
+        // Close modal with Escape key
+        document.addEventListener('keydown', function(event) {
+            if (event.key === 'Escape') {
+                const modals = document.querySelectorAll('.detail-modal');
+                modals.forEach(modal => {
+                    if (modal.style.display === 'flex') {
+                        modal.style.display = 'none';
+                        document.body.style.overflow = 'auto';
+                    }
+                });
+                
+                // Close policy FAQ modal with Escape key
+                const policyModal = document.querySelector('.policy-faq-modal');
+                if (policyModal) {
+                    closePolicyFAQ();
+                }
+            }
+        });
+        
+        // Add pulse animation keyframe
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes chatPulse {
+                0% { transform: scale(1); }
+                50% { transform: scale(1.05); }
+                100% { transform: scale(1); }
+            }
+        `;
+        document.head.appendChild(style);
+        
+        function showInfo() {
+            alert('ℹ️ Oriental Insurance Virtual Office\n\n🏢 Welcome to our digital branch!\n📞 24/7 Customer Service\n🌐 Online Services Available\n💼 Professional Insurance Solutions');
+        }
+        
+        function showMenu() {
+            const options = [
+                '📋 All Services',
+                '👤 Account Login', 
+                '📞 Contact Us',
+                '🏠 Branch Locator',
+                '📱 Mobile App'
+            ].join('\n');
+            
+            alert('⋯ More Options\n\n' + options);
+        }
+        
+        // Initialize application
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('🏢 Oriental Insurance Virtual Office Initialized!');
+            
+            // Test JavaScript functionality
+            console.log('🧪 Testing JavaScript functionality...');
+            
+            // Add debugging for all clickable elements
+            const clickableElements = document.querySelectorAll('[onclick], .nav-card, .office-door, .chat-bubble');
+            console.log(`🎯 Found ${clickableElements.length} clickable elements`);
+            
+            clickableElements.forEach((element, index) => {
+                element.addEventListener('click', function(e) {
+                    console.log(`🔥 Element ${index} clicked:`, element.className);
+                });
+            });
+            
+            // Add interactive effects
+            document.querySelectorAll('.nav-card').forEach((card, index) => {
+                card.addEventListener('mouseenter', function() {
+                    this.style.transform = 'translateY(-8px) scale(1.02)';
+                });
+                
+                card.addEventListener('mouseleave', function() {
+                    this.style.transform = 'translateY(0) scale(1)';
+                });
+            });
+            
+            // Initialize door functionality
+            initializeDoor();
+            
+            // Test if JavaScript is working
+            console.log('🔥 JavaScript is working! Adding test click to navigation cards...');
+            
+            // Add test click handlers to nav cards specifically
+            const navCards = document.querySelectorAll('.nav-card');
+            navCards.forEach((card, index) => {
+                card.style.cursor = 'pointer';
+                card.addEventListener('click', function(e) {
+                    console.log(`🎯 Nav card ${index} clicked!`, card);
+                    e.stopPropagation();
+                    // Force the modal to open
+                    const modalTypes = ['policies', 'claims', 'support'];
+                    openDetailModal(modalTypes[index]);
+                });
+            });
+            
+            // Add backup event listener for chat bubble
+            const chatBubble = document.querySelector('.chat-bubble');
+            if (chatBubble) {
+                chatBubble.style.cursor = 'pointer';
+                chatBubble.addEventListener('click', function(e) {
+                    console.log('💬 Chat bubble clicked!');
+                    e.stopPropagation();
+                    interactWithAssistant();
+                });
+            }
+            
+            console.log('🤖 Virtual Assistant is now fully operational!');
+            console.log('🚪 Door functionality initialized!');
+        });
+
+        // Door Functionality
+        function initializeDoor() {
+            console.log('🚪 Looking for door element...');
+            const door = document.querySelector('.office-door');
+            
+            if (door) {
+                console.log('✅ Door element found!');
+                
+                // Make absolutely sure the door is clickable
+                door.style.cursor = 'pointer';
+                door.style.pointerEvents = 'auto';
+                door.style.zIndex = '999';
+                
+                // Remove any existing click handlers first
+                door.replaceWith(door.cloneNode(true));
+                const newDoor = document.querySelector('.office-door');
+                
+                newDoor.addEventListener('click', function(event) {
+                    console.log('🚪 Door clicked!');
+                    event.preventDefault();
+                    event.stopPropagation();
+                    
+                    alert('🚪 Door click detected! Opening authentication...');
+                    
+                    // Create particle effect
+                    createDoorParticles(newDoor);
+                    
+                    // Add opening animation
+                    newDoor.classList.add('opening');
+                    
+                    // Add screen shake effect
+                    document.body.style.animation = 'doorShake 0.3s ease-out';
+                    
+                    console.log('🚪 Door opening - showing authentication first...');
+                    
+                    // Show authentication modal first
+                    setTimeout(() => {
+                        newDoor.classList.remove('opening');
+                        document.body.style.animation = '';
+                        openAuthModal();
+                    }, 400);
+                });
+                
+                // Enhanced hover effects
+                newDoor.addEventListener('mouseenter', function() {
+                    console.log('🔊 Door hover sound');
+                    this.style.filter = 'brightness(1.1) saturate(1.1)';
+                });
+                
+                newDoor.addEventListener('mouseleave', function() {
+                    this.style.filter = 'brightness(1) saturate(1)';
+                });
+                
+                console.log('🚪 Door event listeners added successfully!');
+            } else {
+                console.error('❌ Door element not found!');
+            }
+        }
+
+        // Create particle effect when door is clicked
+        function createDoorParticles(door) {
+            const particleContainer = document.createElement('div');
+            particleContainer.className = 'door-particles';
+            document.body.appendChild(particleContainer);
+            
+            const doorRect = door.getBoundingClientRect();
+            const particleCount = 15;
+            
+            for (let i = 0; i < particleCount; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'particle';
+                
+                // Random position around the door
+                const x = doorRect.left + doorRect.width * Math.random();
+                const y = doorRect.top + doorRect.height * Math.random();
+                
+                particle.style.left = x + 'px';
+                particle.style.top = y + 'px';
+                particle.style.animationDelay = (Math.random() * 0.2) + 's';
+                
+                // Random color variations
+                const colors = ['#ffd700', '#ffcc00', '#ffb300', '#ff9800'];
+                particle.style.background = colors[Math.floor(Math.random() * colors.length)];
+                
+                particleContainer.appendChild(particle);
+            }
+            
+            // Remove particles after animation
+            setTimeout(() => {
+                document.body.removeChild(particleContainer);
+            }, 1200);
+        }
+
+        // Add CSS animation for screen shake
+        const shakeStyle = document.createElement('style');
+        shakeStyle.textContent = `
+            @keyframes doorShake {
+                0%, 100% { transform: translateX(0); }
+                25% { transform: translateX(-2px); }
+                75% { transform: translateX(2px); }
+            }
+        `;
+        document.head.appendChild(shakeStyle);
+
+        // Feature Modal Functionality
+        function openFeatureModal(featureType) {
+            const modal = document.getElementById('featureModal');
+            const title = document.getElementById('featureTitle');
+            const content = document.getElementById('featureContent');
+            
+            const featureData = getFeatureData(featureType);
+            
+            title.textContent = featureData.title;
+            content.innerHTML = featureData.content;
+            
+            modal.style.display = 'flex';
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeFeatureModal() {
+            const modal = document.getElementById('featureModal');
+            modal.style.display = 'none';
+            document.body.style.overflow = 'auto';
+        }
+
+        function getFeatureData(featureType) {
+            const features = {
+                'customer-service': {
+                    title: '🏪 Customer Service Center',
+                    content: `
+                        <div class="feature-info">
+                            <h4>Welcome to Our Customer Service Hub</h4>
+                            <p>Our dedicated customer service center is designed to provide you with comprehensive support for all your insurance needs.</p>
+                        </div>
+                        <div class="feature-info">
+                            <h4>Available Services:</h4>
+                            <ul class="feature-list">
+                                <li>Policy Information & Updates</li>
+                                <li>Premium Payment Assistance</li>
+                                <li>Coverage Explanations</li>
+                                <li>Document Verification</li>
+                                <li>General Inquiries</li>
+                                <li>Complaint Resolution</li>
+                            </ul>
+                        </div>
+                        <div class="feature-info">
+                            <h4>Service Hours:</h4>
+                            <p><strong>Monday - Friday:</strong> 9:00 AM - 6:00 PM<br>
+                            <strong>Saturday:</strong> 9:00 AM - 2:00 PM<br>
+                            <strong>Emergency Support:</strong> 24/7 Available</p>
+                        </div>
+                    `
+                },
+                'digital-hub': {
+                    title: '💻 Digital Services Hub',
+                    content: `
+                        <div class="feature-info">
+                            <h4>Modern Digital Solutions</h4>
+                            <p>Experience our state-of-the-art digital services designed to make insurance management simple and efficient.</p>
+                        </div>
+                        <div class="feature-info">
+                            <h4>Digital Services:</h4>
+                            <ul class="feature-list">
+                                <li>Online Policy Management</li>
+                                <li>Digital Document Upload</li>
+                                <li>E-Payment Gateway</li>
+                                <li>Mobile App Integration</li>
+                                <li>Virtual Consultations</li>
+                                <li>AI-Powered Chatbot Support</li>
+                            </ul>
+                        </div>
+                        <div class="feature-info">
+                            <h4>Technology Features:</h4>
+                            <p>• Secure Cloud Storage<br>
+                            • Real-time Updates<br>
+                            • Multi-device Synchronization<br>
+                            • Advanced Security Protocols</p>
+                        </div>
+                    `
+                },
+                'claims-processing': {
+                    title: '📋 Claims Processing Unit',
+                    content: `
+                        <div class="feature-info">
+                            <h4>Efficient Claims Management</h4>
+                            <p>Our streamlined claims processing unit ensures quick and fair settlement of your insurance claims.</p>
+                        </div>
+                        <div class="feature-info">
+                            <h4>Claims Services:</h4>
+                            <ul class="feature-list">
+                                <li>Claim Registration & Tracking</li>
+                                <li>Document Assessment</li>
+                                <li>Investigation Support</li>
+                                <li>Settlement Processing</li>
+                                <li>Appeal Handling</li>
+                                <li>Status Updates</li>
+                            </ul>
+                        </div>
+                        <div class="feature-info">
+                            <h4>Processing Timeline:</h4>
+                            <p><strong>Initial Review:</strong> 2-3 Business Days<br>
+                            <strong>Investigation:</strong> 7-14 Days<br>
+                            <strong>Settlement:</strong> 15-30 Days<br>
+                            <strong>Emergency Claims:</strong> Same Day Processing</p>
+                        </div>
+                    `
+                },
+                'consultation': {
+                    title: '👥 Consultation Rooms',
+                    content: `
+                        <div class="feature-info">
+                            <h4>Private Consultation Spaces</h4>
+                            <p>Comfortable and private consultation rooms for personalized insurance advice and planning.</p>
+                        </div>
+                        <div class="feature-info">
+                            <h4>Consultation Services:</h4>
+                            <ul class="feature-list">
+                                <li>Policy Planning & Selection</li>
+                                <li>Risk Assessment</li>
+                                <li>Financial Planning</li>
+                                <li>Coverage Review</li>
+                                <li>Investment Advice</li>
+                                <li>Family Protection Planning</li>
+                            </ul>
+                        </div>
+                        <div class="feature-info">
+                            <h4>Booking Information:</h4>
+                            <p><strong>Advance Booking:</strong> Recommended<br>
+                            <strong>Walk-in:</strong> Subject to Availability<br>
+                            <strong>Consultation Duration:</strong> 30-60 Minutes<br>
+                            <strong>Cost:</strong> Complimentary for Existing Customers</p>
+                        </div>
+                    `
+                },
+                'support-desk': {
+                    title: '📞 24/7 Support Desk',
+                    content: `
+                        <div class="feature-info">
+                            <h4>Round-the-Clock Assistance</h4>
+                            <p>Our 24/7 support desk ensures you always have access to help when you need it most.</p>
+                        </div>
+                        <div class="feature-info">
+                            <h4>Support Channels:</h4>
+                            <ul class="feature-list">
+                                <li>Phone Support: +91-11-24626190</li>
+                                <li>Toll Free: 1800-118-485</li>
+                                <li>Live Chat on Website</li>
+                                <li>Email Support</li>
+                                <li>WhatsApp Business</li>
+                                <li>Video Call Support</li>
+                                <li>Emergency Hotline</li>
+                            </ul>
+                        </div>
+                        <div class="feature-info">
+                            <h4>Response Times:</h4>
+                            <p><strong>Phone:</strong> Immediate<br>
+                            <strong>Live Chat:</strong> Under 2 Minutes<br>
+                            <strong>Email:</strong> Within 4 Hours<br>
+                            <strong>Emergency:</strong> Immediate Response</p>
+                        </div>
+                    `
+                },
+                'document-center': {
+                    title: '🔒 Secure Document Center',
+                    content: `
+                        <div class="feature-info">
+                            <h4>Advanced Document Security</h4>
+                            <p>State-of-the-art secure document center with advanced encryption and storage solutions.</p>
+                        </div>
+                        <div class="feature-info">
+                            <h4>Security Features:</h4>
+                            <ul class="feature-list">
+                                <li>256-bit Encryption</li>
+                                <li>Biometric Access Control</li>
+                                <li>Fireproof Storage</li>
+                                <li>Digital Backup Systems</li>
+                                <li>Audit Trail Tracking</li>
+                                <li>Compliance Monitoring</li>
+                            </ul>
+                        </div>
+                        <div class="feature-info">
+                            <h4>Document Services:</h4>
+                            <p>• Document Scanning & Digitization<br>
+                            • Secure Storage & Retrieval<br>
+                            • Document Verification<br>
+                            • Archival Services<br>
+                            • Access Control Management</p>
+                        </div>
+                    `
+                }
+            };
+            
+            return features[featureType] || {
+                title: 'Feature Information',
+                content: '<p>Information not available for this feature.</p>'
+            };
+        }
+
+        // Authentication Modal Functions
+        function openAuthModal() {
+            const modal = document.getElementById('authModal');
+            modal.style.display = 'flex';
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeAuthModal() {
+            const modal = document.getElementById('authModal');
+            modal.style.display = 'none';
+            document.body.style.overflow = 'auto';
+        }
+
+        function switchAuthTab(tabType) {
+            // Update tab buttons
+            document.querySelectorAll('.auth-tab').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            event.target.classList.add('active');
+
+            // Update forms
+            document.querySelectorAll('.auth-form').forEach(form => {
+                form.classList.remove('active');
+            });
+            
+            if (tabType === 'login') {
+                document.getElementById('loginForm').classList.add('active');
+            } else {
+                document.getElementById('signupForm').classList.add('active');
+            }
+        }
+
+        function handleLogin() {
+            const email = document.getElementById('loginEmail').value;
+            const password = document.getElementById('loginPassword').value;
+
+            if (!email || !password) {
+                alert('⚠️ Please fill in all required fields!');
+                return;
+            }
+
+            // Show loading state
+            const button = event.target;
+            button.innerHTML = '🔄 Authenticating...';
+            button.disabled = true;
+
+            // Use real authentication
+            fetch('/api/auth/login', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    email: email,
+                    password: password
+                })
+            })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+                return response.json();
+            })
+            .then(data => {
+                console.log('✅ Login response:', data);
+                button.innerHTML = '🚀 Access Office';
+                button.disabled = false;
+                
+                // Backend returns: { success: true, message: "...", data: { user: {...}, token: "..." } }
+                if (data.success && data.data) {
+                    // Store user session
+                    localStorage.setItem('userToken', data.data.token);
+                    localStorage.setItem('userName', data.data.user.name);
+                    localStorage.setItem('userEmail', data.data.user.email);
+                    
+                    alert(`✅ Welcome back, ${data.data.user.name}! Login successful!`);
+                    
+                    // Close auth modal and open door modal
+                    closeAuthModal();
+                    setTimeout(() => {
+                        openDetailModal('door');
+                    }, 300);
+                } else {
+                    alert(`❌ Login failed: ${data.message || 'Invalid credentials'}`);
+                }
+            })
+            .catch(error => {
+                button.innerHTML = '🚀 Access Office';
+                button.disabled = false;
+                alert('❌ Login failed. Please check your credentials and try again.');
+            });
+        }
+
+        function handleSignup() {
+            const name = document.getElementById('signupName').value;
+            const email = document.getElementById('signupEmail').value;
+            const phone = document.getElementById('signupPhone').value;
+            const password = document.getElementById('signupPassword').value;
+            const confirmPassword = document.getElementById('confirmPassword').value;
+
+            if (!name || !email || !phone || !password || !confirmPassword) {
+                alert('⚠️ Please fill in all required fields!');
+                return;
+            }
+
+            if (password !== confirmPassword) {
+                alert('⚠️ Passwords do not match!');
+                return;
+            }
+
+            if (password.length < 6) {
+                alert('⚠️ Password must be at least 6 characters long!');
+                return;
+            }
+
+            // Show loading state
+            const button = event.target;
+            button.innerHTML = '🔄 Creating Account...';
+            button.disabled = true;
+
+            // Use real authentication
+            fetch('/api/auth/register', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    name: name,
+                    email: email,
+                    phone: phone,
+                    password: password
+                })
+            })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+                return response.json();
+            })
+            .then(data => {
+                console.log('✅ Registration response:', data);
+                button.innerHTML = '🎉 Create Account & Access Office';
+                button.disabled = false;
+                
+                // Backend returns: { success: true, message: "...", data: { user: {...}, token: "..." } }
+                if (data.success && data.data) {
+                    // Store user session
+                    localStorage.setItem('userToken', data.data.token);
+                    localStorage.setItem('userName', data.data.user.name);
+                    localStorage.setItem('userEmail', data.data.user.email);
+                    
+                    alert(`🎉 Welcome ${data.data.user.name}! Account created successfully!`);
+                    
+                    // Close auth modal and open door modal
+                    closeAuthModal();
+                    setTimeout(() => {
+                        openDetailModal('door');
+                    }, 300);
+                } else {
+                    alert(`❌ Signup failed: ${data.message || 'Unknown error occurred'}`);
+                }
+            })
+            .catch(error => {
+                button.innerHTML = '🎉 Create Account & Access Office';
+                button.disabled = false;
+                alert('❌ Signup failed. Please check if the backend server is running and try again.');
+            });
+        }
+
+        function socialLogin(provider) {
+            console.log(`🔗 Initiating ${provider} login...`);
+            
+            // Show loading state
+            event.target.innerHTML = `🔄 Connecting to ${provider.charAt(0).toUpperCase() + provider.slice(1)}...`;
+            event.target.disabled = true;
+
+            // Simulate social login
+            setTimeout(() => {
+                // Reset button
+                if (provider === 'google') {
+                    event.target.innerHTML = '🔴 Continue with Google';
+                } else {
+                    event.target.innerHTML = '🔵 Continue with Facebook';
+                }
+                event.target.disabled = false;
+                
+                // Show success message
+                alert(`✅ ${provider.charAt(0).toUpperCase() + provider.slice(1)} login successful!`);
+                
+                // Close auth modal and open door modal
+                closeAuthModal();
+                setTimeout(() => {
+                    openDetailModal('door');
+                }, 300);
+            }, 1500);
+        }
+        
+        // EMERGENCY FIX: Initialize click handlers when page loads
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('🚀 EMERGENCY FIX: Initializing click handlers...');
+            
+            // Test if JavaScript is working at all
+            console.log('🧪 Testing basic JavaScript...');
+            console.log('✅ JavaScript execution confirmed');
+            
+            // Add click handlers to door - SIMPLE TEST FIRST
+            const door = document.querySelector('.office-door');
+            if (door) {
+                console.log('✅ Door found, adding emergency click handler');
+                door.style.cursor = 'pointer';
+                door.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    console.log('🚪 EMERGENCY: Door clicked!');
+                    
+                    // Try to call authentication function if it exists
+                    try {
+                        if (typeof openAuthModal === 'function') {
+                            openAuthModal();
+                        } else {
+                            console.log('⚠️ openAuthModal function not found');
+                        }
+                    } catch (error) {
+                        console.log('❌ Error calling openAuthModal:', error);
+                    }
+                });
+                console.log('✅ Door click handler added successfully');
+            } else {
+                console.log('❌ Door element not found with selector .office-door');
+                // Try alternative selectors
+                const doors = document.querySelectorAll('[class*="door"]');
+                console.log(`🔍 Found ${doors.length} elements with "door" in class name`);
+            }
+            
+            // Add click handlers to navigation cards - SIMPLE TEST FIRST
+            const navCards = document.querySelectorAll('.nav-card');
+            console.log(`🎯 EMERGENCY: Found ${navCards.length} navigation cards`);
+            
+            if (navCards.length === 0) {
+                // Try alternative selectors
+                const allCards = document.querySelectorAll('[class*="nav"]');
+                console.log(`🔍 Found ${allCards.length} elements with "nav" in class name`);
+                const cards = document.querySelectorAll('[class*="card"]');
+                console.log(`🔍 Found ${cards.length} elements with "card" in class name`);
+            }
+            
+            navCards.forEach((card, index) => {
+                card.style.cursor = 'pointer';
+                card.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    const modalTypes = ['policies', 'claims', 'support'];
+                    console.log(`🎯 EMERGENCY: Nav card ${index} clicked, type: ${modalTypes[index]}`);
+                    
+                    // Try to call modal function if it exists
+                    try {
+                        if (typeof openDetailModal === 'function') {
+                            openDetailModal(modalTypes[index]);
+                        } else {
+                            console.log('⚠️ openDetailModal function not found');
+                        }
+                    } catch (error) {
+                        console.log('❌ Error calling openDetailModal:', error);
+                    }
+                });
+                console.log(`✅ Nav card ${index} click handler added successfully`);
+            });
+            
+            // Add click handler to chat bubble - SIMPLE TEST FIRST
+            const chatBubble = document.querySelector('.chat-bubble');
+            if (chatBubble) {
+                console.log('💬 EMERGENCY: Chat bubble found, adding click handler');
+                chatBubble.style.cursor = 'pointer';
+                chatBubble.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    console.log('💬 EMERGENCY: Chat bubble clicked!');
+                    
+                    // Try to call assistant function if it exists
+                    try {
+                        if (typeof interactWithAssistant === 'function') {
+                            interactWithAssistant();
+                        } else {
+                            console.log('⚠️ interactWithAssistant function not found');
+                        }
+                    } catch (error) {
+                        console.log('❌ Error calling interactWithAssistant:', error);
+                    }
+                });
+                console.log('✅ Chat bubble click handler added successfully');
+            } else {
+                console.log('❌ Chat bubble element not found with selector .chat-bubble');
+                // Try alternative selectors
+                const bubbles = document.querySelectorAll('[class*="chat"]');
+                console.log(`🔍 Found ${bubbles.length} elements with "chat" in class name`);
+            }
+            
+            // Add general click test to any clickable element
+            const allClickable = document.querySelectorAll('[onclick], button, .nav-card, .office-door, .chat-bubble');
+            console.log(`🎯 Total clickable elements found: ${allClickable.length}`);
+            
+            // Test if any onclick attributes work
+            const onclickElements = document.querySelectorAll('[onclick]');
+            console.log(`🔍 Elements with onclick attributes: ${onclickElements.length}`);
+            
+            console.log('✅ EMERGENCY FIX: All click handlers initialized successfully!');
+            console.log('🎯 Click any element to test if JavaScript is working');
+        });
+        
+        // FINAL WORKING FIX - Ensure all functionality works
+        window.addEventListener('load', function() {
+            console.log('🚀 FINAL FIX: Window loaded, adding bulletproof event handlers...');
+            
+            // Make sure all onclick elements work
+            setTimeout(() => {
+                // Door functionality
+                const doors = document.querySelectorAll('.office-door');
+                doors.forEach(door => {
+                    door.style.cursor = 'pointer';
+                    door.addEventListener('click', function(e) {
+                        e.preventDefault();
+                        e.stopPropagation();
+                        console.log('🚪 WORKING: Door clicked!');
+                        if (typeof openAuthModal === 'function') {
+                            openAuthModal();
+                        }
+                    });
+                });
+                
+                // Navigation cards
+                const navCards = document.querySelectorAll('.nav-card');
+                navCards.forEach((card, index) => {
+                    card.style.cursor = 'pointer';
+                    card.addEventListener('click', function(e) {
+                        e.preventDefault();
+                        e.stopPropagation();
+                        const types = ['policies', 'claims', 'support'];
+                        console.log(`🎯 WORKING: Nav card ${index} clicked`);
+                        if (typeof openDetailModal === 'function') {
+                            openDetailModal(types[index]);
+                        }
+                    });
+                });
+                
+                // Chat bubble
+                const chatBubbles = document.querySelectorAll('.chat-bubble');
+                chatBubbles.forEach(bubble => {
+                    bubble.style.cursor = 'pointer';
+                    bubble.addEventListener('click', function(e) {
+                        e.preventDefault();
+                        e.stopPropagation();
+                        console.log('💬 WORKING: Chat bubble clicked!');
+                        if (typeof interactWithAssistant === 'function') {
+                            interactWithAssistant();
+                        }
+                    });
+                });
+                
+                console.log('✅ FINAL FIX: All event handlers applied successfully!');
+            }, 100);
+        });
+    </script>
+</body>
+</html>

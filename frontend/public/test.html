@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Oriental Insurance - Virtual Office Test</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            text-align: center;
+            padding: 50px;
+            margin: 0;
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        h1 {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+        
+        .status {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+        }
+        
+        .button {
+            background: #667eea;
+            color: white;
+            padding: 15px 30px;
+            border: none;
+            border-radius: 25px;
+            font-size: 1rem;
+            cursor: pointer;
+            margin: 10px;
+            transition: all 0.3s ease;
+        }
+        
+        .button:hover {
+            background: #5a6fd8;
+            transform: scale(1.05);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🏢 Oriental Insurance</h1>
+        <h2>Virtual Office - TEST PAGE</h2>
+        
+        <div class="status">
+            <h3>✅ Frontend Server Status: WORKING</h3>
+            <p>Port: 3001 | Time: <span id="time"></span></p>
+        </div>
+        
+        <div class="status">
+            <h3>🔧 Backend API Status</h3>
+            <p id="backend-status">Testing connection...</p>
+        </div>
+        
+        <div>
+            <button class="button" onclick="testBackend()">Test Backend API</button>
+            <button class="button" onclick="loadFullApp()">Load Full Virtual Office</button>
+        </div>
+        
+        <div class="status" id="test-results">
+            <h3>Test Results</h3>
+            <p>Click buttons above to test functionality</p>
+        </div>
+    </div>
+    
+    <script>
+        // Update time
+        function updateTime() {
+            document.getElementById('time').textContent = new Date().toLocaleTimeString();
+        }
+        setInterval(updateTime, 1000);
+        updateTime();
+        
+        // Test backend connection
+        function testBackend() {
+            const statusEl = document.getElementById('backend-status');
+            const resultsEl = document.getElementById('test-results');
+            
+            statusEl.textContent = 'Testing...';
+            
+            fetch('http://localhost:5000/health')
+                .then(response => response.json())
+                .then(data => {
+                    statusEl.innerHTML = '✅ Backend Connected: ' + JSON.stringify(data);
+                    resultsEl.innerHTML = '<h3>✅ Backend Test Passed</h3><p>API is responding correctly</p>';
+                })
+                .catch(error => {
+                    statusEl.innerHTML = '❌ Backend Error: ' + error.message;
+                    resultsEl.innerHTML = '<h3>❌ Backend Test Failed</h3><p>' + error.message + '</p>';
+                });
+        }
+        
+        function loadFullApp() {
+            window.location.href = '/demo.html';
+        }
+        
+        // Auto-test backend on load
+        setTimeout(testBackend, 1000);
+    </script>
+</body>
+</html>

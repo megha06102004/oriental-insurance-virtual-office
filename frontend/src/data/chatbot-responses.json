@@ -1,0 +1,107 @@
+{
+  "welcome": {
+    "message": "Hello! Welcome to Oriental Insurance Virtual Office. I'm your virtual assistant. How can I help you today?",
+    "quickActions": [
+      "View Policies",
+      "Register Claim",
+      "Get Support",
+      "Contact Information"
+    ]
+  },
+  "responses": {
+    "policy": {
+      "message": "I can help you with policy-related queries. You can view your existing policies, get policy information, renew policies, or purchase new ones. What would you like to do?",
+      "quickActions": [
+        "View My Policies",
+        "Policy Information",
+        "Renew Policy",
+        "Buy New Policy"
+      ]
+    },
+    "claim": {
+      "message": "I can assist you with claim registration and tracking. Whether you need to file a new claim or check the status of an existing one, I'm here to help.",
+      "quickActions": [
+        "Register New Claim",
+        "Track Existing Claim",
+        "Claim Documents",
+        "Claim Process Guide"
+      ]
+    },
+    "support": {
+      "message": "Our support team is here to help you with any questions or concerns. You can get assistance with grievances, technical issues, or general inquiries.",
+      "quickActions": [
+        "File Grievance",
+        "Technical Support",
+        "General Inquiry",
+        "Contact Support Team"
+      ]
+    },
+    "greeting": {
+      "message": "Hello! Great to see you in our Virtual Office. I'm here to make your insurance experience smooth and convenient. What can I assist you with today?",
+      "quickActions": [
+        "Explore Services",
+        "View Policies",
+        "Register Claim",
+        "Get Help"
+      ]
+    },
+    "thanks": {
+      "message": "You're very welcome! I'm always here to help. Is there anything else you'd like to know about our services?",
+      "quickActions": [
+        "Explore More Services",
+        "Contact Information",
+        "Feedback",
+        "End Chat"
+      ]
+    }
+  },
+  "fallback": {
+    "message": "I understand you're looking for information. Let me connect you with the right service. You can also visit our different desks in the virtual office for specific assistance.",
+    "quickActions": [
+      "Policy Desk",
+      "Claim Desk",
+      "Support Desk",
+      "Speak to Agent"
+    ]
+  },
+  "services": {
+    "policies": [
+      {
+        "name": "Motor Insurance",
+        "description": "Comprehensive coverage for your vehicles",
+        "features": ["Third Party Coverage", "Own Damage", "Personal Accident"]
+      },
+      {
+        "name": "Health Insurance",
+        "description": "Medical coverage for you and your family",
+        "features": ["Hospitalization", "Pre/Post Hospitalization", "Day Care"]
+      },
+      {
+        "name": "Home Insurance",
+        "description": "Protection for your home and belongings",
+        "features": ["Building Coverage", "Contents Coverage", "Liability"]
+      },
+      {
+        "name": "Travel Insurance",
+        "description": "Coverage for domestic and international travel",
+        "features": ["Medical Emergency", "Trip Cancellation", "Baggage Loss"]
+      }
+    ]
+  },
+  "contact": {
+    "phone": "1800-118-485",
+    "email": "customercare@orientalinsurance.co.in",
+    "website": "www.orientalinsurance.co.in",
+    "address": "Oriental House, A-25/27, Asaf Ali Road, New Delhi - 110002"
+  },
+  "office_hours": {
+    "weekdays": "9:00 AM - 6:00 PM",
+    "saturday": "9:00 AM - 2:00 PM",
+    "sunday": "Closed"
+  },
+  "emergency": {
+    "claim_helpline": "1800-118-485",
+    "motor_helpline": "1800-103-3003",
+    "health_helpline": "1800-118-485"
+  }
+}

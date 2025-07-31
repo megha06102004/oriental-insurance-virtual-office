@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Minimal Test</title>
+    <style>
+        .test-door {
+            width: 100px;
+            height: 200px;
+            background: brown;
+            margin: 50px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+        }
+        .test-card {
+            width: 200px;
+            height: 100px;
+            background: blue;
+            margin: 20px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <h1>Minimal Click Test</h1>
+    
+    <div class="test-door" onclick="alert('Door clicked!')">DOOR</div>
+    
+    <div class="test-card" onclick="alert('Card 1 clicked!')">Card 1</div>
+    <div class="test-card" onclick="alert('Card 2 clicked!')">Card 2</div>
+    <div class="test-card" onclick="alert('Card 3 clicked!')">Card 3</div>
+
+    <script>
+        console.log('🧪 Minimal test loaded');
+        
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('🚀 DOM ready');
+            
+            const door = document.querySelector('.test-door');
+            if (door) {
+                door.addEventListener('click', function() {
+                    console.log('🚪 Door event listener fired');
+                    alert('Door event listener working!');
+                });
+            }
+            
+            const cards = document.querySelectorAll('.test-card');
+            cards.forEach((card, index) => {
+                card.addEventListener('click', function() {
+                    console.log(`🎯 Card ${index} event listener fired`);
+                    alert(`Card ${index} event listener working!`);
+                });
+            });
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,698 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Oriental Insurance Company Ltd.</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #f5f5f5;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+        
+        .office-container {
+            position: relative;
+            width: 100%;
+            height: 100vh;
+            background: linear-gradient(180deg, #e8e0d8 0%, #d4c4b0 100%);
+            perspective: 1000px;
+        }
+        
+        /* Ceiling with grid pattern */
+        .ceiling {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 25%;
+            background: 
+                linear-gradient(90deg, transparent 0%, rgba(0,0,0,0.1) 20%, transparent 21%, transparent 40%, rgba(0,0,0,0.1) 60%, transparent 61%, transparent 80%, rgba(0,0,0,0.1) 100%),
+                linear-gradient(0deg, transparent 0%, rgba(0,0,0,0.1) 20%, transparent 21%, transparent 40%, rgba(0,0,0,0.1) 60%, transparent 61%, transparent 80%, rgba(0,0,0,0.1) 100%),
+                #f0f0f0;
+            background-size: 80px 80px;
+            transform: perspective(1000px) rotateX(60deg);
+            transform-origin: bottom;
+        }
+        
+        /* Ceiling lights */
+        .ceiling-light {
+            position: absolute;
+            width: 40px;
+            height: 40px;
+            background: radial-gradient(circle, #ffffff 0%, #f0f0f0 70%, transparent 100%);
+            border-radius: 50%;
+            box-shadow: 0 0 20px rgba(255,255,255,0.8);
+        }
+        
+        .light-1 { top: 8%; left: 15%; }
+        .light-2 { top: 8%; left: 45%; }
+        .light-3 { top: 8%; left: 75%; }
+        
+        /* Floor */
+        .floor {
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+            height: 50%;
+            background: linear-gradient(135deg, #d4c4b0 0%, #c4b4a0 100%);
+            transform: perspective(1000px) rotateX(75deg);
+            transform-origin: bottom;
+        }
+        
+        /* Back wall */
+        .back-wall {
+            position: absolute;
+            top: 25%;
+            left: 0;
+            width: 100%;
+            height: 50%;
+            background: linear-gradient(180deg, #e8e0d8 0%, #d4c4b0 100%);
+        }
+        
+        /* Left reception desk */
+        .reception-area {
+            position: absolute;
+            left: 5%;
+            bottom: 35%;
+            width: 35%;
+            height: 25%;
+            z-index: 10;
+        }
+        
+        .reception-desk {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 60%;
+            background: linear-gradient(145deg, #8B4513, #A0522D);
+            border-radius: 8px 8px 0 0;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.3);
+        }
+        
+        .desk-top {
+            position: absolute;
+            top: -8px;
+            left: -5px;
+            width: calc(100% + 10px);
+            height: 15px;
+            background: linear-gradient(145deg, #654321, #8B4513);
+            border-radius: 8px;
+        }
+        
+        /* Company logo and branding (center wall) */
+        .company-branding {
+            position: absolute;
+            left: 45%;
+            top: 30%;
+            transform: translateX(-50%);
+            text-align: center;
+            z-index: 20;
+        }
+        
+        .logo {
+            width: 120px;
+            height: 120px;
+            background: radial-gradient(circle, #1976D2 0%, #0D47A1 100%);
+            border-radius: 50%;
+            margin: 0 auto 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 8px 25px rgba(25, 118, 210, 0.4);
+            border: 8px solid #fff;
+        }
+        
+        .logo-symbol {
+            color: #FFD700;
+            font-size: 2.5rem;
+            font-weight: bold;
+        }
+        
+        .company-name {
+            color: #333;
+            font-size: 2.2rem;
+            font-weight: bold;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+            line-height: 1.1;
+            margin-bottom: 10px;
+        }
+        
+        .company-subtitle {
+            color: #666;
+            font-size: 1rem;
+            font-weight: 500;
+        }
+        
+        /* Professional Receptionist */
+        .receptionist {
+            position: absolute;
+            left: 18%;
+            bottom: 45%;
+            z-index: 15;
+            cursor: pointer;
+        }
+        
+        .person {
+            position: relative;
+            width: 80px;
+            height: 120px;
+        }
+        
+        .person-head {
+            width: 45px;
+            height: 45px;
+            background: #FDBCB4;
+            border-radius: 50%;
+            position: absolute;
+            top: 0;
+            left: 17px;
+            border: 3px solid #fff;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+        }
+        
+        .person-hair {
+            position: absolute;
+            top: -5px;
+            left: 5px;
+            width: 35px;
+            height: 25px;
+            background: #2C1810;
+            border-radius: 20px 20px 0 0;
+        }
+        
+        .person-body {
+            width: 60px;
+            height: 75px;
+            background: linear-gradient(145deg, #1e3a8a, #1e40af);
+            position: absolute;
+            top: 40px;
+            left: 10px;
+            border-radius: 8px 8px 0 0;
+        }
+        
+        .person-arms {
+            position: absolute;
+            top: 50px;
+            left: -5px;
+            width: 15px;
+            height: 35px;
+            background: #1e3a8a;
+            border-radius: 8px;
+            box-shadow: 65px 0 0 #1e3a8a;
+        }
+        
+        .person-collar {
+            position: absolute;
+            top: 45px;
+            left: 20px;
+            width: 40px;
+            height: 15px;
+            background: #fff;
+            border-radius: 0 0 15px 15px;
+        }
+        
+        /* Chat bubble */
+        .chat-bubble {
+            position: absolute;
+            bottom: 40%;
+            left: 35%;
+            background: #fff;
+            padding: 15px 20px;
+            border-radius: 20px 20px 20px 5px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            max-width: 300px;
+            z-index: 25;
+            animation: float 2s ease-in-out infinite;
+        }
+        
+        .chat-bubble::before {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            left: 20px;
+            width: 0;
+            height: 0;
+            border-left: 10px solid transparent;
+            border-right: 10px solid transparent;
+            border-top: 10px solid #fff;
+        }
+        
+        .chat-icon {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            background: #4285f4;
+            border-radius: 50%;
+            margin-right: 10px;
+            vertical-align: middle;
+        }
+        
+        .chat-text {
+            color: #333;
+            font-size: 14px;
+            font-weight: 500;
+            display: inline;
+            vertical-align: middle;
+        }
+        
+        /* Right side service desks */
+        .service-desks {
+            position: absolute;
+            right: 8%;
+            bottom: 35%;
+            width: 40%;
+            height: 25%;
+            z-index: 10;
+        }
+        
+        .desk-row {
+            display: flex;
+            justify-content: space-between;
+            height: 100%;
+            gap: 15px;
+        }
+        
+        .service-desk {
+            flex: 1;
+            position: relative;
+        }
+        
+        .desk-structure {
+            width: 100%;
+            height: 60%;
+            background: linear-gradient(145deg, #8B4513, #A0522D);
+            border-radius: 8px 8px 0 0;
+            position: absolute;
+            bottom: 0;
+            box-shadow: 0 3px 15px rgba(0,0,0,0.2);
+        }
+        
+        .desk-structure::before {
+            content: '';
+            position: absolute;
+            top: -6px;
+            left: -3px;
+            width: calc(100% + 6px);
+            height: 12px;
+            background: linear-gradient(145deg, #654321, #8B4513);
+            border-radius: 6px;
+        }
+        
+        .desk-label {
+            position: absolute;
+            top: -35px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #2c3e50;
+            color: white;
+            padding: 8px 15px;
+            border-radius: 8px;
+            font-size: 12px;
+            font-weight: 600;
+            white-space: nowrap;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.3);
+        }
+        
+        .desk-chair {
+            position: absolute;
+            bottom: 15px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 30px;
+            height: 35px;
+            background: linear-gradient(145deg, #2c3e50, #34495e);
+            border-radius: 8px 8px 15px 15px;
+        }
+        
+        /* Office plant decoration */
+        .office-plant {
+            position: absolute;
+            right: 5%;
+            bottom: 30%;
+            width: 40px;
+            height: 60px;
+            z-index: 12;
+        }
+        
+        .plant-pot {
+            position: absolute;
+            bottom: 0;
+            width: 40px;
+            height: 25px;
+            background: linear-gradient(145deg, #8D6E63, #6D4C41);
+            border-radius: 0 0 20px 20px;
+        }
+        
+        .plant-leaves {
+            position: absolute;
+            bottom: 20px;
+            left: 5px;
+            width: 30px;
+            height: 40px;
+            background: linear-gradient(145deg, #4CAF50, #388E3C);
+            border-radius: 15px 15px 5px 5px;
+        }
+        
+        /* Navigation cards at bottom */
+        .navigation-cards {
+            position: absolute;
+            bottom: 8%;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 30px;
+            z-index: 30;
+        }
+        
+        .nav-card {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 25px 20px;
+            width: 200px;
+            text-align: center;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        .nav-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+        }
+        
+        .nav-icon {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            margin: 0 auto 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            color: white;
+        }
+        
+        .policies-icon {
+            background: linear-gradient(145deg, #e74c3c, #c0392b);
+        }
+        
+        .claims-icon {
+            background: linear-gradient(145deg, #3498db, #2980b9);
+        }
+        
+        .support-icon {
+            background: linear-gradient(145deg, #9b59b6, #8e44ad);
+        }
+        
+        .nav-title {
+            color: #333;
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+        
+        .nav-subtitle {
+            color: #666;
+            font-size: 12px;
+            line-height: 1.4;
+        }
+        
+        /* Side navigation */
+        .side-nav {
+            position: fixed;
+            left: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            z-index: 40;
+        }
+        
+        .side-nav-icon {
+            width: 50px;
+            height: 50px;
+            background: #2c3e50;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 20px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        }
+        
+        .side-nav-icon:hover {
+            background: #34495e;
+            transform: scale(1.1);
+        }
+        
+        /* More options */
+        .more-options {
+            position: fixed;
+            right: 20px;
+            bottom: 20px;
+            z-index: 40;
+        }
+        
+        .more-btn {
+            width: 60px;
+            height: 60px;
+            background: #2c3e50;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 24px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 6px 20px rgba(0,0,0,0.3);
+        }
+        
+        .more-btn:hover {
+            background: #34495e;
+            transform: scale(1.1);
+        }
+        
+        /* Animations */
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-5px); }
+        }
+        
+        @keyframes slideIn {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .nav-card {
+            animation: slideIn 0.6s ease-out;
+        }
+        
+        .nav-card:nth-child(1) { animation-delay: 0.1s; }
+        .nav-card:nth-child(2) { animation-delay: 0.2s; }
+        .nav-card:nth-child(3) { animation-delay: 0.3s; }
+    </style>
+</head>
+<body>
+    <div class="office-container">
+        <!-- Ceiling with grid and lights -->
+        <div class="ceiling">
+            <div class="ceiling-light light-1"></div>
+            <div class="ceiling-light light-2"></div>
+            <div class="ceiling-light light-3"></div>
+        </div>
+        
+        <!-- Floor -->
+        <div class="floor"></div>
+        
+        <!-- Back wall -->
+        <div class="back-wall"></div>
+        
+        <!-- Reception area (left side) -->
+        <div class="reception-area">
+            <div class="reception-desk">
+                <div class="desk-top"></div>
+            </div>
+        </div>
+        
+        <!-- Company branding (center wall) -->
+        <div class="company-branding">
+            <div class="logo">
+                <div class="logo-symbol">🏛️</div>
+            </div>
+            <div class="company-name">THE ORIENTAL<br>INSURANCE<br>COMPANY LTD.</div>
+            <div class="company-subtitle">Trusted Insurance Solutions</div>
+        </div>
+        
+        <!-- Professional Receptionist -->
+        <div class="receptionist">
+            <div class="person">
+                <div class="person-head">
+                    <div class="person-hair"></div>
+                </div>
+                <div class="person-body">
+                    <div class="person-collar"></div>
+                </div>
+                <div class="person-arms"></div>
+            </div>
+        </div>
+        
+        <!-- Chat bubble -->
+        <div class="chat-bubble">
+            <span class="chat-icon">😊</span>
+            <span class="chat-text">Hello! How can I assist you today?</span>
+        </div>
+        
+        <!-- Service desks (right side) -->
+        <div class="service-desks">
+            <div class="desk-row">
+                <div class="service-desk">
+                    <div class="desk-label">Policy Desk</div>
+                    <div class="desk-structure"></div>
+                    <div class="desk-chair"></div>
+                </div>
+                <div class="service-desk">
+                    <div class="desk-label">Claim Desk</div>
+                    <div class="desk-structure"></div>
+                    <div class="desk-chair"></div>
+                </div>
+                <div class="service-desk">
+                    <div class="desk-label">Grievance Desk</div>
+                    <div class="desk-structure"></div>
+                    <div class="desk-chair"></div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Office plant -->
+        <div class="office-plant">
+            <div class="plant-pot"></div>
+            <div class="plant-leaves"></div>
+        </div>
+        
+        <!-- Navigation cards -->
+        <div class="navigation-cards">
+            <div class="nav-card" onclick="openSection('policies')">
+                <div class="nav-icon policies-icon">📄</div>
+                <div class="nav-title">Policies</div>
+                <div class="nav-subtitle">View and manage your insurance policies</div>
+            </div>
+            <div class="nav-card" onclick="openSection('claims')">
+                <div class="nav-icon claims-icon">📝</div>
+                <div class="nav-title">Claim Registration</div>
+                <div class="nav-subtitle">Submit and track your insurance claims</div>
+            </div>
+            <div class="nav-card" onclick="openSection('support')">
+                <div class="nav-icon support-icon">🎧</div>
+                <div class="nav-title">Support</div>
+                <div class="nav-subtitle">Get help from our customer service</div>
+            </div>
+        </div>
+        
+        <!-- Side navigation -->
+        <div class="side-nav">
+            <div class="side-nav-icon" onclick="showInfo()">ℹ️</div>
+        </div>
+        
+        <!-- More options -->
+        <div class="more-options">
+            <div class="more-btn" onclick="showMenu()">⋯</div>
+        </div>
+    </div>
+    
+    <script>
+        function openSection(section) {
+            const messages = {
+                'policies': '🔍 Opening Policies Section...\n\n✅ Services Available:\n• View active policies\n• Download policy documents\n• Premium payment\n• Policy renewal\n• Coverage details\n\n🔗 API Endpoint: http://localhost:5000/api/policies',
+                'claims': '📝 Opening Claim Registration...\n\n✅ Services Available:\n• Submit new claims\n• Track existing claims\n• Upload documents\n• Claim status updates\n• Settlement details\n\n🔗 API Endpoint: http://localhost:5000/api/claims',
+                'support': '🎧 Connecting to Customer Support...\n\n✅ Services Available:\n• Live chat assistance\n• File grievances\n• FAQ and help articles\n• Schedule callback\n• Expert consultation\n\n🔗 API Endpoint: http://localhost:5000/api/support'
+            };
+            
+            alert(messages[section]);
+            
+            // Test backend API connection
+            fetch(`http://localhost:5000/api/${section}`)
+                .then(response => {
+                    console.log(`✅ ${section.toUpperCase()} API Status:`, response.status);
+                    if (response.ok) {
+                        console.log(`🔗 Successfully connected to ${section} service`);
+                    }
+                })
+                .catch(error => {
+                    console.log(`⚠️ ${section} API connection:`, error.message);
+                });
+        }
+        
+        function showInfo() {
+            alert('ℹ️ Oriental Insurance Virtual Office\n\n🏢 Welcome to our digital branch!\n📞 24/7 Customer Service\n🌐 Online Services Available\n💼 Professional Insurance Solutions');
+        }
+        
+        function showMenu() {
+            const options = [
+                '📋 All Services',
+                '👤 Account Login', 
+                '📞 Contact Us',
+                '🏠 Branch Locator',
+                '📱 Mobile App'
+            ].join('\n');
+            
+            alert('⋯ More Options\n\n' + options);
+        }
+        
+        // Initialize application
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('🏢 Oriental Insurance Virtual Office Initialized!');
+            
+            // Test backend connectivity
+            setTimeout(() => {
+                fetch('http://localhost:5000/health')
+                    .then(response => response.json())
+                    .then(data => {
+                        console.log('✅ Backend API Health Check:', data);
+                        console.log('🔗 All services ready and operational');
+                    })
+                    .catch(error => {
+                        console.log('⚠️ Backend connection status:', error.message);
+                    });
+            }, 1500);
+            
+            // Add interactive effects
+            document.querySelectorAll('.nav-card').forEach((card, index) => {
+                card.addEventListener('mouseenter', function() {
+                    this.style.transform = 'translateY(-8px) scale(1.02)';
+                });
+                
+                card.addEventListener('mouseleave', function() {
+                    this.style.transform = 'translateY(0) scale(1)';
+                });
+            });
+            
+            // Receptionist interaction
+            document.querySelector('.receptionist').addEventListener('click', function() {
+                const messages = [
+                    'Welcome to Oriental Insurance! How may I help you?',
+                    'Our team is ready to assist you with all insurance needs.',
+                    'Please feel free to explore our services using the options below.',
+                    'Need help? I\'m here to guide you through our services!'
+                ];
+                const randomMessage = messages[Math.floor(Math.random() * messages.length)];
+                
+                const chatBubble = document.querySelector('.chat-text');
+                chatBubble.textContent = randomMessage;
+            });
+        });
+    </script>
+</body>
+</html>

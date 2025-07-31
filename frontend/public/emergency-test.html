@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Emergency JavaScript Test</title>
+</head>
+<body>
+    <h1>🚨 Emergency JavaScript Test</h1>
+    <button onclick="alert('SUCCESS: JavaScript works!')" style="padding: 20px; font-size: 18px; background: green; color: white; border: none; border-radius: 10px; cursor: pointer;">
+        🧪 EMERGENCY TEST BUTTON
+    </button>
+    
+    <div style="margin: 20px 0;">
+        <button onclick="testFunction()" style="padding: 15px; font-size: 16px; background: blue; color: white; border: none; border-radius: 8px; cursor: pointer;">
+            🔧 Test Custom Function
+        </button>
+    </div>
+    
+    <div id="output" style="margin: 20px 0; padding: 15px; background: #f0f0f0; border-radius: 8px;">
+        JavaScript status: Loading...
+    </div>
+    
+    <script>
+        console.log('🚀 Emergency test JavaScript loading...');
+        
+        function testFunction() {
+            document.getElementById('output').innerHTML = '✅ SUCCESS: Custom function works! Time: ' + new Date().toLocaleTimeString();
+            alert('✅ Custom function executed successfully!');
+        }
+        
+        // Update status when page loads
+        document.addEventListener('DOMContentLoaded', function() {
+            document.getElementById('output').innerHTML = '✅ JavaScript loaded successfully! Time: ' + new Date().toLocaleTimeString();
+            console.log('✅ Emergency test completed successfully');
+        });
+        
+        console.log('📝 Emergency test script loaded');
+    </script>
+</body>
+</html>
