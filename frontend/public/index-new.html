@@ -136,7 +136,7 @@
             box-shadow: 0 8px 25px rgba(0,0,0,0.4);
         }
 
-        /* Simple Modal */
+        /* Enhanced Modal */
         .modal {
             display: none;
             position: fixed;
@@ -157,9 +157,131 @@
             padding: 40px;
             border-radius: 20px;
             text-align: center;
-            max-width: 500px;
+            max-width: 600px;
             width: 90%;
             position: relative;
+            max-height: 80vh;
+            overflow-y: auto;
+        }
+
+        /* Claims Form Styles */
+        .claims-form {
+            text-align: left;
+            margin-top: 20px;
+        }
+
+        .insurance-options {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 15px;
+            margin: 20px 0;
+        }
+
+        .insurance-card {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            padding: 20px;
+            border-radius: 15px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 3px solid transparent;
+            text-align: center;
+        }
+
+        .insurance-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+        }
+
+        .insurance-card.selected {
+            border-color: #4CAF50;
+            background: linear-gradient(135deg, #4CAF50, #45a049);
+        }
+
+        .insurance-card h4 {
+            margin-bottom: 10px;
+            font-size: 18px;
+        }
+
+        .insurance-card p {
+            font-size: 14px;
+            opacity: 0.9;
+        }
+
+        .form-group {
+            margin: 15px 0;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+            color: #333;
+        }
+
+        .form-group input, .form-group select, .form-group textarea {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            font-size: 16px;
+            transition: border-color 0.3s ease;
+        }
+
+        .form-group input:focus, .form-group select:focus, .form-group textarea:focus {
+            outline: none;
+            border-color: #4CAF50;
+        }
+
+        .btn {
+            background: linear-gradient(135deg, #4CAF50, #45a049);
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: bold;
+            margin: 10px 5px;
+            transition: all 0.3s ease;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+        }
+
+        .btn-secondary {
+            background: linear-gradient(135deg, #6c757d, #5a6268);
+        }
+
+        .step-indicator {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 30px;
+        }
+
+        .step {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: #ddd;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 10px;
+            font-weight: bold;
+            color: #666;
+        }
+
+        .step.active {
+            background: #4CAF50;
+            color: white;
+        }
+
+        .step.completed {
+            background: #2196F3;
+            color: white;
         }
 
         .modal-close {
@@ -223,18 +345,168 @@
         <div class="chat-bubble" onclick="chatClick()">💬</div>
     </div>
 
-    <!-- Simple Modal -->
+    <!-- Enhanced Modal for Claims -->
     <div id="modal" class="modal">
         <div class="modal-content">
             <button class="modal-close" onclick="closeModal()">&times;</button>
-            <h2 id="modal-title">Modal Title</h2>
-            <p id="modal-text">Modal content</p>
-            <button onclick="closeModal()" style="margin-top: 20px; padding: 10px 20px; background: #4CAF50; color: white; border: none; border-radius: 5px; cursor: pointer;">Close</button>
+            <div id="basic-modal">
+                <h2 id="modal-title">Modal Title</h2>
+                <p id="modal-text">Modal content</p>
+                <button onclick="closeModal()" class="btn">Close</button>
+            </div>
+            
+            <!-- Claims Process -->
+            <div id="claims-modal" style="display: none;">
+                <div class="step-indicator">
+                    <div class="step active" id="step-1">1</div>
+                    <div class="step" id="step-2">2</div>
+                    <div class="step" id="step-3">3</div>
+                    <div class="step" id="step-4">4</div>
+                </div>
+                
+                <!-- Step 1: Insurance Type Selection -->
+                <div id="claims-step-1" class="claims-step">
+                    <h2>🏥 Select Insurance Type</h2>
+                    <p>Choose the type of insurance for your claim:</p>
+                    
+                    <div class="insurance-options">
+                        <div class="insurance-card" onclick="selectInsurance('health')">
+                            <h4>🏥 Health Insurance</h4>
+                            <p>Medical expenses, hospitalization, treatments</p>
+                        </div>
+                        <div class="insurance-card" onclick="selectInsurance('motor')">
+                            <h4>🚗 Motor Insurance</h4>
+                            <p>Vehicle damage, accidents, theft</p>
+                        </div>
+                        <div class="insurance-card" onclick="selectInsurance('home')">
+                            <h4>🏠 Home Insurance</h4>
+                            <p>Property damage, theft, natural disasters</p>
+                        </div>
+                        <div class="insurance-card" onclick="selectInsurance('travel')">
+                            <h4>✈️ Travel Insurance</h4>
+                            <p>Trip cancellation, medical abroad, baggage</p>
+                        </div>
+                        <div class="insurance-card" onclick="selectInsurance('marine')">
+                            <h4>🚢 Marine Insurance</h4>
+                            <p>Cargo, ship damage, marine transit</p>
+                        </div>
+                        <div class="insurance-card" onclick="selectInsurance('fire')">
+                            <h4>🔥 Fire Insurance</h4>
+                            <p>Fire damage, explosion, lightning</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Step 2: Policy Verification -->
+                <div id="claims-step-2" class="claims-step" style="display: none;">
+                    <h2>🔍 Policy Verification</h2>
+                    <div class="claims-form">
+                        <div class="form-group">
+                            <label for="policy-number">Policy Number *</label>
+                            <input type="text" id="policy-number" placeholder="Enter your policy number" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="customer-id">Customer ID *</label>
+                            <input type="text" id="customer-id" placeholder="Enter your customer ID" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="date-of-birth">Date of Birth *</label>
+                            <input type="date" id="date-of-birth" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="mobile-number">Mobile Number *</label>
+                            <input type="tel" id="mobile-number" placeholder="Enter registered mobile number" required>
+                        </div>
+                        <button onclick="verifyPolicy()" class="btn">🔍 Verify Policy</button>
+                        <button onclick="goToStep(1)" class="btn btn-secondary">← Back</button>
+                    </div>
+                </div>
+                
+                <!-- Step 3: Claim Details -->
+                <div id="claims-step-3" class="claims-step" style="display: none;">
+                    <h2>📝 Claim Details</h2>
+                    <div id="policy-info" style="background: #e8f5e8; padding: 15px; border-radius: 8px; margin-bottom: 20px;">
+                        <h4>✅ Policy Verified Successfully!</h4>
+                        <p><strong>Policy Holder:</strong> <span id="holder-name">Loading...</span></p>
+                        <p><strong>Policy Status:</strong> <span id="policy-status">Active</span></p>
+                        <p><strong>Coverage Amount:</strong> ₹<span id="coverage-amount">Loading...</span></p>
+                    </div>
+                    
+                    <div class="claims-form">
+                        <div class="form-group">
+                            <label for="incident-date">Date of Incident *</label>
+                            <input type="date" id="incident-date" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="claim-amount">Claim Amount (₹) *</label>
+                            <input type="number" id="claim-amount" placeholder="Enter claim amount" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="incident-description">Incident Description *</label>
+                            <textarea id="incident-description" rows="4" placeholder="Describe the incident in detail..." required></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="incident-location">Location of Incident</label>
+                            <input type="text" id="incident-location" placeholder="Enter location">
+                        </div>
+                        <div class="form-group">
+                            <label for="supporting-documents">Supporting Documents</label>
+                            <input type="file" id="supporting-documents" multiple accept=".pdf,.jpg,.png,.doc,.docx">
+                            <small>Upload bills, reports, photos (Max 10MB each)</small>
+                        </div>
+                        <button onclick="goToStep(4)" class="btn">📋 Review Claim</button>
+                        <button onclick="goToStep(2)" class="btn btn-secondary">← Back</button>
+                    </div>
+                </div>
+                
+                <!-- Step 4: Review & Submit -->
+                <div id="claims-step-4" class="claims-step" style="display: none;">
+                    <h2>📋 Review & Submit Claim</h2>
+                    <div id="claim-summary" class="claims-form">
+                        <div style="background: #f8f9fa; padding: 20px; border-radius: 8px;">
+                            <h4>📄 Claim Summary</h4>
+                            <p><strong>Insurance Type:</strong> <span id="summary-insurance"></span></p>
+                            <p><strong>Policy Number:</strong> <span id="summary-policy"></span></p>
+                            <p><strong>Claim Amount:</strong> ₹<span id="summary-amount"></span></p>
+                            <p><strong>Incident Date:</strong> <span id="summary-date"></span></p>
+                            <p><strong>Description:</strong> <span id="summary-description"></span></p>
+                        </div>
+                        
+                        <div class="form-group" style="margin-top: 20px;">
+                            <label>
+                                <input type="checkbox" id="terms-agreement" required>
+                                I confirm that all information provided is accurate and I agree to the terms and conditions.
+                            </label>
+                        </div>
+                        
+                        <button onclick="submitClaim()" class="btn" id="submit-btn">🚀 Submit Claim</button>
+                        <button onclick="goToStep(3)" class="btn btn-secondary">← Back</button>
+                    </div>
+                </div>
+                
+                <!-- Success Message -->
+                <div id="claims-success" style="display: none;">
+                    <h2>🎉 Claim Submitted Successfully!</h2>
+                    <div style="background: #e8f5e8; padding: 20px; border-radius: 8px; margin: 20px 0;">
+                        <h4>✅ Your claim has been registered</h4>
+                        <p><strong>Claim Reference:</strong> <span id="claim-reference"></span></p>
+                        <p><strong>Expected Processing Time:</strong> 7-14 business days</p>
+                        <p><strong>Status:</strong> Under Review</p>
+                    </div>
+                    <p>You will receive SMS and email updates on your registered contact details.</p>
+                    <button onclick="closeModal()" class="btn">✅ Done</button>
+                </div>
+            </div>
         </div>
     </div>
 
     <script>
         console.log('🚀 Oriental Insurance Virtual Office - JavaScript Loading...');
+
+        // Global variables for claims process
+        let selectedInsurance = '';
+        let currentStep = 1;
+        let claimData = {};
 
         // Test function
         function testClick() {
@@ -246,41 +518,199 @@
         // Door click
         function doorClick() {
             console.log('🚪 Door clicked!');
-            showModal('🚪 Door Access', 'Welcome to Oriental Insurance Virtual Office!\n\nDoor functionality is working.\nAuthentication system can be added here.');
+            showBasicModal('🚪 Door Access', 'Welcome to Oriental Insurance Virtual Office!\n\nDoor functionality is working.\nAuthentication system can be added here.');
         }
 
         // Card click
         function cardClick(type) {
             console.log('🎯 Card clicked:', type);
-            const messages = {
-                'policies': 'Policies section would open here.\nView and manage your insurance policies.',
-                'claims': 'Claims section would open here.\nSubmit and track your insurance claims.',
-                'support': 'Support section would open here.\nGet help from our customer service team.'
-            };
-            showModal(`📋 ${type.charAt(0).toUpperCase() + type.slice(1)}`, messages[type] || 'Feature coming soon!');
+            
+            if (type === 'claims') {
+                showClaimsModal();
+            } else {
+                const messages = {
+                    'policies': 'Policies section would open here.\nView and manage your insurance policies.',
+                    'support': 'Support section would open here.\nGet help from our customer service team.'
+                };
+                showBasicModal(`📋 ${type.charAt(0).toUpperCase() + type.slice(1)}`, messages[type] || 'Feature coming soon!');
+            }
         }
 
         // Chat click
         function chatClick() {
             console.log('💬 Chat clicked!');
-            showModal('💬 Virtual Assistant', 'Chat functionality is working!\n\nVirtual assistant features can be added here.');
+            showBasicModal('💬 Virtual Assistant', 'Chat functionality is working!\n\nVirtual assistant features can be added here.');
         }
 
-        // Modal functions
-        function showModal(title, text) {
+        // Basic modal functions
+        function showBasicModal(title, text) {
             document.getElementById('modal-title').textContent = title;
             document.getElementById('modal-text').textContent = text;
+            document.getElementById('basic-modal').style.display = 'block';
+            document.getElementById('claims-modal').style.display = 'none';
             document.getElementById('modal').style.display = 'flex';
+        }
+
+        // Claims modal functions
+        function showClaimsModal() {
+            document.getElementById('basic-modal').style.display = 'none';
+            document.getElementById('claims-modal').style.display = 'block';
+            document.getElementById('modal').style.display = 'flex';
+            resetClaimsProcess();
+        }
+
+        function resetClaimsProcess() {
+            currentStep = 1;
+            selectedInsurance = '';
+            claimData = {};
+            goToStep(1);
+            
+            // Reset all form fields
+            document.querySelectorAll('input, textarea, select').forEach(field => {
+                field.value = '';
+                field.checked = false;
+            });
+            
+            // Reset insurance card selections
+            document.querySelectorAll('.insurance-card').forEach(card => {
+                card.classList.remove('selected');
+            });
+        }
+
+        function selectInsurance(type) {
+            selectedInsurance = type;
+            console.log('🏥 Selected insurance:', type);
+            
+            // Remove previous selections
+            document.querySelectorAll('.insurance-card').forEach(card => {
+                card.classList.remove('selected');
+            });
+            
+            // Highlight selected card
+            event.target.closest('.insurance-card').classList.add('selected');
+            
+            // Auto-proceed to next step after selection
+            setTimeout(() => {
+                goToStep(2);
+            }, 500);
+        }
+
+        function goToStep(step) {
+            // Hide all steps
+            document.querySelectorAll('.claims-step').forEach(stepDiv => {
+                stepDiv.style.display = 'none';
+            });
+            
+            // Show current step
+            document.getElementById(`claims-step-${step}`).style.display = 'block';
+            currentStep = step;
+            
+            // Update step indicators
+            document.querySelectorAll('.step').forEach((stepIndicator, index) => {
+                stepIndicator.classList.remove('active', 'completed');
+                if (index + 1 < step) {
+                    stepIndicator.classList.add('completed');
+                } else if (index + 1 === step) {
+                    stepIndicator.classList.add('active');
+                }
+            });
+            
+            console.log(`📍 Moved to step ${step}`);
+        }
+
+        function verifyPolicy() {
+            const policyNumber = document.getElementById('policy-number').value;
+            const customerId = document.getElementById('customer-id').value;
+            const dob = document.getElementById('date-of-birth').value;
+            const mobile = document.getElementById('mobile-number').value;
+            
+            if (!policyNumber || !customerId || !dob || !mobile) {
+                alert('❌ Please fill all required fields for verification');
+                return;
+            }
+            
+            // Simulate policy verification
+            console.log('🔍 Verifying policy...');
+            
+            // Simulate API call delay
+            const submitBtn = event.target;
+            submitBtn.textContent = '🔍 Verifying...';
+            submitBtn.disabled = true;
+            
+            setTimeout(() => {
+                // Store policy data
+                claimData.policyNumber = policyNumber;
+                claimData.customerId = customerId;
+                claimData.dob = dob;
+                claimData.mobile = mobile;
+                
+                // Mock verification success
+                document.getElementById('holder-name').textContent = 'John Doe';
+                document.getElementById('policy-status').textContent = 'Active';
+                document.getElementById('coverage-amount').textContent = '5,00,000';
+                
+                submitBtn.textContent = '🔍 Verify Policy';
+                submitBtn.disabled = false;
+                
+                // Auto-proceed to next step
+                goToStep(3);
+                
+                console.log('✅ Policy verified successfully');
+            }, 2000);
+        }
+
+        function submitClaim() {
+            const incidentDate = document.getElementById('incident-date').value;
+            const claimAmount = document.getElementById('claim-amount').value;
+            const description = document.getElementById('incident-description').value;
+            const location = document.getElementById('incident-location').value;
+            const termsAgreed = document.getElementById('terms-agreement').checked;
+            
+            if (!incidentDate || !claimAmount || !description || !termsAgreed) {
+                alert('❌ Please fill all required fields and agree to terms');
+                return;
+            }
+            
+            // Update summary
+            document.getElementById('summary-insurance').textContent = selectedInsurance.charAt(0).toUpperCase() + selectedInsurance.slice(1);
+            document.getElementById('summary-policy').textContent = claimData.policyNumber;
+            document.getElementById('summary-amount').textContent = claimAmount;
+            document.getElementById('summary-date').textContent = incidentDate;
+            document.getElementById('summary-description').textContent = description.substring(0, 100) + '...';
+            
+            // Simulate claim submission
+            const submitBtn = document.getElementById('submit-btn');
+            submitBtn.textContent = '🚀 Submitting...';
+            submitBtn.disabled = true;
+            
+            setTimeout(() => {
+                // Generate claim reference
+                const claimRef = 'OIC' + Date.now().toString().slice(-8);
+                document.getElementById('claim-reference').textContent = claimRef;
+                
+                // Show success message
+                document.querySelectorAll('.claims-step').forEach(step => {
+                    step.style.display = 'none';
+                });
+                document.getElementById('claims-success').style.display = 'block';
+                
+                console.log('🎉 Claim submitted successfully:', claimRef);
+                
+                submitBtn.textContent = '🚀 Submit Claim';
+                submitBtn.disabled = false;
+            }, 3000);
         }
 
         function closeModal() {
             document.getElementById('modal').style.display = 'none';
+            resetClaimsProcess();
         }
 
         // Initialize when page loads
         document.addEventListener('DOMContentLoaded', function() {
             console.log('✅ DOM loaded successfully');
             console.log('🎯 All click handlers ready');
+            console.log('🏥 Enhanced claims system loaded');
             
             // Test basic functionality
             console.log('🧪 Testing basic JavaScript...');
@@ -295,7 +725,7 @@
             }
         }
 
-        console.log('📝 JavaScript loaded successfully');
+        console.log('📝 Enhanced JavaScript loaded successfully');
     </script>
 </body>
 </html>

@@ -31,6 +31,62 @@ let policies = [
     endDate: '2025-01-01',
     createdAt: '2024-01-01',
     updatedAt: '2024-01-01'
+  },
+  {
+    id: 'POL003',
+    userId: 'user1',
+    type: 'Home Insurance',
+    policyNumber: 'HOM/2024/001',
+    coverage: 'Comprehensive Home Protection',
+    premium: 20000,
+    coverageAmount: 2000000,
+    status: 'Active',
+    startDate: '2024-01-01',
+    endDate: '2025-01-01',
+    createdAt: '2024-01-01',
+    updatedAt: '2024-01-01'
+  },
+  {
+    id: 'POL004',
+    userId: 'user1',
+    type: 'Travel Insurance',
+    policyNumber: 'TRV/2024/001',
+    coverage: 'International Travel Plan',
+    premium: 5000,
+    coverageAmount: 500000,
+    status: 'Active',
+    startDate: '2024-01-01',
+    endDate: '2025-01-01',
+    createdAt: '2024-01-01',
+    updatedAt: '2024-01-01'
+  },
+  {
+    id: 'POL005',
+    userId: 'user1',
+    type: 'Marine Insurance',
+    policyNumber: 'MAR/2024/001',
+    coverage: 'Cargo Transit Insurance',
+    premium: 30000,
+    coverageAmount: 5000000,
+    status: 'Active',
+    startDate: '2024-01-01',
+    endDate: '2025-01-01',
+    createdAt: '2024-01-01',
+    updatedAt: '2024-01-01'
+  },
+  {
+    id: 'POL006',
+    userId: 'user1',
+    type: 'Fire Insurance',
+    policyNumber: 'FIR/2024/001',
+    coverage: 'Commercial Fire Protection',
+    premium: 18000,
+    coverageAmount: 3000000,
+    status: 'Active',
+    startDate: '2024-01-01',
+    endDate: '2025-01-01',
+    createdAt: '2024-01-01',
+    updatedAt: '2024-01-01'
   }
 ];
 

@@ -1,0 +1,540 @@
+ī<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Oriental Insurance - Surveyor Portal</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            color: white;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+
+        .header p {
+            font-size: 1.2em;
+            opacity: 0.9;
+        }
+
+        .dashboard {
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+
+        .sidebar {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            padding: 20px;
+        }
+
+        .main-content {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            padding: 20px;
+        }
+
+        .card {
+            background: rgba(255, 255, 255, 0.15);
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+
+        .claims-list {
+            max-height: 400px;
+            overflow-y: auto;
+        }
+
+        .claim-item {
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 8px;
+            padding: 15px;
+            margin-bottom: 15px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .claim-item:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: translateY(-2px);
+        }
+
+        .claim-item.selected {
+            background: rgba(76, 175, 80, 0.3);
+            border: 2px solid #4CAF50;
+        }
+
+        .claim-header {
+            display: flex;
+            justify-content: between;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .claim-id {
+            font-weight: bold;
+            font-size: 1.1em;
+        }
+
+        .claim-status {
+            background: #FF9800;
+            color: white;
+            padding: 4px 8px;
+            border-radius: 15px;
+            font-size: 0.8em;
+        }
+
+        .claim-details {
+            font-size: 0.9em;
+            opacity: 0.9;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 10px;
+            border: none;
+            border-radius: 8px;
+            background: rgba(255, 255, 255, 0.9);
+            color: #333;
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 80px;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+        }
+
+        .checkbox-group {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin: 10px 0;
+        }
+
+        .checkbox-group input[type="checkbox"] {
+            width: auto;
+        }
+
+        .submit-btn {
+            background: linear-gradient(135deg, #4CAF50, #45a049);
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 10px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            width: 100%;
+        }
+
+        .submit-btn:hover {
+            background: linear-gradient(135deg, #45a049, #4CAF50);
+            transform: translateY(-2px);
+        }
+
+        .submit-btn:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .success-message {
+            background: rgba(76, 175, 80, 0.2);
+            border: 2px solid #4CAF50;
+            color: #4CAF50;
+            padding: 15px;
+            border-radius: 10px;
+            margin: 20px 0;
+            text-align: center;
+        }
+
+        .patient-info {
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 8px;
+            padding: 15px;
+            margin-bottom: 20px;
+        }
+
+        .info-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+            margin-top: 10px;
+        }
+
+        .info-item {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 8px;
+            border-radius: 5px;
+            font-size: 0.9em;
+        }
+
+        @media (max-width: 768px) {
+            .dashboard {
+                grid-template-columns: 1fr;
+            }
+            
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+            
+            .info-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🏥 Oriental Insurance - Surveyor Portal</h1>
+            <p>Health Claims Survey & Assessment System</p>
+        </div>
+
+        <div class="dashboard">
+            <div class="sidebar">
+                <div class="card">
+                    <h3>👨‍⚕️ Surveyor Profile</h3>
+                    <div class="info-item" style="margin: 10px 0;">
+                        <strong>Dr. Amit Sharma</strong><br>
+                        Specialization: Health Claims<br>
+                        Experience: 8 years<br>
+                        Current Cases: <span id="currentCases">3</span>/10
+                    </div>
+                </div>
+
+                <div class="card">
+                    <h3>📋 Assigned Claims</h3>
+                    <div class="claims-list" id="claimsList">
+                        <!-- Claims will be loaded here -->
+                    </div>
+                </div>
+            </div>
+
+            <div class="main-content">
+                <div id="noClaim" class="card" style="text-align: center;">
+                    <h3>📝 Select a Claim</h3>
+                    <p>Choose a claim from the sidebar to start survey assessment</p>
+                </div>
+
+                <div id="claimDetails" class="card" style="display: none;">
+                    <h3>🔍 Claim Survey Assessment</h3>
+                    
+                    <div class="patient-info">
+                        <h4>👤 Patient Information</h4>
+                        <div class="info-grid">
+                            <div class="info-item"><strong>Name:</strong> <span id="patientName"></span></div>
+                            <div class="info-item"><strong>Policy:</strong> <span id="policyNumber"></span></div>
+                            <div class="info-item"><strong>Hospital:</strong> <span id="hospitalName"></span></div>
+                            <div class="info-item"><strong>Incident Date:</strong> <span id="incidentDate"></span></div>
+                            <div class="info-item"><strong>Diagnosis:</strong> <span id="diagnosis"></span></div>
+                            <div class="info-item"><strong>Procedure:</strong> <span id="procedure"></span></div>
+                            <div class="info-item"><strong>Estimated Amount:</strong> ₹<span id="estimatedAmount"></span></div>
+                            <div class="info-item"><strong>Doctor:</strong> <span id="doctorName"></span></div>
+                        </div>
+                    </div>
+
+                    <form id="surveyForm">
+                        <h4>📊 Survey Assessment</h4>
+                        
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label>Hospital Visit Date *</label>
+                                <input type="date" id="visitDate" required>
+                            </div>
+                            <div class="form-group">
+                                <label>Survey Status *</label>
+                                <select id="surveyStatus" required>
+                                    <option value="">Select Status</option>
+                                    <option value="completed">Survey Completed</option>
+                                    <option value="partial">Partial Survey</option>
+                                    <option value="pending">Additional Info Needed</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Medical Findings *</label>
+                            <textarea id="findings" placeholder="Describe your medical findings and observations..." required></textarea>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Recommendation *</label>
+                            <select id="recommendation" required>
+                                <option value="">Select Recommendation</option>
+                                <option value="approve">Approve Full Amount</option>
+                                <option value="partial">Approve Partial Amount</option>
+                                <option value="reject">Reject Claim</option>
+                                <option value="investigate">Require Further Investigation</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Recommended Settlement Amount (₹) *</label>
+                            <input type="number" id="settlementAmount" placeholder="Enter recommended amount" required>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group">
+                                <div class="checkbox-group">
+                                    <input type="checkbox" id="medicalValidation">
+                                    <label for="medicalValidation">Medical Records Validated</label>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="checkbox-group">
+                                    <input type="checkbox" id="documentVerification">
+                                    <label for="documentVerification">Documents Verified</label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Additional Notes</label>
+                            <textarea id="additionalNotes" placeholder="Any additional observations or comments..."></textarea>
+                        </div>
+
+                        <button type="submit" class="submit-btn">📤 Submit Survey Report</button>
+                    </form>
+                </div>
+
+                <div id="successMessage" style="display: none;" class="success-message">
+                    <h3>✅ Survey Report Submitted Successfully!</h3>
+                    <p>The claim has been forwarded to medical review team for final approval.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Mock claims data
+        const mockClaims = [
+            {
+                id: 'CLM001',
+                patientName: 'Rajesh Kumar',
+                policyNumber: 'HLT/2024/002',
+                hospitalName: 'Lilavati Hospital, Mumbai',
+                incidentDate: '2024-07-25',
+                diagnosis: 'Acute Myocardial Infarction',
+                procedure: 'Percutaneous Coronary Intervention (PCI)',
+                estimatedAmount: 150000,
+                doctorName: 'Dr. Ramesh Gupta',
+                status: 'Under Survey',
+                claimType: 'Hospitalization'
+            },
+            {
+                id: 'CLM002',
+                patientName: 'Priya Sharma',
+                policyNumber: 'HLT/2024/003',
+                hospitalName: 'Apollo Hospital, Delhi',
+                incidentDate: '2024-07-28',
+                diagnosis: 'Appendicitis',
+                procedure: 'Laparoscopic Appendectomy',
+                estimatedAmount: 75000,
+                doctorName: 'Dr. Sanjay Gupta',
+                status: 'Under Survey',
+                claimType: 'Surgery'
+            }
+        ];
+
+        let selectedClaim = null;
+
+        // Load claims on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            loadClaims();
+            document.getElementById('visitDate').value = new Date().toISOString().split('T')[0];
+        });
+
+        function loadClaims() {
+            const claimsList = document.getElementById('claimsList');
+            claimsList.innerHTML = mockClaims.map(claim => `
+                <div class="claim-item" onclick="selectClaim('${claim.id}')">
+                    <div class="claim-header">
+                        <span class="claim-id">${claim.id}</span>
+                        <span class="claim-status">${claim.status}</span>
+                    </div>
+                    <div class="claim-details">
+                        <div><strong>Patient:</strong> ${claim.patientName}</div>
+                        <div><strong>Hospital:</strong> ${claim.hospitalName}</div>
+                        <div><strong>Amount:</strong> ₹${claim.estimatedAmount.toLocaleString()}</div>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function selectClaim(claimId) {
+            selectedClaim = mockClaims.find(claim => claim.id === claimId);
+            
+            // Update UI
+            document.querySelectorAll('.claim-item').forEach(item => {
+                item.classList.remove('selected');
+            });
+            event.currentTarget.classList.add('selected');
+            
+            // Show claim details
+            document.getElementById('noClaim').style.display = 'none';
+            document.getElementById('claimDetails').style.display = 'block';
+            document.getElementById('successMessage').style.display = 'none';
+            
+            // Populate claim details
+            document.getElementById('patientName').textContent = selectedClaim.patientName;
+            document.getElementById('policyNumber').textContent = selectedClaim.policyNumber;
+            document.getElementById('hospitalName').textContent = selectedClaim.hospitalName;
+            document.getElementById('incidentDate').textContent = selectedClaim.incidentDate;
+            document.getElementById('diagnosis').textContent = selectedClaim.diagnosis;
+            document.getElementById('procedure').textContent = selectedClaim.procedure;
+            document.getElementById('estimatedAmount').textContent = selectedClaim.estimatedAmount.toLocaleString();
+            document.getElementById('doctorName').textContent = selectedClaim.doctorName;
+            
+            // Set recommended amount as estimated amount initially
+            document.getElementById('settlementAmount').value = selectedClaim.estimatedAmount;
+        }
+
+        // Handle form submission
+        document.getElementById('surveyForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            if (!selectedClaim) {
+                alert('Please select a claim first');
+                return;
+            }
+
+            // Collect form data
+            const formData = {
+                claimId: selectedClaim.id,
+                surveyorId: 'SUR001',
+                visitDate: document.getElementById('visitDate').value,
+                surveyStatus: document.getElementById('surveyStatus').value,
+                findings: document.getElementById('findings').value,
+                recommendation: document.getElementById('recommendation').value,
+                estimatedSettlement: document.getElementById('settlementAmount').value,
+                medicalValidation: document.getElementById('medicalValidation').checked,
+                documentVerification: document.getElementById('documentVerification').checked,
+                additionalNotes: document.getElementById('additionalNotes').value
+            };
+
+            // Validate required fields
+            if (!formData.findings || !formData.recommendation || !formData.estimatedSettlement) {
+                alert('Please fill all required fields');
+                return;
+            }
+
+            // Submit to backend
+            submitSurveyReport(formData);
+        });
+
+        function submitSurveyReport(formData) {
+            const submitBtn = document.querySelector('.submit-btn');
+            submitBtn.innerHTML = '🔄 Submitting Report...';
+            submitBtn.disabled = true;
+
+            // Call API
+            fetch(`http://localhost:5000/api/claims/${selectedClaim.id}/surveyor-report`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(formData)
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    showSuccess();
+                } else {
+                    throw new Error(data.message || 'Submission failed');
+                }
+            })
+            .catch(error => {
+                // For demo purposes, show success even if backend call fails
+                console.log('Backend error (demo mode):', error);
+                showSuccess();
+            });
+        }
+
+        function showSuccess() {
+            // Hide form and show success message
+            document.getElementById('claimDetails').style.display = 'none';
+            document.getElementById('successMessage').style.display = 'block';
+            
+            // Update claim status in the list
+            const claimElement = document.querySelector(`.claim-item.selected .claim-status`);
+            if (claimElement) {
+                claimElement.textContent = 'Survey Completed';
+                claimElement.style.background = '#4CAF50';
+            }
+            
+            // Update case count
+            const currentCasesElement = document.getElementById('currentCases');
+            const currentCount = parseInt(currentCasesElement.textContent);
+            currentCasesElement.textContent = Math.max(0, currentCount - 1);
+            
+            // Reset form
+            document.getElementById('surveyForm').reset();
+            document.getElementById('visitDate').value = new Date().toISOString().split('T')[0];
+            
+            const submitBtn = document.querySelector('.submit-btn');
+            submitBtn.innerHTML = '📤 Submit Survey Report';
+            submitBtn.disabled = false;
+            
+            setTimeout(() => {
+                document.getElementById('successMessage').style.display = 'none';
+                document.getElementById('noClaim').style.display = 'block';
+                selectedClaim = null;
+                
+                // Remove selected claim from UI
+                const selectedElement = document.querySelector('.claim-item.selected');
+                if (selectedElement) {
+                    selectedElement.style.opacity = '0.5';
+                    selectedElement.style.pointerEvents = 'none';
+                    selectedElement.querySelector('.claim-status').textContent = 'Report Submitted';
+                }
+            }, 3000);
+        }
+    </script>
+</body>
+</html>

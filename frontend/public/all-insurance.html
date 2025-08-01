@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Oriental Insurance - ALL INSURANCE TYPES</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            color: white;
+            padding: 20px;
+            margin: 0;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            text-align: center;
+        }
+        .title {
+            font-size: 48px;
+            margin: 20px 0;
+            color: #fff;
+        }
+        .subtitle {
+            font-size: 24px;
+            margin-bottom: 40px;
+            color: #e0e0e0;
+        }
+        .insurance-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin: 40px 0;
+        }
+        .insurance-card {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            padding: 30px;
+            border-radius: 20px;
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        .insurance-card:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+        }
+        .insurance-card h3 {
+            font-size: 32px;
+            margin-bottom: 15px;
+        }
+        .insurance-card p {
+            font-size: 18px;
+            line-height: 1.6;
+            opacity: 0.9;
+        }
+        .claim-btn {
+            background: linear-gradient(135deg, #4CAF50, #45a049);
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            font-size: 18px;
+            border-radius: 10px;
+            cursor: pointer;
+            margin-top: 15px;
+            transition: all 0.3s ease;
+        }
+        .claim-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.3);
+        }
+        .success-msg {
+            background: #4CAF50;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 class="title">🏢 Oriental Insurance Virtual Office</h1>
+        <h2 class="subtitle">ALL 6 INSURANCE TYPES AVAILABLE</h2>
+        
+        <div class="insurance-grid">
+            <div class="insurance-card" onclick="selectClaim('health')">
+                <h3>🏥 Health Insurance</h3>
+                <p>Medical expenses, hospitalization, treatments, surgeries, emergency care</p>
+                <button class="claim-btn">File Health Claim</button>
+            </div>
+            
+            <div class="insurance-card" onclick="selectClaim('motor')">
+                <h3>🚗 Motor Insurance</h3>
+                <p>Vehicle damage, accidents, theft, third-party liability, comprehensive coverage</p>
+                <button class="claim-btn">File Motor Claim</button>
+            </div>
+            
+            <div class="insurance-card" onclick="selectClaim('home')">
+                <h3>🏠 Home Insurance</h3>
+                <p>Property damage, theft, natural disasters, fire, flood protection</p>
+                <button class="claim-btn">File Home Claim</button>
+            </div>
+            
+            <div class="insurance-card" onclick="selectClaim('travel')">
+                <h3>✈️ Travel Insurance</h3>
+                <p>Trip cancellation, medical emergencies abroad, baggage loss, flight delays</p>
+                <button class="claim-btn">File Travel Claim</button>
+            </div>
+            
+            <div class="insurance-card" onclick="selectClaim('marine')">
+                <h3>🚢 Marine Insurance</h3>
+                <p>Cargo protection, ship damage, marine transit, import/export coverage</p>
+                <button class="claim-btn">File Marine Claim</button>
+            </div>
+            
+            <div class="insurance-card" onclick="selectClaim('fire')">
+                <h3>🔥 Fire Insurance</h3>
+                <p>Fire damage, explosion, lightning, electrical hazards, smoke damage</p>
+                <button class="claim-btn">File Fire Claim</button>
+            </div>
+        </div>
+        
+        <div id="success-msg" class="success-msg">
+            <h3>✅ Claim Type Selected!</h3>
+            <p id="selected-type">Ready to proceed with claim process</p>
+        </div>
+    </div>
+
+    <script>
+        function selectClaim(type) {
+            const typeNames = {
+                'health': '🏥 Health Insurance',
+                'motor': '🚗 Motor Insurance', 
+                'home': '🏠 Home Insurance',
+                'travel': '✈️ Travel Insurance',
+                'marine': '🚢 Marine Insurance',
+                'fire': '🔥 Fire Insurance'
+            };
+            
+            document.getElementById('selected-type').textContent = 
+                `Selected: ${typeNames[type]} - Proceeding to claim form...`;
+            document.getElementById('success-msg').style.display = 'block';
+            
+            console.log(`🎯 Selected insurance type: ${type}`);
+            
+            // Auto-hide success message after 3 seconds
+            setTimeout(() => {
+                document.getElementById('success-msg').style.display = 'none';
+            }, 3000);
+        }
+        
+        console.log('🎉 Oriental Insurance - All 6 insurance types loaded successfully!');
+        console.log('🏥 Health | 🚗 Motor | 🏠 Home | ✈️ Travel | 🚢 Marine | 🔥 Fire');
+    </script>
+</body>
+</html>
