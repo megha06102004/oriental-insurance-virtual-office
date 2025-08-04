@@ -1,0 +1,353 @@
+[
+  {
+    "id": "aa8e2f57-5a1f-4dce-a34c-de9f13c4f8ae",
+    "policyNumber": "HLT/2024/DEMO001",
+    "customerName": "Demo Customer",
+    "email": "demo@orientalinsurance.com",
+    "phone": "+91-9876543210",
+    "policyType": "health",
+    "premium": 25000,
+    "coverageAmount": 1000000,
+    "startDate": "2024-01-01",
+    "endDate": "2024-12-31",
+    "status": "active",
+    "created_at": "2025-08-04T06:49:28.386Z"
+  },
+  {
+    "id": "b725bc08-3ff9-426e-8e26-dd05bb9bdb6d",
+    "policyNumber": "HLT/2025/5332",
+    "userId": "e15b7677-052d-4555-bd5d-1f41ee111c6a",
+    "dateOfBirth": "1990-01-15",
+    "fullName": "John Doe",
+    "address": "123 Main Street, Mumbai",
+    "phone": "+91-9876543210",
+    "annualIncome": "5-10lakh",
+    "email": "john.doe@example.com",
+    "policyType": "health",
+    "premium": 32097,
+    "coverageAmount": 1000000,
+    "startDate": "2025-08-04",
+    "endDate": "2026-08-04",
+    "status": "active",
+    "features": [
+      "Hospitalization Coverage",
+      "Pre & Post Hospitalization",
+      "Daycare Procedures",
+      "Ambulance Charges",
+      "Health Check-up",
+      "Maternity Benefits (after 3 years)"
+    ],
+    "benefits": [
+      "Cashless treatment at 8000+ hospitals",
+      "No pre-medical check-up up to 45 years",
+      "Cumulative bonus for claim-free years",
+      "Tax benefits under Section 80D"
+    ],
+    "terms": [
+      "Waiting period: 30 days for illness",
+      "Pre-existing diseases: 4 years waiting",
+      "Maternity: 3 years waiting period",
+      "Room rent limit: 1% of sum insured"
+    ],
+    "created_at": "2025-08-04T06:50:35.024Z",
+    "updated_at": "2025-08-04T06:50:35.024Z"
+  },
+  {
+    "id": "835f66b0-fcd4-4553-a27e-0a2b779c0fb7",
+    "policyNumber": "MOT/2025/2627",
+    "userId": "80037464-e2fb-4e47-98dd-ffa7d10d3d77",
+    "dateOfBirth": "1985-05-20",
+    "fullName": "Sarah Wilson",
+    "address": "456 Park Avenue, Delhi",
+    "phone": "+91-8765432109",
+    "email": "sarah.wilson@example.com",
+    "vehicleDetails": {
+      "fuelType": "petrol",
+      "registrationNumber": "DL01AB5678",
+      "model": "Honda City",
+      "year": "2023"
+    },
+    "policyType": "motor",
+    "premium": 18476,
+    "coverageAmount": 500000,
+    "startDate": "2025-08-04",
+    "endDate": "2026-08-04",
+    "status": "active",
+    "features": [
+      "Third Party Liability Coverage",
+      "Own Damage Protection",
+      "Personal Accident Cover",
+      "Zero Depreciation (Optional)",
+      "Roadside Assistance",
+      "No Claim Bonus up to 50%"
+    ],
+    "benefits": [
+      "Cashless garage network of 4000+ garages",
+      "Quick claim settlement",
+      "Online renewal facility",
+      "24/7 customer support"
+    ],
+    "terms": [
+      "Policy valid for 12 months",
+      "Premium payment within 30 days",
+      "Immediate coverage upon payment",
+      "Grace period for renewal: 90 days"
+    ],
+    "created_at": "2025-08-04T06:51:58.531Z",
+    "updated_at": "2025-08-04T06:51:58.531Z"
+  },
+  {
+    "id": "3daa3272-7a44-4254-b489-67c6078c424c",
+    "policyNumber": "HLT/2025/5782",
+    "userId": "894a98b2-7ae6-4114-9f7b-d1731088842c",
+    "fullName": "Megha Bhandari",
+    "email": "megha6102004@gmail.com",
+    "phone": "9717963935",
+    "policyType": "health",
+    "dateOfBirth": "2004-10-06",
+    "annualIncome": "below-3lakh",
+    "address": "House no. 192, Street no. - 3, Postoffice - Kapashera\nKapashera, New Delhi - 10037",
+    "fuelType": "petrol",
+    "healthSumInsured": "300000",
+    "familyMembers": "parents",
+    "travelerCount": "1",
+    "healthDetails": {
+      "sumInsured": "300000",
+      "familyMembers": "parents",
+      "medicalConditions": ""
+    },
+    "applicationDate": "2025-08-04",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/138.0.0.0 Safari/537.36",
+    "referenceId": "WEB_1754290501266",
+    "premium": 33768,
+    "coverageAmount": 1000000,
+    "startDate": "2025-08-04",
+    "endDate": "2026-08-04",
+    "status": "active",
+    "features": [
+      "Hospitalization Coverage",
+      "Pre & Post Hospitalization",
+      "Daycare Procedures",
+      "Ambulance Charges",
+      "Health Check-up",
+      "Maternity Benefits (after 3 years)"
+    ],
+    "benefits": [
+      "Cashless treatment at 8000+ hospitals",
+      "No pre-medical check-up up to 45 years",
+      "Cumulative bonus for claim-free years",
+      "Tax benefits under Section 80D"
+    ],
+    "terms": [
+      "Waiting period: 30 days for illness",
+      "Pre-existing diseases: 4 years waiting",
+      "Maternity: 3 years waiting period",
+      "Room rent limit: 1% of sum insured"
+    ],
+    "created_at": "2025-08-04T06:55:01.284Z",
+    "updated_at": "2025-08-04T06:55:01.284Z"
+  },
+  {
+    "id": "13cf03a3-682d-4e5e-88d9-d29539bdf69d",
+    "policyNumber": "HLT/2025/6265",
+    "userId": "9d1bf12b-1bed-42ae-b735-68bf4a625887",
+    "fullName": "Megha Bhandari",
+    "email": "bhandarimegha815@gmail.com",
+    "phone": "9717963935",
+    "policyType": "health",
+    "dateOfBirth": "2004-10-06",
+    "annualIncome": "below-3lakh",
+    "address": "House no. 192, Street no. - 3, Postoffice - Kapashera\nKapashera, New Delhi - 10037",
+    "fuelType": "petrol",
+    "healthSumInsured": "1000000",
+    "familyMembers": "parents",
+    "travelerCount": "1",
+    "healthDetails": {
+      "sumInsured": "1000000",
+      "familyMembers": "parents",
+      "medicalConditions": ""
+    },
+    "applicationDate": "2025-08-04",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/138.0.0.0 Safari/537.36",
+    "referenceId": "WEB_1754291852662",
+    "premium": 26862,
+    "coverageAmount": 1000000,
+    "startDate": "2025-08-04",
+    "endDate": "2026-08-04",
+    "status": "active",
+    "features": [
+      "Hospitalization Coverage",
+      "Pre & Post Hospitalization",
+      "Daycare Procedures",
+      "Ambulance Charges",
+      "Health Check-up",
+      "Maternity Benefits (after 3 years)"
+    ],
+    "benefits": [
+      "Cashless treatment at 8000+ hospitals",
+      "No pre-medical check-up up to 45 years",
+      "Cumulative bonus for claim-free years",
+      "Tax benefits under Section 80D"
+    ],
+    "terms": [
+      "Waiting period: 30 days for illness",
+      "Pre-existing diseases: 4 years waiting",
+      "Maternity: 3 years waiting period",
+      "Room rent limit: 1% of sum insured"
+    ],
+    "created_at": "2025-08-04T07:17:32.682Z",
+    "updated_at": "2025-08-04T07:17:32.682Z"
+  },
+  {
+    "id": "da4af8c8-6533-4616-9dd2-c6f4034dddf1",
+    "policyNumber": "HLT/2025/9844",
+    "userId": "9d1bf12b-1bed-42ae-b735-68bf4a625887",
+    "fullName": "Megha Bhandari",
+    "email": "bhandarimegha815@gmail.com",
+    "phone": "9717963935",
+    "policyType": "health",
+    "dateOfBirth": "2004-10-06",
+    "annualIncome": "below-3lakh",
+    "address": "House no. 192, Street no. - 3, Postoffice - Kapashera\nKapashera, New Delhi - 10037",
+    "fuelType": "petrol",
+    "healthSumInsured": "1000000",
+    "familyMembers": "parents",
+    "travelerCount": "1",
+    "healthDetails": {
+      "sumInsured": "1000000",
+      "familyMembers": "parents",
+      "medicalConditions": ""
+    },
+    "applicationDate": "2025-08-04",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/138.0.0.0 Safari/537.36",
+    "referenceId": "WEB_1754298588378",
+    "status": "approved",
+    "premium": 23251,
+    "coverageAmount": 1000000,
+    "startDate": "2025-08-04",
+    "endDate": "2026-08-04",
+    "features": [
+      "Hospitalization Coverage",
+      "Pre & Post Hospitalization",
+      "Daycare Procedures",
+      "Ambulance Charges",
+      "Health Check-up",
+      "Maternity Benefits (after 3 years)"
+    ],
+    "benefits": [
+      "Cashless treatment at 8000+ hospitals",
+      "No pre-medical check-up up to 45 years",
+      "Cumulative bonus for claim-free years",
+      "Tax benefits under Section 80D"
+    ],
+    "terms": [
+      "Waiting period: 30 days for illness",
+      "Pre-existing diseases: 4 years waiting",
+      "Maternity: 3 years waiting period",
+      "Room rent limit: 1% of sum insured"
+    ],
+    "created_at": "2025-08-04T09:09:48.380Z",
+    "updated_at": "2025-08-04T09:09:48.386Z",
+    "approvedAt": "2025-08-04T09:09:48.386Z"
+  },
+  {
+    "id": "1260e175-7023-4499-87fc-f51bc2fcc0dc",
+    "policyNumber": "HLT/2025/5149",
+    "userId": "894a98b2-7ae6-4114-9f7b-d1731088842c",
+    "fullName": "Megha Bhandari",
+    "email": "megha6102004@gmail.com",
+    "phone": "9717963935",
+    "policyType": "health",
+    "dateOfBirth": "2004-10-06",
+    "annualIncome": "below-3lakh",
+    "address": "House no. 192, Street no. - 3, Postoffice - Kapashera\nKapashera, New Delhi - 10037",
+    "healthSumInsured": "1000000",
+    "familyMembers": "parents",
+    "healthDetails": {
+      "sumInsured": "1000000",
+      "familyMembers": "parents",
+      "medicalConditions": ""
+    },
+    "applicationDate": "2025-08-04",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/138.0.0.0 Safari/537.36",
+    "referenceId": "WEB_1754299304469",
+    "status": "approved",
+    "premium": 29836,
+    "coverageAmount": 1000000,
+    "startDate": "2025-08-04",
+    "endDate": "2026-08-04",
+    "features": [
+      "Hospitalization Coverage",
+      "Pre & Post Hospitalization",
+      "Daycare Procedures",
+      "Ambulance Charges",
+      "Health Check-up",
+      "Maternity Benefits (after 3 years)"
+    ],
+    "benefits": [
+      "Cashless treatment at 8000+ hospitals",
+      "No pre-medical check-up up to 45 years",
+      "Cumulative bonus for claim-free years",
+      "Tax benefits under Section 80D"
+    ],
+    "terms": [
+      "Waiting period: 30 days for illness",
+      "Pre-existing diseases: 4 years waiting",
+      "Maternity: 3 years waiting period",
+      "Room rent limit: 1% of sum insured"
+    ],
+    "created_at": "2025-08-04T09:21:44.470Z",
+    "updated_at": "2025-08-04T09:21:44.475Z",
+    "approvedAt": "2025-08-04T09:21:44.475Z"
+  },
+  {
+    "id": "0d0b88f7-b954-4c89-a345-551874fdf457",
+    "policyNumber": "HLT/2025/5324",
+    "userId": "9d1bf12b-1bed-42ae-b735-68bf4a625887",
+    "fullName": "Megha Bhandari",
+    "email": "bhandarimegha815@gmail.com",
+    "phone": "9717963935",
+    "policyType": "health",
+    "dateOfBirth": "2004-10-06",
+    "annualIncome": "5-10lakh",
+    "address": "House no. 192, Street no. - 3, Postoffice - Kapashera\nKapashera, New Delhi - 10037",
+    "healthSumInsured": "1500000",
+    "familyMembers": "parents",
+    "healthDetails": {
+      "sumInsured": "1500000",
+      "familyMembers": "parents",
+      "medicalConditions": ""
+    },
+    "applicationDate": "2025-08-04",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/138.0.0.0 Safari/537.36",
+    "referenceId": "WEB_1754299962137",
+    "status": "approved",
+    "premium": 28441,
+    "coverageAmount": 1000000,
+    "startDate": "2025-08-04",
+    "endDate": "2026-08-04",
+    "features": [
+      "Hospitalization Coverage",
+      "Pre & Post Hospitalization",
+      "Daycare Procedures",
+      "Ambulance Charges",
+      "Health Check-up",
+      "Maternity Benefits (after 3 years)"
+    ],
+    "benefits": [
+      "Cashless treatment at 8000+ hospitals",
+      "No pre-medical check-up up to 45 years",
+      "Cumulative bonus for claim-free years",
+      "Tax benefits under Section 80D"
+    ],
+    "terms": [
+      "Waiting period: 30 days for illness",
+      "Pre-existing diseases: 4 years waiting",
+      "Maternity: 3 years waiting period",
+      "Room rent limit: 1% of sum insured"
+    ],
+    "created_at": "2025-08-04T09:32:42.140Z",
+    "updated_at": "2025-08-04T09:32:42.145Z",
+    "approvedAt": "2025-08-04T09:32:42.145Z"
+  }
+]

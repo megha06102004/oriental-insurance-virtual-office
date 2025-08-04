@@ -67,7 +67,7 @@ app.get('/health', (req, res) => {
 
 // API Routes
 app.use('/api/auth', authRoutes);
-app.use('/api/policies', auth, policyRoutes);
+app.use('/api/policies', policyRoutes); // Removed auth middleware for public policy registration
 app.use('/api/claims', auth, claimRoutes);
 app.use('/api/grievances', auth, grievanceRoutes);
 app.use('/api/chatbot', chatbotRoutes);
