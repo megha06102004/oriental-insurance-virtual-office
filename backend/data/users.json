@@ -53,5 +53,14 @@
     "role": "customer",
     "created_at": "2025-08-04T07:17:32.679Z",
     "updated_at": "2025-08-04T07:17:32.679Z"
+  },
+  {
+    "id": "40825266-89e6-4a94-a752-82c85f93ccd0",
+    "email": "test@example.com",
+    "name": "Test User",
+    "phone": "9876543210",
+    "role": "customer",
+    "created_at": "2025-08-05T06:18:19.853Z",
+    "updated_at": "2025-08-05T06:18:19.853Z"
   }
 ]

@@ -296,6 +296,75 @@ function calculatePolicyDetails(policyType) {
   return policyConfig[policyType] || policyConfig.health;
 }
 
+// Claim operations
+async function createClaim(claimData) {
+  const claims = await readFile(CLAIMS_FILE);
+  
+  const newClaim = {
+    id: `CLM${String(claims.length + 1).padStart(3, '0')}`,
+    ...claimData,
+    status: claimData.status || 'Under Review',
+    reportedDate: new Date().toISOString().split('T')[0],
+    created_at: new Date().toISOString(),
+    updated_at: new Date().toISOString()
+  };
+  
+  claims.push(newClaim);
+  await writeFile(CLAIMS_FILE, claims);
+  
+  return newClaim;
+}
+
+async function getClaims() {
+  return await readFile(CLAIMS_FILE);
+}
+
+async function getClaimById(id) {
+  const claims = await readFile(CLAIMS_FILE);
+  return claims.find(c => c.id === id);
+}
+
+async function getClaimsByPolicyNumber(policyNumber) {
+  const claims = await readFile(CLAIMS_FILE);
+  return claims.filter(c => c.policyNumber === policyNumber);
+}
+
+async function getClaimsByUserId(userId) {
+  const claims = await readFile(CLAIMS_FILE);
+  return claims.filter(c => c.userId === userId);
+}
+
+async function updateClaimStatus(claimId, newStatus, remarks = null) {
+  const claims = await readFile(CLAIMS_FILE);
+  const claimIndex = claims.findIndex(c => c.id === claimId);
+  
+  if (claimIndex !== -1) {
+    claims[claimIndex].status = newStatus;
+    claims[claimIndex].updated_at = new Date().toISOString();
+    
+    if (remarks) {
+      claims[claimIndex].remarks = remarks;
+    }
+    
+    // Update timeline if it exists
+    if (claims[claimIndex].timeline) {
+      const currentStep = claims[claimIndex].timeline.find(t => !t.completed);
+      if (currentStep) {
+        currentStep.completed = true;
+        currentStep.date = new Date().toISOString().split('T')[0];
+        if (remarks) {
+          currentStep.remarks = remarks;
+        }
+      }
+    }
+    
+    await writeFile(CLAIMS_FILE, claims);
+    return claims[claimIndex];
+  }
+  
+  return null;
+}
+
 module.exports = {
   initializeDataFiles,
   createPolicy,
@@ -305,5 +374,11 @@ module.exports = {
   updatePolicyStatus,
   createUser,
   getUserByEmail,
-  calculatePolicyDetails
+  calculatePolicyDetails,
+  createClaim,
+  getClaims,
+  getClaimById,
+  getClaimsByPolicyNumber,
+  getClaimsByUserId,
+  updateClaimStatus
 };

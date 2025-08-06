@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Policy Test</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; }
+        button { padding: 10px 20px; margin: 10px; font-size: 16px; background: #007cba; color: white; border: none; cursor: pointer; }
+        button:hover { background: #005a87; }
+        #result { margin-top: 20px; padding: 20px; background: #f5f5f5; border: 1px solid #ddd; }
+    </style>
+</head>
+<body>
+    <h1>🧪 Policy Verification Test</h1>
+    <p>Click these buttons to test your backend:</p>
+    <button onclick="testBackend()" style="background: #28a745;">✅ Test Backend Health</button>
+    <button onclick="testPolicy()" style="background: #dc3545;">🔍 Test Policy HLT/2025/5324</button>
+    <div id="result">Click a button above to start testing...</div>
+
+    <script>
+        async function testBackend() {
+            const result = document.getElementById('result');
+            try {
+                const response = await fetch('http://localhost:5000/health');
+                const data = await response.json();
+                result.innerHTML = '<h3>Backend Health Check:</h3><pre>' + JSON.stringify(data, null, 2) + '</pre>';
+            } catch (error) {
+                result.innerHTML = '<h3>Backend Error:</h3><pre>' + error.message + '</pre>';
+            }
+        }
+
+        async function testPolicy() {
+            const result = document.getElementById('result');
+            try {
+                const response = await fetch('http://localhost:5000/api/policies/number/HLT%2F2025%2F5324');
+                const data = await response.json();
+                result.innerHTML = '<h3>Policy Test Result:</h3><pre>' + JSON.stringify(data, null, 2) + '</pre>';
+            } catch (error) {
+                result.innerHTML = '<h3>Policy Error:</h3><pre>' + error.message + '</pre>';
+            }
+        }
+    </script>
+</body>
+</html>

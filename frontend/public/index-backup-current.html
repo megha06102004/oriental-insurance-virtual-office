@@ -4965,26 +4965,6 @@
                         resetClaimsModal();
                     }
                     
-                    // Fix for policy form inputs
-                    if (type === 'policies') {
-                        setTimeout(() => {
-                            // Ensure all input fields are interactive
-                            const inputs = modal.querySelectorAll('input, select, textarea');
-                            inputs.forEach(input => {
-                                input.style.pointerEvents = 'auto';
-                                input.style.zIndex = '1000';
-                                input.removeAttribute('disabled');
-                                input.removeAttribute('readonly');
-                            });
-                            
-                            // Focus first input
-                            const firstInput = modal.querySelector('#policyFullName');
-                            if (firstInput) {
-                                firstInput.focus();
-                            }
-                        }, 100);
-                    }
-                    
                     console.log('✅ Modal opened:', type);
                 } else {
                     console.log('❌ Modal not found:', type + 'Modal');
@@ -5444,135 +5424,62 @@
             // Close the modal first
             closeDetailModal('policies');
             
-            // Create enhanced success popup
+            // Create success modal
             setTimeout(() => {
-                showPolicySuccessPopup(policyData, nextSteps);
+                const successMessage = `🎉 Policy Application Successful!
+                
+📋 Policy Details:
+• Policy Number: ${policyData.policyNumber}
+• Customer Name: ${policyData.customerName}
+• Policy Type: ${policyData.policyType?.toUpperCase()} Insurance
+• Premium: ₹${policyData.premium?.toLocaleString()}
+• Coverage: ₹${policyData.coverageAmount?.toLocaleString()}
+• Start Date: ${policyData.startDate}
+• Status: ${policyData.status?.toUpperCase()}
+
+✨ Key Features:
+${policyData.features?.map(feature => `• ${feature}`).join('\n') || '• Comprehensive coverage as per policy type'}
+
+📌 Next Steps:
+${nextSteps?.map(step => `• ${step}`).join('\n')}
+
+🎯 Important Notes:
+• Policy documents will be sent to your registered email
+• Premium payment instructions will follow shortly
+• Keep your policy number safe for future reference
+• Customer support: 1800-XXX-XXXX
+
+Thank you for choosing Oriental Insurance! 🏛️`;
+                
+                alert(successMessage);
+                
+                // Show additional confirmation
+                setTimeout(() => {
+                    const additionalInfo = `📱 Oriental Insurance Policy Confirmation
+                    
+Your policy application has been processed successfully!
+
+Policy ID: ${policyData.id}
+Reference: ${policyData.policyNumber}
+
+🔔 You will receive:
+1. Email confirmation within 5 minutes
+2. SMS with payment link within 15 minutes  
+3. Policy documents within 24 hours
+4. Welcome kit by post within 7 days
+
+💡 Pro Tips:
+• Download our mobile app for easy policy management
+• Set up auto-pay for hassle-free renewals
+• Add our customer care number to contacts
+• Keep policy documents in digital format
+
+Visit your dashboard to track policy status anytime!`;
+                    
+                    alert(additionalInfo);
+                }, 2000);
+                
             }, 500);
-        }
-        
-        function showPolicySuccessPopup(policyData, nextSteps) {
-            // Create popup element
-            const popup = document.createElement('div');
-            popup.style.cssText = `
-                position: fixed;
-                top: 0;
-                left: 0;
-                width: 100%;
-                height: 100%;
-                background: rgba(0,0,0,0.8);
-                z-index: 15000;
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                animation: fadeIn 0.3s ease-out;
-            `;
-            
-            popup.innerHTML = `
-                <div style="
-                    background: linear-gradient(135deg, #28a745, #20c997);
-                    color: white;
-                    padding: 40px;
-                    border-radius: 20px;
-                    text-align: center;
-                    box-shadow: 0 20px 60px rgba(0,0,0,0.3);
-                    max-width: 600px;
-                    max-height: 80vh;
-                    overflow-y: auto;
-                    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-                    animation: slideIn 0.4s ease-out;
-                    margin: 20px;
-                ">
-                    <div style="font-size: 60px; margin-bottom: 20px;">🎉</div>
-                    <h2 style="margin: 0 0 20px 0; font-size: 28px;">Policy Application Successful!</h2>
-                    
-                    <div style="background: rgba(255,255,255,0.15); padding: 25px; border-radius: 15px; margin: 20px 0; text-align: left;">
-                        <h3 style="margin: 0 0 15px 0; text-align: center; font-size: 20px;">📋 Policy Details</h3>
-                        <div style="display: grid; gap: 10px; font-size: 16px;">
-                            <div><strong>Policy Number:</strong> <span style="color: #ffeb3b; font-weight: bold;">${policyData.policyNumber}</span></div>
-                            <div><strong>Customer Name:</strong> ${policyData.customerName}</div>
-                            <div><strong>Policy Type:</strong> ${policyData.policyType?.toUpperCase()} Insurance</div>
-                            <div><strong>Premium:</strong> ₹${policyData.premium?.toLocaleString()}</div>
-                            <div><strong>Coverage:</strong> ₹${policyData.coverageAmount?.toLocaleString()}</div>
-                            <div><strong>Start Date:</strong> ${policyData.startDate}</div>
-                            <div><strong>Status:</strong> <span style="color: #4caf50; font-weight: bold;">${policyData.status?.toUpperCase()}</span></div>
-                        </div>
-                    </div>
-                    
-                    <div style="background: rgba(255,255,255,0.15); padding: 20px; border-radius: 15px; margin: 20px 0; text-align: left;">
-                        <h3 style="margin: 0 0 15px 0; text-align: center; font-size: 18px;">📧 Email Confirmation</h3>
-                        <div style="text-align: center; font-size: 16px;">
-                            <div style="color: #4caf50; font-weight: bold; margin-bottom: 10px;">✅ Confirmation email sent to: ${policyData.email}</div>
-                            <div style="font-size: 14px; opacity: 0.9;">Please check your inbox and spam folder</div>
-                        </div>
-                    </div>
-                    
-                    <div style="background: rgba(255,255,255,0.15); padding: 20px; border-radius: 15px; margin: 20px 0; text-align: left;">
-                        <h3 style="margin: 0 0 15px 0; text-align: center; font-size: 18px;">📌 Next Steps</h3>
-                        <ul style="margin: 0; padding-left: 20px; text-align: left;">
-                            ${nextSteps?.map(step => `<li style="margin: 8px 0;">${step}</li>`).join('') || '<li>Policy documents will be sent to your email</li>'}
-                        </ul>
-                    </div>
-                    
-                    <div style="background: rgba(255,255,255,0.15); padding: 15px; border-radius: 15px; margin: 20px 0;">
-                        <div style="font-size: 14px; opacity: 0.9;">
-                            <strong>Customer Support:</strong> 1800-XXX-XXXX<br>
-                            <strong>Email:</strong> support@orientalinsurance.com
-                        </div>
-                    </div>
-                    
-                    <div style="margin-top: 30px;">
-                        <button onclick="this.closest('div').parentElement.remove()" style="
-                            background: rgba(255,255,255,0.2);
-                            border: 2px solid white;
-                            color: white;
-                            padding: 12px 30px;
-                            border-radius: 30px;
-                            cursor: pointer;
-                            font-weight: bold;
-                            font-size: 16px;
-                            margin: 0 10px;
-                            transition: all 0.3s ease;
-                        " onmouseover="this.style.background='rgba(255,255,255,0.3)'" onmouseout="this.style.background='rgba(255,255,255,0.2)'">Close</button>
-                        
-                        <button onclick="window.open('mailto:${policyData.email}?subject=Policy ${policyData.policyNumber} - Quick Access', '_blank')" style="
-                            background: #ff6b6b;
-                            border: 2px solid #ff6b6b;
-                            color: white;
-                            padding: 12px 30px;
-                            border-radius: 30px;
-                            cursor: pointer;
-                            font-weight: bold;
-                            font-size: 16px;
-                            margin: 0 10px;
-                            transition: all 0.3s ease;
-                        " onmouseover="this.style.background='#ff5252'" onmouseout="this.style.background='#ff6b6b'">📧 Open Email</button>
-                    </div>
-                </div>
-            `;
-            
-            // Add animation keyframes if not already added
-            if (!document.querySelector('#policy-popup-styles')) {
-                const style = document.createElement('style');
-                style.id = 'policy-popup-styles';
-                style.textContent = `
-                    @keyframes fadeIn {
-                        from { opacity: 0; }
-                        to { opacity: 1; }
-                    }
-                    @keyframes slideIn {
-                        from { opacity: 0; transform: scale(0.8) translateY(-50px); }
-                        to { opacity: 1; transform: scale(1) translateY(0); }
-                    }
-                `;
-                document.head.appendChild(style);
-            }
-            
-            document.body.appendChild(popup);
-            
-            // Auto-remove after 30 seconds
-            setTimeout(() => {
-                if (popup.parentElement) popup.remove();
-            }, 30000);
         }
         
         function isValidEmail(email) {
@@ -5641,20 +5548,15 @@
             verifyBtn.innerHTML = '🔄 Verifying...';
             verifyBtn.disabled = true;
 
-            // Encode policy number for URL (handle slashes properly)
-            const encodedPolicyNumber = encodeURIComponent(policyNumber);
-
             // Call API to verify customer and fetch details
-            fetch(`http://localhost:5000/api/policies/number/${encodedPolicyNumber}`)
+            fetch(`http://localhost:5000/api/policies/number/${policyNumber}`)
                 .then(response => response.json())
                 .then(data => {
                     if (data.success) {
                         // Transform the policy data to match expected format
-                        const customerName = data.data.customerName || data.data.fullName || 'Unknown Customer';
-                        const nameParts = customerName.split(' ');
                         currentCustomer = {
-                            firstName: nameParts[0] || customerName,
-                            lastName: nameParts.slice(1).join(' ') || '',
+                            firstName: data.data.customerName.split(' ')[0] || data.data.customerName,
+                            lastName: data.data.customerName.split(' ').slice(1).join(' ') || '',
                             email: data.data.email,
                             phone: data.data.phone,
                             address: data.data.address || 'Address not available',
@@ -5713,24 +5615,10 @@
             verifyBtn.style.background = '#4CAF50';
 
             // Check if policy is eligible for claims
-            console.log('🔍 Debugging policy status:');
-            console.log('   Policy status:', policy.status);
-            console.log('   Policy status type:', typeof policy.status);
-            console.log('   Policy status lowercase:', policy.status ? policy.status.toLowerCase() : 'null/undefined');
-            
-            const eligibleForClaim = policy.status && (
-                policy.status.toLowerCase() === 'approved' || 
-                policy.status.toLowerCase() === 'active'
-            );
-            
-            console.log('   Eligible for claim:', eligibleForClaim);
-            
+            const eligibleForClaim = policy.status === 'approved' || policy.status === 'active';
             if (!eligibleForClaim) {
-                console.log('❌ Policy not eligible - showing alert');
                 alert('⚠️ Policy is not active or not eligible for claims');
                 return;
-            } else {
-                console.log('✅ Policy is eligible for claims - proceeding');
             }
         }
 
@@ -5740,45 +5628,40 @@
             document.getElementById('claimStatusStep').style.display = 'block';
             
             const policyNumber = currentPolicy.policyNumber;
-            console.log('Checking existing claims for policy:', policyNumber);
             
-            // Call API to check existing claims for this policy
-            fetch(`http://localhost:5000/api/claims/policy/${encodeURIComponent(policyNumber)}`)
-                .then(response => response.json())
-                .then(data => {
-                    console.log('Claims API response:', data);
-                    if (data.success) {
-                        const policyClaims = data.data;
-                        console.log('Found claims for policy:', policyClaims);
-                        
-                        if (policyClaims.length > 0) {
-                            // Filter only pending/active claims (not completed ones)
-                            const pendingClaims = policyClaims.filter(claim => 
-                                claim.status !== 'Approved' && 
-                                claim.status !== 'Paid' && 
-                                claim.status !== 'Closed'
-                            );
-                            console.log('Pending claims after filter:', pendingClaims);
-                            
-                            if (pendingClaims.length > 0) {
-                                displayExistingClaims(pendingClaims);
-                            } else {
-                                displayNoClaims();
-                            }
-                        } else {
-                            displayNoClaims();
-                        }
-                    } else {
-                        console.error('Error fetching claims:', data.message);
-                        // Fallback to no claims if API fails
-                        displayNoClaims();
+            // Simulate API call to check existing claims
+            setTimeout(() => {
+                // Mock existing claims data - you can modify this logic
+                const mockClaims = [
+                    {
+                        id: 'CLM-2024-001',
+                        type: 'Hospitalization',
+                        amount: 45000,
+                        dateSubmitted: '2024-07-15',
+                        status: 'under-review',
+                        hospital: 'Apollo Hospital',
+                        description: 'Emergency surgery for appendicitis'
+                    },
+                    {
+                        id: 'CLM-2024-002',
+                        type: 'Diagnostic Tests',
+                        amount: 8500,
+                        dateSubmitted: '2024-07-10',
+                        status: 'approved',
+                        hospital: 'Lal PathLabs',
+                        description: 'Blood tests and MRI scan'
                     }
-                })
-                .catch(error => {
-                    console.error('Error fetching claims:', error);
-                    // Fallback to no claims if API fails
+                ];
+                
+                // For demo purposes, show different scenarios based on policy number
+                if (policyNumber.includes('002')) {
+                    // Show existing claims for policy 002
+                    displayExistingClaims(mockClaims.filter(claim => claim.status !== 'approved'));
+                } else {
+                    // No pending claims for other policies
                     displayNoClaims();
-                });
+                }
+            }, 1500);
         }
 
         function displayNoClaims() {
@@ -5796,15 +5679,14 @@
                 <div class="claim-item">
                     <div class="claim-header">
                         <span class="claim-id">${claim.id}</span>
-                        <span class="claim-status ${claim.status.toLowerCase().replace(' ', '-')}">${claim.status}</span>
+                        <span class="claim-status ${claim.status}">${claim.status.replace('-', ' ')}</span>
                     </div>
                     <div class="claim-details">
-                        <div><strong>Type:</strong> ${claim.type || claim.claimType}</div>
-                        <div><strong>Amount:</strong> ₹${(claim.estimatedAmount || claim.amount || 0).toLocaleString()}</div>
-                        <div><strong>Date Submitted:</strong> ${new Date(claim.reportedDate || claim.created_at).toLocaleDateString()}</div>
-                        <div><strong>Hospital/Provider:</strong> ${claim.hospitalName || claim.hospital || 'N/A'}</div>
+                        <div><strong>Type:</strong> ${claim.type}</div>
+                        <div><strong>Amount:</strong> ₹${claim.amount.toLocaleString()}</div>
+                        <div><strong>Date Submitted:</strong> ${new Date(claim.dateSubmitted).toLocaleDateString()}</div>
+                        <div><strong>Hospital/Provider:</strong> ${claim.hospital}</div>
                         <div><strong>Description:</strong> ${claim.description}</div>
-                        ${claim.assignedSurveyor ? `<div><strong>Surveyor:</strong> ${claim.assignedSurveyor.name}</div>` : ''}
                     </div>
                 </div>
             `).join('');
@@ -6580,67 +6462,8 @@
             });
         }
 
-        function showSuccessPopup(message) {
-            // Create popup element
-            const popup = document.createElement('div');
-            popup.style.cssText = `
-                position: fixed;
-                top: 50%;
-                left: 50%;
-                transform: translate(-50%, -50%);
-                background: linear-gradient(135deg, #28a745, #20c997);
-                color: white;
-                padding: 30px;
-                border-radius: 15px;
-                text-align: center;
-                box-shadow: 0 10px 30px rgba(0,0,0,0.3);
-                z-index: 10000;
-                max-width: 400px;
-                font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-                animation: popupShow 0.3s ease-out;
-            `;
-            
-            popup.innerHTML = `
-                <div style="font-size: 24px; margin-bottom: 15px;">🎉</div>
-                <div style="font-size: 18px; font-weight: bold; margin-bottom: 15px; white-space: pre-line;">${message}</div>
-                <button onclick="this.parentElement.remove()" style="
-                    background: rgba(255,255,255,0.2);
-                    border: 2px solid white;
-                    color: white;
-                    padding: 10px 20px;
-                    border-radius: 25px;
-                    cursor: pointer;
-                    font-weight: bold;
-                    margin-top: 10px;
-                ">Close</button>
-            `;
-            
-            // Add animation keyframes if not already added
-            if (!document.querySelector('#popup-styles')) {
-                const style = document.createElement('style');
-                style.id = 'popup-styles';
-                style.textContent = `
-                    @keyframes popupShow {
-                        from { opacity: 0; transform: translate(-50%, -50%) scale(0.8); }
-                        to { opacity: 1; transform: translate(-50%, -50%) scale(1); }
-                    }
-                `;
-                document.head.appendChild(style);
-            }
-            
-            document.body.appendChild(popup);
-            
-            // Auto-remove after 10 seconds
-            setTimeout(() => {
-                if (popup.parentElement) popup.remove();
-            }, 10000);
-        }
-
         function displayClaimConfirmation(data) {
             const { claim, assignedSurveyor } = data;
-            
-            // Show success popup notification
-            showSuccessPopup(`🎉 Claim Submitted Successfully!\n\nClaim ID: ${claim.id}\nStatus: ${claim.status}\nAssigned Surveyor: ${assignedSurveyor.name}\n\nYour claim is now under review. You will be contacted by our surveyor within 24-48 hours.`);
             
             // Hide claim form and show confirmation
             document.getElementById('claimFormStep').style.display = 'none';

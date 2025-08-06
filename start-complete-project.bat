@@ -9,12 +9,12 @@ echo 🚀 Starting Complete Project in Agent Mode...
 echo.
 
 echo 🔧 Starting Backend API Server (Port 5000)...
-start "Backend API" cmd /k "cd /d %~dp0backend && node api-server.js"
+start "Backend API" cmd /k "cd /d %~dp0backend && npm start"
 
 timeout /t 3
 
 echo 🌐 Starting Frontend Server (Port 3000)...
-start "Virtual Office" cmd /k "cd /d %~dp0frontend && node serve-virtual-office.js"
+start "Virtual Office" cmd /k "cd /d %~dp0frontend && npm start"
 
 timeout /t 3
 

@@ -10,7 +10,7 @@ app.get('/', (req, res) => {
     res.set('Cache-Control', 'no-cache, no-store, must-revalidate');
     res.set('Pragma', 'no-cache');
     res.set('Expires', '0');
-    res.sendFile(path.join(__dirname, 'public', 'index-fresh.html'));
+    res.sendFile(path.join(__dirname, 'public', 'index.html'));
 });
 
 // API routes placeholder
@@ -28,7 +28,7 @@ app.listen(PORT, () => {
     console.log('🏢 Oriental Insurance Virtual Office');
     console.log('🎉 ====================================');
     console.log(`🌐 Frontend: http://localhost:${PORT}`);
-    console.log('📁 Serving: index-new.html');
+    console.log('📁 Serving: index.html');
     console.log('✅ All functionality ready!');
     console.log('🎯 Features:');
     console.log('   🧪 JS Test Button');
