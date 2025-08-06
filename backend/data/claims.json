@@ -413,5 +413,159 @@
     "submissionMethod": "Online Portal",
     "created_at": "2025-08-06T06:16:33.005Z",
     "updated_at": "2025-08-06T06:16:33.005Z"
+  },
+  {
+    "id": "CLM193",
+    "userId": "demo_user",
+    "customerId": "CUST_AUTO",
+    "policyId": "auto_generated",
+    "policyNumber": "MOT/2025/6621",
+    "type": "Motor Claim",
+    "claimType": "Accident",
+    "incidentDate": "2025-07-23",
+    "priority": "Medium",
+    "claimAmount": 0,
+    "estimatedAmount": 20000,
+    "approvedAmount": 0,
+    "description": "Suddenly a car hit me hard",
+    "incidentLocation": "Noida",
+    "vehicleDetails": {
+      "registrationNumber": "UP45AB1920",
+      "driverName": "Ram",
+      "licenseNumber": "6573657836",
+      "firNumber": "1800",
+      "garageName": "Sodhi Garage",
+      "thirdPartyInvolved": "No"
+    },
+    "assignedSurveyor": {
+      "id": "SUR002",
+      "name": "Mr. Rajesh Kumar",
+      "phone": "+91-9876543301",
+      "assignedDate": "2025-08-06"
+    },
+    "contactNumber": "+91-9876543210",
+    "documents": [],
+    "timeline": [
+      {
+        "step": "Claim Reported",
+        "date": "2025-08-06",
+        "completed": true,
+        "remarks": "Motor claim submitted successfully"
+      },
+      {
+        "step": "Customer Verification",
+        "date": "2025-08-06",
+        "completed": true,
+        "remarks": "Policy and customer details verified"
+      },
+      {
+        "step": "Surveyor Assignment",
+        "date": "2025-08-06",
+        "completed": true,
+        "remarks": "Mr. Rajesh Kumar assigned for vehicle survey"
+      },
+      {
+        "step": "Vehicle Inspection",
+        "date": null,
+        "completed": false,
+        "remarks": "Vehicle damage assessment pending"
+      },
+      {
+        "step": "Repair Estimate",
+        "date": null,
+        "completed": false,
+        "remarks": "Garage estimate review pending"
+      },
+      {
+        "step": "Approval Decision",
+        "date": null,
+        "completed": false,
+        "remarks": "Final approval pending"
+      },
+      {
+        "step": "Payment Processing",
+        "date": null,
+        "completed": false,
+        "remarks": "Settlement processing"
+      }
+    ],
+    "surveyReport": null,
+    "status": "Under Review",
+    "submissionMethod": "Online Portal",
+    "created_at": "2025-08-06T06:54:27.406Z",
+    "updated_at": "2025-08-06T06:54:27.406Z"
+  },
+  {
+    "id": "CLM109",
+    "userId": "demo_user",
+    "customerId": "CUST_AUTO",
+    "policyId": "auto_generated",
+    "policyNumber": "TRV/2025/1309",
+    "type": "Travel Claim",
+    "claimType": "Trip Cancellation",
+    "incidentDate": "2025-09-02",
+    "priority": "Medium",
+    "claimAmount": 0,
+    "estimatedAmount": 10000,
+    "approvedAmount": 0,
+    "description": "Sudden home issues",
+    "travelDestination": "Europe",
+    "assignedSurveyor": {
+      "id": "SUR004",
+      "name": "Mr. Vikram Mehta",
+      "phone": "+91-9876543303",
+      "assignedDate": "2025-08-06"
+    },
+    "contactNumber": "+91-9876543210",
+    "documents": [],
+    "timeline": [
+      {
+        "step": "Claim Reported",
+        "date": "2025-08-06",
+        "completed": true,
+        "remarks": "Travel claim submitted successfully"
+      },
+      {
+        "step": "Customer Verification",
+        "date": "2025-08-06",
+        "completed": true,
+        "remarks": "Policy and customer details verified"
+      },
+      {
+        "step": "Surveyor Assignment",
+        "date": "2025-08-06",
+        "completed": true,
+        "remarks": "Mr. Vikram Mehta assigned for claim review"
+      },
+      {
+        "step": "Documentation Review",
+        "date": null,
+        "completed": false,
+        "remarks": "Travel documents review pending"
+      },
+      {
+        "step": "Claim Assessment",
+        "date": null,
+        "completed": false,
+        "remarks": "Claim validity assessment pending"
+      },
+      {
+        "step": "Approval Decision",
+        "date": null,
+        "completed": false,
+        "remarks": "Final approval pending"
+      },
+      {
+        "step": "Payment Processing",
+        "date": null,
+        "completed": false,
+        "remarks": "Settlement processing"
+      }
+    ],
+    "surveyReport": null,
+    "status": "Under Review",
+    "submissionMethod": "Online Portal",
+    "created_at": "2025-08-06T07:49:28.140Z",
+    "updated_at": "2025-08-06T07:49:28.140Z"
   }
 ]

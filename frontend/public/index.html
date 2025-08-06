@@ -980,7 +980,7 @@
             left: 5px;
             width: 30px;
             height: 40px;
-            background: linear-gradient(145deg, #4CAF50, #388E3C);
+            background: linear-gradient(145deg, #6c757d, #495057);
             border-radius: 15px 15px 5px 5px;
         }
         
@@ -1389,12 +1389,12 @@
         .insurance-card:hover {
             transform: translateY(-8px) scale(1.02);
             box-shadow: 0 15px 30px rgba(0,0,0,0.3);
-            border-color: #4CAF50;
+            border-color: #007bff;
         }
 
         .insurance-card.selected {
-            border-color: #4CAF50;
-            background: linear-gradient(135deg, #4CAF50, #45a049);
+            border-color: #007bff;
+            background: linear-gradient(135deg, #007bff, #0056b3);
             transform: translateY(-5px);
         }
 
@@ -1427,7 +1427,7 @@
         }
 
         .insurance-badge {
-            background: #4CAF50;
+            background: #007bff;
             color: white;
             padding: 5px 15px;
             border-radius: 20px;
@@ -2218,8 +2218,8 @@
         }
         
         .form-group input.success, .form-group select.success, .form-group textarea.success {
-            border-color: #27ae60;
-            background-color: rgba(39, 174, 96, 0.1);
+            border-color: #6c757d;
+            background-color: rgba(248, 249, 250, 0.8);
         }
         
         .error-message {
@@ -2230,7 +2230,7 @@
         }
         
         .success-message {
-            color: #27ae60;
+            color: #495057;
             font-size: 12px;
             margin-top: 5px;
             display: none;
@@ -2302,7 +2302,7 @@
         }
 
         .verify-btn {
-            background: linear-gradient(135deg, #4CAF50, #45a049);
+            background: linear-gradient(135deg, #007bff, #0056b3);
             color: white;
             border: none;
             padding: 12px 25px;
@@ -2315,13 +2315,13 @@
         }
 
         .verify-btn:hover {
-            background: linear-gradient(135deg, #45a049, #4CAF50);
+            background: linear-gradient(135deg, #0056b3, #007bff);
             transform: translateY(-2px);
         }
 
         .customer-info {
-            background: #e8f5e8;
-            border: 2px solid #4CAF50;
+            background: #f8f9fa;
+            border: 2px solid #e9ecef;
             border-radius: 12px;
             padding: 20px;
             margin: 20px 0;
@@ -2347,7 +2347,7 @@
         }
 
         .status-active {
-            color: #4CAF50;
+            color: #007bff;
             font-weight: bold;
         }
 
@@ -2382,7 +2382,7 @@
         }
 
         .success-icon {
-            color: #4CAF50;
+            color: #6c757d;
         }
 
         .info-icon {
@@ -2514,11 +2514,12 @@
         }
 
         .confirmation-card {
-            background: #e8f5e8;
-            border: 2px solid #4CAF50;
+            background: #ffffff;
+            border: 2px solid #e9ecef;
             border-radius: 12px;
             padding: 20px;
             margin: 20px 0;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
         }
 
         .success-message {
@@ -2527,7 +2528,7 @@
         }
 
         .success-message h4 {
-            color: #4CAF50;
+            color: #2c3e50;
             margin-bottom: 15px;
         }
 
@@ -2577,8 +2578,8 @@
         }
 
         .timeline-step.completed {
-            border-left-color: #4CAF50;
-            background: #f8fff8;
+            border-left-color: #6c757d;
+            background: #f8f9fa;
         }
 
         .timeline-step.active {
@@ -2598,7 +2599,7 @@
         }
 
         .timeline-step.completed::before {
-            background: #4CAF50;
+            background: #6c757d;
         }
 
         .timeline-step.active::before {
@@ -2695,8 +2696,8 @@
         }
         
         .timeline-item.completed {
-            border-left: 4px solid #28a745;
-            background: #f8fff9;
+            border-left: 4px solid #6c757d;
+            background: #f8f9fa;
         }
         
         .timeline-item.active {
@@ -2766,7 +2767,7 @@
         }
         
         .doc-status.verified {
-            color: #28a745;
+            color: #495057;
             font-weight: 600;
         }
         
@@ -2899,7 +2900,7 @@
         }
 
         .new-btn {
-            background: linear-gradient(135deg, #4CAF50, #45a049);
+            background: linear-gradient(135deg, #007bff, #0056b3);
             color: white;
         }
 
@@ -3615,6 +3616,175 @@
             margin-top: 0;
             height: 100vh;
         }
+        
+        /* Move process steps from right side to bottom */
+        .process-guide,
+        .step-indicator,
+        .process-steps,
+        .process-flow,
+        [class*="step-"] {
+            position: static !important;
+            right: auto !important;
+            top: auto !important;
+            left: auto !important;
+            transform: none !important;
+            margin: 20px auto !important;
+            max-width: 100% !important;
+            display: block !important;
+            flex-direction: column !important;
+            flex-wrap: nowrap !important;
+            justify-content: flex-start !important;
+            gap: 10px !important;
+        }
+        
+        /* Style the process flow specifically - keep as one block */
+        .process-flow {
+            background: linear-gradient(135deg, #f8f9fa, #e9ecef) !important;
+            padding: 25px !important;
+            border-radius: 15px !important;
+            border: 2px solid #dee2e6 !important;
+            margin: 30px auto !important;
+            max-width: 900px !important;
+            display: block !important;
+        }
+        
+        /* Style individual process steps - keep them stacked vertically */
+        .process-step {
+            background: white !important;
+            border: 1px solid #e9ecef !important;
+            border-radius: 10px !important;
+            padding: 15px !important;
+            margin: 10px 0 !important;
+            text-align: left !important;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1) !important;
+            transition: all 0.3s ease !important;
+            display: flex !important;
+            align-items: center !important;
+            gap: 15px !important;
+            width: 100% !important;
+        }
+        
+        .process-step:hover {
+            transform: translateX(5px) !important;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.15) !important;
+            border-color: #667eea !important;
+        }
+        
+        /* Style step numbers */
+        .step-number {
+            background: linear-gradient(135deg, #667eea, #764ba2) !important;
+            color: white !important;
+            border-radius: 50% !important;
+            width: 35px !important;
+            height: 35px !important;
+            display: flex !important;
+            align-items: center !important;
+            justify-content: center !important;
+            font-weight: bold !important;
+            font-size: 14px !important;
+            margin: 0 !important;
+            flex-shrink: 0 !important;
+        }
+        
+        /* Style step content */
+        .step-content {
+            flex: 1 !important;
+        }
+        
+        .step-content h5 {
+            margin: 0 0 5px 0 !important;
+            color: #2c3e50 !important;
+            font-size: 16px !important;
+            font-weight: 600 !important;
+        }
+        
+        .step-content p {
+            margin: 0 !important;
+            color: #6c757d !important;
+            font-size: 14px !important;
+            line-height: 1.4 !important;
+        }
+        
+        /* Ensure the info-section containing process flows is visible */
+        .info-section {
+            background: transparent !important;
+            border-radius: 0 !important;
+            padding: 20px 0 !important;
+            margin: 20px 0 !important;
+            width: 100% !important;
+        }
+        
+        .info-section h3 {
+            text-align: center !important;
+            color: #2c3e50 !important;
+            margin-bottom: 20px !important;
+            font-size: 20px !important;
+        }
+        
+        /* Fix any floating elements that might be process steps */
+        [style*="position: fixed"],
+        [style*="position: absolute"]:not(.modal-content):not(.modal):not(.detail-modal):not(.modal-close):not(.nav-card):not(.chat-bubble) {
+            position: relative !important;
+            right: auto !important;
+            top: auto !important;
+            left: auto !important;
+            transform: none !important;
+            margin: 10px auto !important;
+        }
+        
+        /* Style process step items horizontally */
+        .modal-section {
+            position: relative !important;
+        }
+        
+        /* Create bottom process bar if needed */
+        .process-bottom-bar {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(135deg, rgba(102, 126, 234, 0.95), rgba(118, 75, 162, 0.95));
+            padding: 15px 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 30px;
+            z-index: 1000;
+            backdrop-filter: blur(10px);
+            border-top: 2px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        .process-step-mini {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: white;
+            font-size: 14px;
+            font-weight: 500;
+        }
+        
+        .step-number-mini {
+            background: rgba(255, 255, 255, 0.2);
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            width: 30px;
+            height: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+        }
+        
+        .step-number-mini.active {
+            background: #ffc107;
+            color: #333;
+            border-color: #ffc107;
+        }
+        
+        .step-number-mini.completed {
+            background: #6c757d;
+            border-color: #6c757d;
+        }
     </style>
 </head>
 <body>
@@ -4077,6 +4247,62 @@
                     </div>
                 </div>
                 
+                <!-- Process Information Section - Only visible on insurance type selection -->
+                <div id="processInfoSection" class="modal-section info-section">
+                    <h3>🔄 Enhanced Claim Process</h3>
+                    <div class="process-flow">
+                        <div class="process-step">
+                            <div class="step-number">1</div>
+                            <div class="step-content">
+                                <h5>Customer Verification</h5>
+                                <p>Policy and customer details verification</p>
+                            </div>
+                        </div>
+                        <div class="process-step">
+                            <div class="step-number">2</div>
+                            <div class="step-content">
+                                <h5>Claim Submission</h5>
+                                <p>Detailed claim form submission</p>
+                            </div>
+                        </div>
+                        <div class="process-step">
+                            <div class="step-number">3</div>
+                            <div class="step-content">
+                                <h5>Surveyor Assignment</h5>
+                                <p>Auto-assignment of qualified surveyor</p>
+                            </div>
+                        </div>
+                        <div class="process-step">
+                            <div class="step-number">4</div>
+                            <div class="step-content">
+                                <h5>Professional Survey</h5>
+                                <p>On-site verification and assessment</p>
+                            </div>
+                        </div>
+                        <div class="process-step">
+                            <div class="step-number">5</div>
+                            <div class="step-content">
+                                <h5>Survey Report</h5>
+                                <p>Comprehensive evaluation and documentation</p>
+                            </div>
+                        </div>
+                        <div class="process-step">
+                            <div class="step-number">6</div>
+                            <div class="step-content">
+                                <h5>Claim Decision</h5>
+                                <p>Approval/rejection based on survey findings</p>
+                            </div>
+                        </div>
+                        <div class="process-step">
+                            <div class="step-number">7</div>
+                            <div class="step-content">
+                                <h5>Settlement</h5>
+                                <p>Payment processing for approved claims</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
                 <!-- Step 1: Customer Verification -->
                 <div id="customerVerificationStep" class="modal-section" style="display: none;">
                     <h3>🔍 Customer Verification</h3>
@@ -4144,14 +4370,16 @@
                     </div>
                 </div>
 
-                <!-- Step 2: Claim Form -->
+                <!-- Step 2: Dynamic Claim Form -->
                 <div id="claimFormStep" class="modal-section" style="display: none;">
-                    <h3>🏥 Health Claim Details</h3>
-                    <div class="claim-form">
+                    <h3 id="claimFormTitle">📝 Claim Details</h3>
+                    
+                    <!-- Health Claim Form -->
+                    <div id="healthClaimForm" class="claim-form" style="display: none;">
                         <div class="form-row">
                             <div class="form-group">
                                 <label>Claim Type *</label>
-                                <select id="claimTypeSelect" required>
+                                <select id="healthClaimType" required>
                                     <option value="">Select Claim Type</option>
                                     <option value="Hospitalization">Hospitalization</option>
                                     <option value="Surgery">Surgery</option>
@@ -4163,7 +4391,7 @@
                             </div>
                             <div class="form-group">
                                 <label>Incident Date *</label>
-                                <input type="date" id="incidentDate" required>
+                                <input type="date" id="healthIncidentDate" required>
                             </div>
                         </div>
                         
@@ -4174,7 +4402,7 @@
                             </div>
                             <div class="form-group">
                                 <label>Estimated Amount (₹) *</label>
-                                <input type="number" id="estimatedAmount" placeholder="Enter estimated claim amount" required>
+                                <input type="number" id="healthEstimatedAmount" placeholder="Enter estimated claim amount" required>
                             </div>
                         </div>
 
@@ -4221,13 +4449,205 @@
 
                         <div class="form-group">
                             <label>Incident Description *</label>
-                            <textarea id="incidentDescription" rows="4" placeholder="Describe the medical incident and treatment in detail" required></textarea>
+                            <textarea id="healthIncidentDescription" rows="4" placeholder="Describe the medical incident and treatment in detail" required></textarea>
                         </div>
 
                         <div class="form-actions">
                             <button class="back-btn" onclick="backToVerification()">⬅️ Back</button>
                             <button class="submit-btn" onclick="submitHealthClaim()">🚀 Submit Health Claim</button>
                         </div>
+                    </div>
+
+                    <!-- Motor Claim Form -->
+                    <div id="motorClaimForm" class="claim-form" style="display: none;">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label>Claim Type *</label>
+                                <select id="motorClaimType" required>
+                                    <option value="">Select Claim Type</option>
+                                    <option value="Accident">Accident</option>
+                                    <option value="Theft">Theft</option>
+                                    <option value="Fire">Fire</option>
+                                    <option value="Natural Calamity">Natural Calamity</option>
+                                    <option value="Vandalism">Vandalism</option>
+                                    <option value="Third Party">Third Party</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label>Incident Date *</label>
+                                <input type="date" id="motorIncidentDate" required>
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label>Location of Incident *</label>
+                                <input type="text" id="incidentLocation" placeholder="Where did the incident occur?" required>
+                            </div>
+                            <div class="form-group">
+                                <label>Estimated Damage Amount (₹) *</label>
+                                <input type="number" id="motorEstimatedAmount" placeholder="Enter estimated repair cost" required>
+                            </div>
+                        </div>
+
+                        <div class="vehicle-details">
+                            <h4>🚗 Vehicle & Incident Details</h4>
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label>Vehicle Registration Number *</label>
+                                    <input type="text" id="vehicleRegNumber" placeholder="e.g., DL01AB1234" required>
+                                </div>
+                                <div class="form-group">
+                                    <label>Driver Name *</label>
+                                    <input type="text" id="driverName" placeholder="Name of the driver at time of incident" required>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label>Driver License Number *</label>
+                                    <input type="text" id="licenseNumber" placeholder="Driving license number" required>
+                                </div>
+                                <div class="form-group">
+                                    <label>Police FIR Number</label>
+                                    <input type="text" id="firNumber" placeholder="FIR number (if applicable)">
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label>Garage/Workshop Name</label>
+                                    <input type="text" id="garageName" placeholder="Preferred garage for repair">
+                                </div>
+                                <div class="form-group">
+                                    <label>Third Party Involved</label>
+                                    <select id="thirdPartyInvolved">
+                                        <option value="">Select</option>
+                                        <option value="Yes">Yes</option>
+                                        <option value="No">No</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Incident Description *</label>
+                            <textarea id="motorIncidentDescription" rows="4" placeholder="Describe the incident in detail - what happened, how it happened, extent of damage, etc." required></textarea>
+                        </div>
+
+                        <div class="form-actions">
+                            <button class="back-btn" onclick="backToVerification()">⬅️ Back</button>
+                            <button class="submit-btn" onclick="submitMotorClaim()">🚗 Submit Motor Claim</button>
+                        </div>
+                    </div>
+
+                    <!-- Home Claim Form -->
+                    <div id="homeClaimForm" class="claim-form" style="display: none;">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label>Claim Type *</label>
+                                <select id="homeClaimType" required>
+                                    <option value="">Select Claim Type</option>
+                                    <option value="Fire">Fire</option>
+                                    <option value="Theft">Theft/Burglary</option>
+                                    <option value="Natural Calamity">Natural Calamity</option>
+                                    <option value="Water Damage">Water Damage</option>
+                                    <option value="Electrical Damage">Electrical Damage</option>
+                                    <option value="Structural Damage">Structural Damage</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label>Incident Date *</label>
+                                <input type="date" id="homeIncidentDate" required>
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label>Property Address *</label>
+                                <input type="text" id="propertyAddress" placeholder="Complete address of the property" required>
+                            </div>
+                            <div class="form-group">
+                                <label>Estimated Loss Amount (₹) *</label>
+                                <input type="number" id="homeEstimatedAmount" placeholder="Enter estimated loss/damage amount" required>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Incident Description *</label>
+                            <textarea id="homeIncidentDescription" rows="4" placeholder="Describe the incident and damage in detail" required></textarea>
+                        </div>
+
+                        <div class="form-actions">
+                            <button class="back-btn" onclick="backToVerification()">⬅️ Back</button>
+                            <button class="submit-btn" onclick="submitHomeClaim()">🏠 Submit Home Claim</button>
+                        </div>
+                    </div>
+
+                    <!-- Travel Claim Form -->
+                    <div id="travelClaimForm" class="claim-form" style="display: none;">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label>Claim Type *</label>
+                                <select id="travelClaimType" required>
+                                    <option value="">Select Claim Type</option>
+                                    <option value="Medical Emergency">Medical Emergency</option>
+                                    <option value="Trip Cancellation">Trip Cancellation</option>
+                                    <option value="Baggage Loss">Baggage Loss</option>
+                                    <option value="Flight Delay">Flight Delay</option>
+                                    <option value="Passport Loss">Passport Loss</option>
+                                    <option value="Personal Accident">Personal Accident</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label>Incident Date *</label>
+                                <input type="date" id="travelIncidentDate" required>
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label>Travel Destination *</label>
+                                <input type="text" id="travelDestination" placeholder="Where were you traveling?" required>
+                            </div>
+                            <div class="form-group">
+                                <label>Claim Amount (₹) *</label>
+                                <input type="number" id="travelEstimatedAmount" placeholder="Enter claim amount" required>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Incident Description *</label>
+                            <textarea id="travelIncidentDescription" rows="4" placeholder="Describe the incident in detail" required></textarea>
+                        </div>
+
+                        <div class="form-actions">
+                            <button class="back-btn" onclick="backToVerification()">⬅️ Back</button>
+                            <button class="submit-btn" onclick="submitTravelClaim()">✈️ Submit Travel Claim</button>
+                        </div>
+                    </div>
+
+                    <!-- Generic Claim Form for other types -->
+                    <div id="genericClaimForm" class="claim-form" style="display: none;">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label>Incident Date *</label>
+                                <input type="date" id="genericIncidentDate" required>
+                            </div>
+                            <div class="form-group">
+                                <label>Claim Amount (₹) *</label>
+                                <input type="number" id="genericEstimatedAmount" placeholder="Enter claim amount" required>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Incident Description *</label>
+                            <textarea id="genericIncidentDescription" rows="4" placeholder="Describe the incident in detail" required></textarea>
+                        </div>
+
+                        <div class="form-actions">
+                            <button class="back-btn" onclick="backToVerification()">⬅️ Back</button>
+                            <button class="submit-btn" onclick="submitGenericClaim()">📋 Submit Claim</button>
+                        </div>
+                    </div>
                     </div>
                 </div>
 
@@ -4267,62 +4687,6 @@
                         <div class="action-buttons">
                             <button class="track-btn" onclick="trackClaim()">📱 Track Claim Status</button>
                             <button class="new-btn" onclick="startNewClaim()">➕ Submit New Claim</button>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Existing Process Information -->
-                <div class="modal-section info-section">
-                    <h3>🔄 Enhanced Claim Process</h3>
-                    <div class="process-flow">
-                        <div class="process-step">
-                            <div class="step-number">1</div>
-                            <div class="step-content">
-                                <h5>Customer Verification</h5>
-                                <p>Policy and customer details verification</p>
-                            </div>
-                        </div>
-                        <div class="process-step">
-                            <div class="step-number">2</div>
-                            <div class="step-content">
-                                <h5>Claim Submission</h5>
-                                <p>Detailed health claim form submission</p>
-                            </div>
-                        </div>
-                        <div class="process-step">
-                            <div class="step-number">3</div>
-                            <div class="step-content">
-                                <h5>Surveyor Assignment</h5>
-                                <p>Auto-assignment of qualified health surveyor</p>
-                            </div>
-                        </div>
-                        <div class="process-step">
-                            <div class="step-number">4</div>
-                            <div class="step-content">
-                                <h5>Hospital Survey</h5>
-                                <p>On-site medical verification and assessment</p>
-                            </div>
-                        </div>
-                        <div class="process-step">
-                            <div class="step-number">5</div>
-                            <div class="step-content">
-                                <h5>Survey Report</h5>
-                                <p>Comprehensive medical and financial evaluation</p>
-                            </div>
-                        </div>
-                        <div class="process-step">
-                            <div class="step-number">6</div>
-                            <div class="step-content">
-                                <h5>Claim Decision</h5>
-                                <p>Approval/rejection based on survey findings</p>
-                            </div>
-                        </div>
-                        <div class="process-step">
-                            <div class="step-number">7</div>
-                            <div class="step-content">
-                                <h5>Settlement</h5>
-                                <p>Payment processing for approved claims</p>
-                            </div>
                         </div>
                     </div>
                 </div>
@@ -4609,29 +4973,104 @@
                         </div>
                     </div>
                     
-                    <!-- Hospital/Provider Details -->
-                    <div class="claim-section">
-                        <h3>🏥 Hospital/Provider Details</h3>
-                        <div class="hospital-info">
-                            <div class="info-item">
-                                <strong>Hospital Name:</strong>
-                                <span id="detailHospitalName">Apollo Hospital</span>
+                    <!-- Hospital/Provider/Travel Details -->
+                    <div class="claim-section" id="providerDetailsSection">
+                        <h3 id="providerDetailsTitle">🏥 Hospital/Provider Details</h3>
+                        <div class="provider-info" id="providerDetailsContent">
+                            <!-- Hospital Details (for health claims) -->
+                            <div id="hospitalDetails" style="display: none;">
+                                <div class="info-item">
+                                    <strong>Hospital Name:</strong>
+                                    <span id="detailHospitalName">Apollo Hospital</span>
+                                </div>
+                                <div class="info-item">
+                                    <strong>Doctor Name:</strong>
+                                    <span id="detailDoctorName">Dr. Rajesh Kumar</span>
+                                </div>
+                                <div class="info-item">
+                                    <strong>Treatment Description:</strong>
+                                    <span id="detailTreatmentDesc">Emergency surgery for appendicitis</span>
+                                </div>
+                                <div class="info-item">
+                                    <strong>Admission Date:</strong>
+                                    <span id="detailAdmissionDate">July 12, 2024</span>
+                                </div>
+                                <div class="info-item">
+                                    <strong>Discharge Date:</strong>
+                                    <span id="detailDischargeDate">July 14, 2024</span>
+                                </div>
                             </div>
-                            <div class="info-item">
-                                <strong>Doctor Name:</strong>
-                                <span id="detailDoctorName">Dr. Rajesh Kumar</span>
+                            
+                            <!-- Travel Details (for travel claims) -->
+                            <div id="travelDetails" style="display: none;">
+                                <div class="info-item">
+                                    <strong>Travel Destination:</strong>
+                                    <span id="detailTravelDestination">Europe</span>
+                                </div>
+                                <div class="info-item">
+                                    <strong>Travel Date:</strong>
+                                    <span id="detailTravelDate">September 2, 2025</span>
+                                </div>
+                                <div class="info-item">
+                                    <strong>Claim Reason:</strong>
+                                    <span id="detailClaimReason">Trip Cancellation</span>
+                                </div>
+                                <div class="info-item">
+                                    <strong>Incident Description:</strong>
+                                    <span id="detailIncidentDesc">Sudden home issues</span>
+                                </div>
+                                <div class="info-item">
+                                    <strong>Trip Duration:</strong>
+                                    <span id="detailTripDuration">7 days</span>
+                                </div>
                             </div>
-                            <div class="info-item">
-                                <strong>Treatment Description:</strong>
-                                <span id="detailTreatmentDesc">Emergency surgery for appendicitis</span>
+                            
+                            <!-- Motor Details (for motor claims) -->
+                            <div id="motorDetails" style="display: none;">
+                                <div class="info-item">
+                                    <strong>Vehicle:</strong>
+                                    <span id="detailVehicleInfo">Honda Civic 2022</span>
+                                </div>
+                                <div class="info-item">
+                                    <strong>Accident Location:</strong>
+                                    <span id="detailAccidentLocation">MG Road, Bangalore</span>
+                                </div>
+                                <div class="info-item">
+                                    <strong>Garage/Workshop:</strong>
+                                    <span id="detailGarageName">Authorized Service Center</span>
+                                </div>
+                                <div class="info-item">
+                                    <strong>Damage Type:</strong>
+                                    <span id="detailDamageType">Front bumper damage</span>
+                                </div>
+                                <div class="info-item">
+                                    <strong>Police Report:</strong>
+                                    <span id="detailPoliceReport">Filed - FIR #12345</span>
+                                </div>
                             </div>
-                            <div class="info-item">
-                                <strong>Admission Date:</strong>
-                                <span id="detailAdmissionDate">July 12, 2024</span>
-                            </div>
-                            <div class="info-item">
-                                <strong>Discharge Date:</strong>
-                                <span id="detailDischargeDate">July 14, 2024</span>
+                            
+                            <!-- Home Details (for home claims) -->
+                            <div id="homeDetails" style="display: none;">
+                                <div class="info-item">
+                                    <strong>Property Address:</strong>
+                                    <span id="detailPropertyAddress">123 Main Street, City</span>
+                                </div>
+                                <div class="info-item">
+                                    <strong>Damage Type:</strong>
+                                    <span id="detailHomeDamageType">Water damage</span>
+                                </div>
+                                <div class="info-item">
+                                    <strong>Cause of Loss:</strong>
+                                    <span id="detailLossCause">Burst pipe</span>
+                                </div>
+                                <div class="info-item">
+                                    <strong>Contractor/Repair Service:</strong>
+                                    <span id="detailContractor">ABC Repair Services</span>
+                                </div>
+                                <div class="info-item">
+                                    <strong>Property Inspection:</strong>
+                                    <span id="detailPropertyInspection">Scheduled for Aug 10, 2025</span>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -5088,6 +5527,7 @@
             // Show verification step after selection
             setTimeout(() => {
                 document.getElementById('insuranceTypeStep').style.display = 'none';
+                document.getElementById('processInfoSection').style.display = 'none'; // Hide process steps
                 document.getElementById('customerVerificationStep').style.display = 'block';
                 document.getElementById('selectedInsuranceDisplay').textContent = insuranceNames[type];
                 
@@ -5111,6 +5551,7 @@
             // Reset to insurance type selection
             selectedInsuranceType = '';
             document.getElementById('insuranceTypeStep').style.display = 'block';
+            document.getElementById('processInfoSection').style.display = 'block'; // Show process steps again
             document.getElementById('customerVerificationStep').style.display = 'none';
             document.getElementById('claimFormStep').style.display = 'none';
             document.getElementById('claimStatusStep').style.display = 'none';
@@ -5469,8 +5910,8 @@
             
             popup.innerHTML = `
                 <div style="
-                    background: linear-gradient(135deg, #28a745, #20c997);
-                    color: white;
+                    background: white;
+                    color: #333;
                     padding: 40px;
                     border-radius: 20px;
                     text-align: center;
@@ -5485,35 +5926,35 @@
                     <div style="font-size: 60px; margin-bottom: 20px;">🎉</div>
                     <h2 style="margin: 0 0 20px 0; font-size: 28px;">Policy Application Successful!</h2>
                     
-                    <div style="background: rgba(255,255,255,0.15); padding: 25px; border-radius: 15px; margin: 20px 0; text-align: left;">
+                    <div style="background: #f8f9fa; border: 2px solid #e9ecef; padding: 25px; border-radius: 15px; margin: 20px 0; text-align: left;">
                         <h3 style="margin: 0 0 15px 0; text-align: center; font-size: 20px;">📋 Policy Details</h3>
                         <div style="display: grid; gap: 10px; font-size: 16px;">
-                            <div><strong>Policy Number:</strong> <span style="color: #ffeb3b; font-weight: bold;">${policyData.policyNumber}</span></div>
+                            <div><strong>Policy Number:</strong> <span style="color: #007bff; font-weight: bold; font-size: 18px;">${policyData.policyNumber}</span></div>
                             <div><strong>Customer Name:</strong> ${policyData.customerName}</div>
                             <div><strong>Policy Type:</strong> ${policyData.policyType?.toUpperCase()} Insurance</div>
                             <div><strong>Premium:</strong> ₹${policyData.premium?.toLocaleString()}</div>
                             <div><strong>Coverage:</strong> ₹${policyData.coverageAmount?.toLocaleString()}</div>
                             <div><strong>Start Date:</strong> ${policyData.startDate}</div>
-                            <div><strong>Status:</strong> <span style="color: #4caf50; font-weight: bold;">${policyData.status?.toUpperCase()}</span></div>
+                            <div><strong>Status:</strong> <span style="color: #007bff; font-weight: bold;">${policyData.status?.toUpperCase()}</span></div>
                         </div>
                     </div>
                     
-                    <div style="background: rgba(255,255,255,0.15); padding: 20px; border-radius: 15px; margin: 20px 0; text-align: left;">
+                    <div style="background: #f8f9fa; border: 2px solid #e9ecef; padding: 20px; border-radius: 15px; margin: 20px 0; text-align: left;">
                         <h3 style="margin: 0 0 15px 0; text-align: center; font-size: 18px;">📧 Email Confirmation</h3>
                         <div style="text-align: center; font-size: 16px;">
-                            <div style="color: #4caf50; font-weight: bold; margin-bottom: 10px;">✅ Confirmation email sent to: ${policyData.email}</div>
+                            <div style="color: #007bff; font-weight: bold; margin-bottom: 10px;">✅ Confirmation email sent to: ${policyData.email}</div>
                             <div style="font-size: 14px; opacity: 0.9;">Please check your inbox and spam folder</div>
                         </div>
                     </div>
                     
-                    <div style="background: rgba(255,255,255,0.15); padding: 20px; border-radius: 15px; margin: 20px 0; text-align: left;">
+                    <div style="background: #f8f9fa; border: 2px solid #e9ecef; padding: 20px; border-radius: 15px; margin: 20px 0; text-align: left;">
                         <h3 style="margin: 0 0 15px 0; text-align: center; font-size: 18px;">📌 Next Steps</h3>
                         <ul style="margin: 0; padding-left: 20px; text-align: left;">
                             ${nextSteps?.map(step => `<li style="margin: 8px 0;">${step}</li>`).join('') || '<li>Policy documents will be sent to your email</li>'}
                         </ul>
                     </div>
                     
-                    <div style="background: rgba(255,255,255,0.15); padding: 15px; border-radius: 15px; margin: 20px 0;">
+                    <div style="background: #f8f9fa; border: 2px solid #e9ecef; padding: 15px; border-radius: 15px; margin: 20px 0;">
                         <div style="font-size: 14px; opacity: 0.9;">
                             <strong>Customer Support:</strong> 1800-XXX-XXXX<br>
                             <strong>Email:</strong> support@orientalinsurance.com
@@ -5522,8 +5963,8 @@
                     
                     <div style="margin-top: 30px;">
                         <button onclick="this.closest('div').parentElement.remove()" style="
-                            background: rgba(255,255,255,0.2);
-                            border: 2px solid white;
+                            background: #6c757d;
+                            border: 2px solid #6c757d;
                             color: white;
                             padding: 12px 30px;
                             border-radius: 30px;
@@ -5532,11 +5973,11 @@
                             font-size: 16px;
                             margin: 0 10px;
                             transition: all 0.3s ease;
-                        " onmouseover="this.style.background='rgba(255,255,255,0.3)'" onmouseout="this.style.background='rgba(255,255,255,0.2)'">Close</button>
+                        " onmouseover="this.style.background='#5a6268'" onmouseout="this.style.background='#6c757d'">Close</button>
                         
                         <button onclick="window.open('mailto:${policyData.email}?subject=Policy ${policyData.policyNumber} - Quick Access', '_blank')" style="
-                            background: #ff6b6b;
-                            border: 2px solid #ff6b6b;
+                            background: #007bff;
+                            border: 2px solid #007bff;
                             color: white;
                             padding: 12px 30px;
                             border-radius: 30px;
@@ -5545,7 +5986,7 @@
                             font-size: 16px;
                             margin: 0 10px;
                             transition: all 0.3s ease;
-                        " onmouseover="this.style.background='#ff5252'" onmouseout="this.style.background='#ff6b6b'">📧 Open Email</button>
+                        " onmouseover="this.style.background='#0056b3'" onmouseout="this.style.background='#007bff'">📧 Open Email</button>
                     </div>
                 </div>
             `;
@@ -5710,7 +6151,7 @@
             const verifyBtn = document.querySelector('.verify-btn');
             verifyBtn.innerHTML = '✅ Verified';
             verifyBtn.disabled = true;
-            verifyBtn.style.background = '#4CAF50';
+            verifyBtn.style.background = '#007bff';
 
             // Check if policy is eligible for claims
             console.log('🔍 Debugging policy status:');
@@ -5787,13 +6228,35 @@
             document.getElementById('existingClaimsFound').style.display = 'none';
         }
 
+        // Store current claims for details view
+        let currentClaimsData = [];
+
         function displayExistingClaims(claims) {
+            // Store claims data globally for details view
+            currentClaimsData = claims;
+            
             document.getElementById('noExistingClaims').style.display = 'none';
             document.getElementById('existingClaimsFound').style.display = 'block';
             
             const claimsList = document.getElementById('claimsList');
-            claimsList.innerHTML = claims.map(claim => `
-                <div class="claim-item">
+            claimsList.innerHTML = claims.map((claim, index) => {
+                // Determine appropriate provider/location based on claim type
+                let providerInfo = 'N/A';
+                const claimType = claim.type?.toLowerCase() || '';
+                const policyType = claim.policyNumber?.substring(0, 3)?.toLowerCase() || '';
+                
+                if (claimType.includes('health') || policyType === 'hlt') {
+                    providerInfo = claim.hospitalName || 'Medical facility not specified';
+                } else if (claimType.includes('travel') || policyType === 'trv') {
+                    providerInfo = claim.travelDestination || 'Destination not specified';
+                } else if (claimType.includes('motor') || policyType === 'mot') {
+                    providerInfo = claim.incidentLocation || claim.vehicleDetails?.garageName || 'Location not specified';
+                } else if (claimType.includes('home') || policyType === 'hom') {
+                    providerInfo = claim.propertyAddress || 'Property address not specified';
+                }
+                
+                return `
+                <div class="claim-item" data-claim-index="${index}">
                     <div class="claim-header">
                         <span class="claim-id">${claim.id}</span>
                         <span class="claim-status ${claim.status.toLowerCase().replace(' ', '-')}">${claim.status}</span>
@@ -5802,15 +6265,16 @@
                         <div><strong>Type:</strong> ${claim.type || claim.claimType}</div>
                         <div><strong>Amount:</strong> ₹${(claim.estimatedAmount || claim.amount || 0).toLocaleString()}</div>
                         <div><strong>Date Submitted:</strong> ${new Date(claim.reportedDate || claim.created_at).toLocaleDateString()}</div>
-                        <div><strong>Hospital/Provider:</strong> ${claim.hospitalName || claim.hospital || 'N/A'}</div>
+                        <div><strong>Location/Provider:</strong> ${providerInfo}</div>
                         <div><strong>Description:</strong> ${claim.description}</div>
                         ${claim.assignedSurveyor ? `<div><strong>Surveyor:</strong> ${claim.assignedSurveyor.name}</div>` : ''}
                     </div>
                 </div>
-            `).join('');
+            `;
+            }).join('');
         }
 
-        function viewClaimDetails() {
+        function viewClaimDetails(claimIndex = 0) {
             console.log('📋 Opening detailed claim view...');
             
             // Hide the claims modal
@@ -5832,10 +6296,11 @@
                     chatBubble.style.display = 'none';
                 }
                 
-                // Populate with current claim data (if available)
-                populateClaimDetails();
+                // Populate with current claim data
+                const claimData = currentClaimsData[claimIndex] || currentClaimsData[0];
+                populateClaimDetails(claimData);
                 
-                console.log('✅ Claim details modal opened');
+                console.log('✅ Claim details modal opened for claim:', claimData?.id);
             } else {
                 console.log('❌ Claim details modal not found');
                 alert('🔍 Claim Details View\n\nThis would redirect to a detailed claims tracking page where you can:\n\n• View complete claim history\n• Track claim progress\n• Upload additional documents\n• Communicate with claims team\n• Check payment status\n\nFor now, this is a demo placeholder.');
@@ -5869,34 +6334,208 @@
             }
         }
         
-        function populateClaimDetails() {
-            // This function can be called to populate the modal with dynamic data
-            // For now, we'll use the static data already in the HTML
-            // In a real application, this would fetch data from the API
+        function populateClaimDetails(claimData) {
+            if (!claimData) {
+                console.log('No claim data provided, using default data');
+                // Default health claim data
+                claimData = {
+                    id: 'CLM-2024-001',
+                    policyNumber: currentPolicy?.policyNumber || 'HLT/2024/002',
+                    type: 'Health Claim',
+                    claimType: 'Hospitalization',
+                    status: 'Under Review',
+                    estimatedAmount: 45000,
+                    reportedDate: '2024-07-15',
+                    hospitalName: 'Apollo Hospital',
+                    treatmentDetails: {
+                        doctorName: 'Dr. Rajesh Kumar',
+                        diagnosis: 'Emergency surgery for appendicitis',
+                        admissionDate: '2024-07-12',
+                        dischargeDate: '2024-07-14'
+                    }
+                };
+            }
             
-            const claimData = {
-                claimId: 'CLM-2024-001',
-                policyNumber: currentPolicy?.policyNumber || 'HLT/2024/002',
-                claimType: 'Hospitalization',
-                status: 'Under Review',
-                amount: '₹45,000',
-                submissionDate: 'July 15, 2024',
-                hospitalName: 'Apollo Hospital',
-                doctorName: 'Dr. Rajesh Kumar',
-                treatmentDesc: 'Emergency surgery for appendicitis',
-                admissionDate: 'July 12, 2024',
-                dischargeDate: 'July 14, 2024'
-            };
+            console.log('📋 Populating claim details for:', claimData);
             
-            // Update the modal content with current data
+            // Update basic claim information
             if (document.getElementById('detailClaimId')) {
-                document.getElementById('detailClaimId').textContent = claimData.claimId;
+                document.getElementById('detailClaimId').textContent = claimData.id;
             }
             if (document.getElementById('detailPolicyNumber')) {
                 document.getElementById('detailPolicyNumber').textContent = claimData.policyNumber;
             }
+            if (document.getElementById('detailClaimType')) {
+                document.getElementById('detailClaimType').textContent = claimData.claimType || claimData.type;
+            }
+            if (document.getElementById('detailClaimStatus')) {
+                const statusElement = document.getElementById('detailClaimStatus');
+                statusElement.textContent = claimData.status;
+                statusElement.className = `claim-status ${claimData.status.toLowerCase().replace(' ', '-')}`;
+            }
+            if (document.getElementById('detailClaimAmount')) {
+                document.getElementById('detailClaimAmount').textContent = `₹${(claimData.estimatedAmount || claimData.amount || 0).toLocaleString()}`;
+            }
+            if (document.getElementById('detailSubmissionDate')) {
+                const submissionDate = claimData.reportedDate || claimData.created_at || claimData.incidentDate;
+                document.getElementById('detailSubmissionDate').textContent = new Date(submissionDate).toLocaleDateString();
+            }
             
-            console.log('📋 Claim details populated successfully');
+            // Hide all provider detail sections first
+            document.getElementById('hospitalDetails').style.display = 'none';
+            document.getElementById('travelDetails').style.display = 'none';
+            document.getElementById('motorDetails').style.display = 'none';
+            document.getElementById('homeDetails').style.display = 'none';
+            
+            // Determine claim type and show appropriate details
+            const claimType = claimData.type?.toLowerCase() || claimData.claimType?.toLowerCase() || '';
+            const policyType = claimData.policyNumber?.substring(0, 3)?.toLowerCase() || '';
+            
+            console.log('🔍 Claim type detection:', { claimType, policyType, rawType: claimData.type });
+            
+            if (claimType.includes('health') || claimType.includes('medical') || policyType === 'hlt') {
+                // Health/Medical claim - ONLY for health insurance
+                document.getElementById('providerDetailsTitle').innerHTML = '🏥 Hospital/Medical Details';
+                document.getElementById('hospitalDetails').style.display = 'block';
+                
+                // Populate hospital details
+                if (document.getElementById('detailHospitalName')) {
+                    document.getElementById('detailHospitalName').textContent = claimData.hospitalName || 'Not specified';
+                }
+                if (document.getElementById('detailDoctorName')) {
+                    document.getElementById('detailDoctorName').textContent = claimData.treatmentDetails?.doctorName || 'Not specified';
+                }
+                if (document.getElementById('detailTreatmentDesc')) {
+                    document.getElementById('detailTreatmentDesc').textContent = claimData.description || claimData.treatmentDetails?.diagnosis || 'Not specified';
+                }
+                if (document.getElementById('detailAdmissionDate')) {
+                    document.getElementById('detailAdmissionDate').textContent = claimData.treatmentDetails?.admissionDate || 'Not specified';
+                }
+                if (document.getElementById('detailDischargeDate')) {
+                    document.getElementById('detailDischargeDate').textContent = claimData.treatmentDetails?.dischargeDate || 'Not specified';
+                }
+                
+            } else if (claimType.includes('travel') || policyType === 'trv') {
+                // Travel claim - show travel-specific details
+                document.getElementById('providerDetailsTitle').innerHTML = '✈️ Travel Details';
+                document.getElementById('travelDetails').style.display = 'block';
+                
+                // Populate travel details
+                if (document.getElementById('detailTravelDestination')) {
+                    document.getElementById('detailTravelDestination').textContent = claimData.travelDestination || 'Not specified';
+                }
+                if (document.getElementById('detailTravelDate')) {
+                    document.getElementById('detailTravelDate').textContent = new Date(claimData.incidentDate || claimData.travelDate).toLocaleDateString();
+                }
+                if (document.getElementById('detailClaimReason')) {
+                    document.getElementById('detailClaimReason').textContent = claimData.claimType || 'Not specified';
+                }
+                if (document.getElementById('detailIncidentDesc')) {
+                    document.getElementById('detailIncidentDesc').textContent = claimData.description || 'Not specified';
+                }
+                if (document.getElementById('detailTripDuration')) {
+                    document.getElementById('detailTripDuration').textContent = claimData.tripDuration || 'Not specified';
+                }
+                
+            } else if (claimType.includes('motor') || claimType.includes('vehicle') || policyType === 'mot') {
+                // Motor claim - show vehicle-specific details
+                document.getElementById('providerDetailsTitle').innerHTML = '🚗 Vehicle/Accident Details';
+                document.getElementById('motorDetails').style.display = 'block';
+                
+                // Populate motor details with actual data
+                if (document.getElementById('detailVehicleInfo')) {
+                    const regNumber = claimData.vehicleDetails?.registrationNumber || 'Not specified';
+                    document.getElementById('detailVehicleInfo').textContent = regNumber;
+                }
+                if (document.getElementById('detailAccidentLocation')) {
+                    document.getElementById('detailAccidentLocation').textContent = claimData.incidentLocation || 'Not specified';
+                }
+                if (document.getElementById('detailGarageName')) {
+                    document.getElementById('detailGarageName').textContent = claimData.vehicleDetails?.garageName || 'Not assigned';
+                }
+                if (document.getElementById('detailDamageType')) {
+                    document.getElementById('detailDamageType').textContent = claimData.description || 'Not specified';
+                }
+                if (document.getElementById('detailPoliceReport')) {
+                    const firNumber = claimData.vehicleDetails?.firNumber || null;
+                    document.getElementById('detailPoliceReport').textContent = firNumber ? `Filed - FIR #${firNumber}` : 'Not filed';
+                }
+                
+            } else if (claimType.includes('home') || claimType.includes('property') || policyType === 'hom') {
+                // Home claim - show property-specific details
+                document.getElementById('providerDetailsTitle').innerHTML = '🏠 Property Details';
+                document.getElementById('homeDetails').style.display = 'block';
+                
+                // Populate home details
+                if (document.getElementById('detailPropertyAddress')) {
+                    document.getElementById('detailPropertyAddress').textContent = claimData.propertyAddress || 'Not specified';
+                }
+                if (document.getElementById('detailHomeDamageType')) {
+                    document.getElementById('detailHomeDamageType').textContent = claimData.damageType || claimData.description || 'Not specified';
+                }
+                if (document.getElementById('detailLossCause')) {
+                    document.getElementById('detailLossCause').textContent = claimData.lossCause || 'Not specified';
+                }
+                if (document.getElementById('detailContractor')) {
+                    document.getElementById('detailContractor').textContent = claimData.contractor || 'Not assigned';
+                }
+                if (document.getElementById('detailPropertyInspection')) {
+                    document.getElementById('detailPropertyInspection').textContent = claimData.inspectionDate || 'Not scheduled';
+                }
+            } else {
+                // Default case - determine by policy number if claim type is unclear
+                if (policyType === 'hlt') {
+                    document.getElementById('providerDetailsTitle').innerHTML = '🏥 Hospital/Medical Details';
+                    document.getElementById('hospitalDetails').style.display = 'block';
+                } else if (policyType === 'trv') {
+                    document.getElementById('providerDetailsTitle').innerHTML = '✈️ Travel Details';
+                    document.getElementById('travelDetails').style.display = 'block';
+                } else if (policyType === 'mot') {
+                    document.getElementById('providerDetailsTitle').innerHTML = '🚗 Vehicle/Accident Details';
+                    document.getElementById('motorDetails').style.display = 'block';
+                } else if (policyType === 'hom') {
+                    document.getElementById('providerDetailsTitle').innerHTML = '� Property Details';
+                    document.getElementById('homeDetails').style.display = 'block';
+                } else {
+                    // Last resort - show generic provider details
+                    document.getElementById('providerDetailsTitle').innerHTML = '📋 Claim Details';
+                    document.getElementById('hospitalDetails').style.display = 'block';
+                    // But populate with generic claim info instead of hospital
+                    if (document.getElementById('detailHospitalName')) {
+                        document.getElementById('detailHospitalName').textContent = 'Not applicable for this claim type';
+                    }
+                }
+            }
+            
+            // Update timeline with actual claim data
+            updateClaimTimeline(claimData);
+            
+            console.log('📋 Claim details populated successfully for', claimType, 'claim');
+        }
+        
+        function updateClaimTimeline(claimData) {
+            const timelineContainer = document.getElementById('detailedClaimTimeline');
+            if (!timelineContainer || !claimData.timeline) {
+                console.log('No timeline data available');
+                return;
+            }
+            
+            timelineContainer.innerHTML = claimData.timeline.map(item => {
+                const statusClass = item.completed ? 'completed' : 'pending';
+                const icon = item.completed ? '✅' : (item.date ? '🔄' : '⏳');
+                const dateText = item.date ? new Date(item.date).toLocaleDateString() : 'Pending';
+                
+                return `
+                    <div class="timeline-item ${statusClass}">
+                        <div class="timeline-icon">${icon}</div>
+                        <div class="timeline-content">
+                            <h4>${item.step}</h4>
+                            <p>${dateText}</p>
+                            <small>${item.remarks}</small>
+                        </div>
+                    </div>
+                `;
+            }).join('');
         }
         
         // Additional action functions for the claim details modal
@@ -5907,20 +6546,61 @@
         function downloadClaimReport() {
             console.log('📄 Generating claim report...');
             
-            // Get current claim data
+            // Get current claim data - basic info first
             const claimData = {
                 claimId: document.getElementById('detailClaimId')?.textContent || 'CLM-2024-001',
                 policyNumber: document.getElementById('detailPolicyNumber')?.textContent || 'HLT/2024/002',
                 claimType: document.getElementById('detailClaimType')?.textContent || 'Hospitalization',
                 status: document.getElementById('detailClaimStatus')?.textContent || 'Under Review',
                 amount: document.getElementById('detailClaimAmount')?.textContent || '₹45,000',
-                submissionDate: document.getElementById('detailSubmissionDate')?.textContent || 'July 15, 2024',
-                hospitalName: document.getElementById('detailHospitalName')?.textContent || 'Apollo Hospital',
-                doctorName: document.getElementById('detailDoctorName')?.textContent || 'Dr. Rajesh Kumar',
-                treatmentDesc: document.getElementById('detailTreatmentDesc')?.textContent || 'Emergency surgery for appendicitis',
-                admissionDate: document.getElementById('detailAdmissionDate')?.textContent || 'July 12, 2024',
-                dischargeDate: document.getElementById('detailDischargeDate')?.textContent || 'July 14, 2024'
+                submissionDate: document.getElementById('detailSubmissionDate')?.textContent || 'July 15, 2024'
             };
+            
+            // Determine insurance type from claim ID or policy number
+            let insuranceType = 'health'; // default
+            
+            if (claimData.claimId) {
+                if (claimData.claimId.includes('TRV') || claimData.policyNumber?.includes('TRV')) {
+                    insuranceType = 'travel';
+                } else if (claimData.claimId.includes('MTR') || claimData.policyNumber?.includes('MTR')) {
+                    insuranceType = 'motor';
+                } else if (claimData.claimId.includes('HOM') || claimData.policyNumber?.includes('HOM')) {
+                    insuranceType = 'home';
+                } else if (claimData.claimId.includes('HLT') || claimData.policyNumber?.includes('HLT')) {
+                    insuranceType = 'health';
+                }
+            }
+            
+            // Get type-specific details based on insurance type
+            if (insuranceType === 'health') {
+                claimData.hospitalName = document.getElementById('detailHospitalName')?.textContent || 'Apollo Hospital';
+                claimData.doctorName = document.getElementById('detailDoctorName')?.textContent || 'Dr. Rajesh Kumar';
+                claimData.treatmentDesc = document.getElementById('detailTreatmentDesc')?.textContent || 'Emergency surgery for appendicitis';
+                claimData.admissionDate = document.getElementById('detailAdmissionDate')?.textContent || 'July 12, 2024';
+                claimData.dischargeDate = document.getElementById('detailDischargeDate')?.textContent || 'July 14, 2024';
+            } else if (insuranceType === 'travel') {
+                claimData.travelDestination = document.getElementById('detailTravelDestination')?.textContent || 'Paris, France';
+                claimData.travelDates = document.getElementById('detailTravelDates')?.textContent || 'June 15 - June 30, 2024';
+                claimData.incidentType = document.getElementById('detailIncidentType')?.textContent || 'Flight Cancellation';
+                claimData.incidentDate = document.getElementById('detailIncidentDate')?.textContent || 'June 16, 2024';
+                claimData.incidentDesc = document.getElementById('detailIncidentDesc')?.textContent || 'Flight was cancelled due to weather conditions';
+            } else if (insuranceType === 'motor') {
+                claimData.vehicleDetails = document.getElementById('detailVehicleDetails')?.textContent || 'Honda City (MH01AB1234)';
+                claimData.incidentLocation = document.getElementById('detailIncidentLocation')?.textContent || 'Mumbai-Pune Highway';
+                claimData.incidentType = document.getElementById('detailIncidentType')?.textContent || 'Collision';
+                claimData.incidentDate = document.getElementById('detailIncidentDate')?.textContent || 'July 10, 2024';
+                claimData.incidentDesc = document.getElementById('detailIncidentDesc')?.textContent || 'Collision with another vehicle';
+                claimData.policeReport = document.getElementById('detailPoliceReport')?.textContent || 'FIR No: 12345/2024';
+            } else if (insuranceType === 'home') {
+                claimData.propertyAddress = document.getElementById('detailPropertyAddress')?.textContent || '123 Main Street, Mumbai';
+                claimData.incidentType = document.getElementById('detailIncidentType')?.textContent || 'Water Damage';
+                claimData.incidentDate = document.getElementById('detailIncidentDate')?.textContent || 'July 8, 2024';
+                claimData.incidentDesc = document.getElementById('detailIncidentDesc')?.textContent || 'Pipe burst causing water damage';
+                claimData.damageAssessment = document.getElementById('detailDamageAssessment')?.textContent || 'Extensive water damage to flooring and furniture';
+            }
+            
+            // Add insurance type to claim data
+            claimData.insuranceType = insuranceType;
             
             // Get customer data
             const customerData = {
@@ -5962,6 +6642,145 @@
                 day: 'numeric'
             });
             const currentTime = new Date().toLocaleTimeString('en-IN');
+            
+            // Generate type-specific details section
+            let typeSpecificSection = '';
+            
+            if (claimData.insuranceType === 'health') {
+                typeSpecificSection = `
+            <div class="section">
+                <div class="section-title">
+                    🏥 Hospital & Treatment Details
+                </div>
+                <div class="info-grid">
+                    <div class="info-item">
+                        <div class="info-label">Hospital Name</div>
+                        <div class="info-value">${claimData.hospitalName || 'N/A'}</div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-label">Attending Doctor</div>
+                        <div class="info-value">${claimData.doctorName || 'N/A'}</div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-label">Treatment Description</div>
+                        <div class="info-value">${claimData.treatmentDesc || 'N/A'}</div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-label">Admission Date</div>
+                        <div class="info-value">${claimData.admissionDate || 'N/A'}</div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-label">Discharge Date</div>
+                        <div class="info-value">${claimData.dischargeDate || 'N/A'}</div>
+                    </div>
+                </div>
+            </div>`;
+            } else if (claimData.insuranceType === 'travel') {
+                typeSpecificSection = `
+            <div class="section">
+                <div class="section-title">
+                    ✈️ Travel & Incident Details
+                </div>
+                <div class="info-grid">
+                    <div class="info-item">
+                        <div class="info-label">Travel Destination</div>
+                        <div class="info-value">${claimData.travelDestination || 'N/A'}</div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-label">Travel Dates</div>
+                        <div class="info-value">${claimData.travelDates || 'N/A'}</div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-label">Incident Type</div>
+                        <div class="info-value">${claimData.incidentType || 'N/A'}</div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-label">Incident Date</div>
+                        <div class="info-value">${claimData.incidentDate || 'N/A'}</div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-label">Incident Description</div>
+                        <div class="info-value">${claimData.incidentDesc || 'N/A'}</div>
+                    </div>
+                </div>
+            </div>`;
+            } else if (claimData.insuranceType === 'motor') {
+                typeSpecificSection = `
+            <div class="section">
+                <div class="section-title">
+                    🚗 Vehicle & Incident Details
+                </div>
+                <div class="info-grid">
+                    <div class="info-item">
+                        <div class="info-label">Vehicle Details</div>
+                        <div class="info-value">${claimData.vehicleDetails || 'N/A'}</div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-label">Incident Location</div>
+                        <div class="info-value">${claimData.incidentLocation || 'N/A'}</div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-label">Incident Type</div>
+                        <div class="info-value">${claimData.incidentType || 'N/A'}</div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-label">Incident Date</div>
+                        <div class="info-value">${claimData.incidentDate || 'N/A'}</div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-label">Incident Description</div>
+                        <div class="info-value">${claimData.incidentDesc || 'N/A'}</div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-label">Police Report</div>
+                        <div class="info-value">${claimData.policeReport || 'N/A'}</div>
+                    </div>
+                </div>
+            </div>`;
+            } else if (claimData.insuranceType === 'home') {
+                typeSpecificSection = `
+            <div class="section">
+                <div class="section-title">
+                    🏠 Property & Incident Details
+                </div>
+                <div class="info-grid">
+                    <div class="info-item">
+                        <div class="info-label">Property Address</div>
+                        <div class="info-value">${claimData.propertyAddress || 'N/A'}</div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-label">Incident Type</div>
+                        <div class="info-value">${claimData.incidentType || 'N/A'}</div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-label">Incident Date</div>
+                        <div class="info-value">${claimData.incidentDate || 'N/A'}</div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-label">Incident Description</div>
+                        <div class="info-value">${claimData.incidentDesc || 'N/A'}</div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-label">Damage Assessment</div>
+                        <div class="info-value">${claimData.damageAssessment || 'N/A'}</div>
+                    </div>
+                </div>
+            </div>`;
+            } else {
+                // Default to health if type is unknown
+                typeSpecificSection = `
+            <div class="section">
+                <div class="section-title">
+                    📋 Additional Details
+                </div>
+                <div class="info-grid">
+                    <div class="info-item">
+                        <div class="info-label">Description</div>
+                        <div class="info-value">${claimData.treatmentDesc || claimData.incidentDesc || 'N/A'}</div>
+                    </div>
+                </div>
+            </div>`;
+            }
             
             return `
 <!DOCTYPE html>
@@ -6119,7 +6938,7 @@
         }
         
         .timeline-completed {
-            background: #28a745;
+            background: #6c757d;
             color: white;
         }
         
@@ -6175,7 +6994,7 @@
         }
         
         .doc-verified {
-            color: #28a745;
+            color: #007bff;
         }
         
         .doc-pending {
@@ -6292,36 +7111,10 @@
                         <div class="info-label">Date Submitted</div>
                         <div class="info-value">${claimData.submissionDate}</div>
                     </div>
-                    <div class="info-item">
-                        <div class="info-label">Treatment Description</div>
-                        <div class="info-value">${claimData.treatmentDesc}</div>
-                    </div>
                 </div>
             </div>
             
-            <div class="section">
-                <div class="section-title">
-                    🏥 Hospital & Treatment Details
-                </div>
-                <div class="info-grid">
-                    <div class="info-item">
-                        <div class="info-label">Hospital Name</div>
-                        <div class="info-value">${claimData.hospitalName}</div>
-                    </div>
-                    <div class="info-item">
-                        <div class="info-label">Attending Doctor</div>
-                        <div class="info-value">${claimData.doctorName}</div>
-                    </div>
-                    <div class="info-item">
-                        <div class="info-label">Admission Date</div>
-                        <div class="info-value">${claimData.admissionDate}</div>
-                    </div>
-                    <div class="info-item">
-                        <div class="info-label">Discharge Date</div>
-                        <div class="info-value">${claimData.dischargeDate}</div>
-                    </div>
-                </div>
-            </div>
+            ${typeSpecificSection}
             
             <div class="section">
                 <div class="section-title">
@@ -6457,14 +7250,31 @@
             document.getElementById('claimStatusStep').style.display = 'none';
             document.getElementById('claimFormStep').style.display = 'block';
             
+            // Set the insurance type based on the current policy
+            if (currentPolicy && currentPolicy.type) {
+                selectedInsuranceType = currentPolicy.type;
+                console.log(`✅ Setting insurance type to: ${selectedInsuranceType}`);
+            } else {
+                console.log('⚠️ No policy type found, defaulting to health');
+                selectedInsuranceType = 'health';
+            }
+            
             // Update form title based on selected insurance type
             updateClaimFormForInsuranceType();
             
-            // Set today as max date for incident date
+            // Set today as max date for incident date fields
             const today = new Date().toISOString().split('T')[0];
-            document.getElementById('incidentDate').max = today;
-            document.getElementById('admissionDate').max = today;
-            document.getElementById('dischargeDate').max = today;
+            const dateFields = [
+                'healthIncidentDate', 'motorIncidentDate', 'homeIncidentDate', 
+                'travelIncidentDate', 'genericIncidentDate', 'admissionDate', 'dischargeDate'
+            ];
+            
+            dateFields.forEach(fieldId => {
+                const field = document.getElementById(fieldId);
+                if (field) {
+                    field.max = today;
+                }
+            });
         }
 
         function updateClaimFormForInsuranceType() {
@@ -6484,9 +7294,37 @@
             };
             
             // Update form title
-            const formTitle = document.querySelector('#claimFormStep .modal-title');
+            const formTitle = document.querySelector('#claimFormTitle');
             if (formTitle) {
                 formTitle.textContent = `📝 ${insuranceNames[selectedInsuranceType]} Claim Form`;
+            }
+
+            // Hide all claim forms first
+            document.getElementById('healthClaimForm').style.display = 'none';
+            document.getElementById('motorClaimForm').style.display = 'none';
+            document.getElementById('homeClaimForm').style.display = 'none';
+            document.getElementById('travelClaimForm').style.display = 'none';
+            document.getElementById('genericClaimForm').style.display = 'none';
+
+            // Show the appropriate form based on insurance type
+            switch(selectedInsuranceType.toLowerCase()) {
+                case 'health':
+                    document.getElementById('healthClaimForm').style.display = 'block';
+                    break;
+                case 'motor':
+                    document.getElementById('motorClaimForm').style.display = 'block';
+                    break;
+                case 'home':
+                    document.getElementById('homeClaimForm').style.display = 'block';
+                    break;
+                case 'travel':
+                    document.getElementById('travelClaimForm').style.display = 'block';
+                    break;
+                case 'fire':
+                case 'marine':
+                default:
+                    document.getElementById('genericClaimForm').style.display = 'block';
+                    break;
             }
             
             console.log(`✅ Updated claim form for ${selectedInsuranceType} insurance`);
@@ -6501,10 +7339,10 @@
             // Collect form data
             const claimData = {
                 policyNumber: currentPolicy.policyNumber,
-                claimType: document.getElementById('claimTypeSelect').value,
-                incidentDate: document.getElementById('incidentDate').value,
-                estimatedAmount: document.getElementById('estimatedAmount').value,
-                description: document.getElementById('incidentDescription').value,
+                claimType: document.getElementById('healthClaimType').value,
+                incidentDate: document.getElementById('healthIncidentDate').value,
+                estimatedAmount: document.getElementById('healthEstimatedAmount').value,
+                description: document.getElementById('healthIncidentDescription').value,
                 hospitalName: document.getElementById('hospitalName').value,
                 treatmentDetails: {
                     diagnosis: document.getElementById('diagnosis').value,
@@ -6516,36 +7354,87 @@
                 }
             };
 
-            // Validate required fields
-            const requiredFields = [
-                'claimType', 'incidentDate', 'estimatedAmount', 'description', 
-                'hospitalName', 'treatmentDetails.diagnosis', 'treatmentDetails.procedure', 
-                'treatmentDetails.doctorName'
-            ];
+            submitClaim(claimData, 'health');
+        }
 
-            let isValid = true;
-            requiredFields.forEach(field => {
-                const value = field.includes('.') ? 
-                    claimData[field.split('.')[0]][field.split('.')[1]] : 
-                    claimData[field];
-                    
-                if (!value || value.trim() === '') {
-                    isValid = false;
+        function submitMotorClaim() {
+            // Collect motor-specific form data
+            const claimData = {
+                policyNumber: currentPolicy.policyNumber,
+                claimType: document.getElementById('motorClaimType').value,
+                incidentDate: document.getElementById('motorIncidentDate').value,
+                estimatedAmount: document.getElementById('motorEstimatedAmount').value,
+                description: document.getElementById('motorIncidentDescription').value,
+                incidentLocation: document.getElementById('incidentLocation').value,
+                vehicleDetails: {
+                    registrationNumber: document.getElementById('vehicleRegNumber').value,
+                    driverName: document.getElementById('driverName').value,
+                    licenseNumber: document.getElementById('licenseNumber').value,
+                    firNumber: document.getElementById('firNumber').value,
+                    garageName: document.getElementById('garageName').value,
+                    thirdPartyInvolved: document.getElementById('thirdPartyInvolved').value
                 }
-            });
+            };
 
-            if (!isValid) {
+            submitClaim(claimData, 'motor');
+        }
+
+        function submitHomeClaim() {
+            // Collect home-specific form data
+            const claimData = {
+                policyNumber: currentPolicy.policyNumber,
+                claimType: document.getElementById('homeClaimType').value,
+                incidentDate: document.getElementById('homeIncidentDate').value,
+                estimatedAmount: document.getElementById('homeEstimatedAmount').value,
+                description: document.getElementById('homeIncidentDescription').value,
+                propertyAddress: document.getElementById('propertyAddress').value
+            };
+
+            submitClaim(claimData, 'home');
+        }
+
+        function submitTravelClaim() {
+            // Collect travel-specific form data
+            const claimData = {
+                policyNumber: currentPolicy.policyNumber,
+                claimType: document.getElementById('travelClaimType').value,
+                incidentDate: document.getElementById('travelIncidentDate').value,
+                estimatedAmount: document.getElementById('travelEstimatedAmount').value,
+                description: document.getElementById('travelIncidentDescription').value,
+                travelDestination: document.getElementById('travelDestination').value
+            };
+
+            submitClaim(claimData, 'travel');
+        }
+
+        function submitGenericClaim() {
+            // Collect generic form data
+            const claimData = {
+                policyNumber: currentPolicy.policyNumber,
+                incidentDate: document.getElementById('genericIncidentDate').value,
+                estimatedAmount: document.getElementById('genericEstimatedAmount').value,
+                description: document.getElementById('genericIncidentDescription').value
+            };
+
+            submitClaim(claimData, selectedInsuranceType);
+        }
+
+        function submitClaim(claimData, claimType) {
+            // Validate required fields based on claim type
+            if (!validateClaimData(claimData, claimType)) {
                 alert('❌ Please fill all required fields');
                 return;
             }
 
             // Show loading state
-            const submitBtn = document.querySelector('.submit-btn');
-            submitBtn.innerHTML = '🔄 Submitting Claim...';
-            submitBtn.disabled = true;
+            const submitBtn = document.querySelector(`#${claimType}ClaimForm .submit-btn, #genericClaimForm .submit-btn`);
+            if (submitBtn) {
+                submitBtn.innerHTML = '🔄 Submitting Claim...';
+                submitBtn.disabled = true;
+            }
 
             // Submit to backend with selected insurance type
-            const endpoint = `http://localhost:5000/api/claims/${selectedInsuranceType}`;
+            const endpoint = `http://localhost:5000/api/claims/${claimType}`;
             fetch(endpoint, {
                 method: 'POST',
                 headers: {
@@ -6568,16 +7457,70 @@
                     claim: {
                         id: `CLM${String(Math.floor(Math.random() * 1000)).padStart(3, '0')}`,
                         status: 'Under Review',
-                        estimatedAmount: claimData.estimatedAmount
+                        estimatedAmount: claimData.estimatedAmount,
+                        claimType: claimData.claimType || 'General',
+                        submissionDate: new Date().toISOString().split('T')[0]
                     },
-                    assignedSurveyor: {
-                        name: 'Dr. Amit Sharma',
-                        phone: '+91-9876543300',
-                        specialization: 'Health Claims'
-                    }
+                    assignedSurveyor: getSurveyorByType(claimType)
                 };
                 displayClaimConfirmation(mockClaimData);
             });
+        }
+
+        function validateClaimData(claimData, claimType) {
+            // Common required fields
+            const commonRequiredFields = ['incidentDate', 'estimatedAmount', 'description'];
+            
+            // Type-specific required fields
+            const typeSpecificFields = {
+                'health': ['claimType', 'hospitalName'],
+                'motor': ['claimType', 'incidentLocation'],
+                'home': ['claimType', 'propertyAddress'],
+                'travel': ['claimType', 'travelDestination']
+            };
+
+            const allRequiredFields = [...commonRequiredFields, ...(typeSpecificFields[claimType] || [])];
+            
+            return allRequiredFields.every(field => {
+                const value = claimData[field];
+                return value && value.trim() !== '';
+            });
+        }
+
+        function getSurveyorByType(claimType) {
+            const surveyors = {
+                'health': {
+                    name: 'Dr. Amit Sharma',
+                    phone: '+91-9876543300',
+                    specialization: 'Health Claims',
+                    email: 'amit.sharma@orientalinsurance.com'
+                },
+                'motor': {
+                    name: 'Mr. Rajesh Kumar',
+                    phone: '+91-9876543301',
+                    specialization: 'Motor Claims & Vehicle Assessment',
+                    email: 'rajesh.kumar@orientalinsurance.com'
+                },
+                'home': {
+                    name: 'Ms. Priya Singh',
+                    phone: '+91-9876543302',
+                    specialization: 'Property & Home Claims',
+                    email: 'priya.singh@orientalinsurance.com'
+                },
+                'travel': {
+                    name: 'Mr. Vikram Mehta',
+                    phone: '+91-9876543303',
+                    specialization: 'Travel & International Claims',
+                    email: 'vikram.mehta@orientalinsurance.com'
+                }
+            };
+
+            return surveyors[claimType] || {
+                name: 'Mr. Suresh Gupta',
+                phone: '+91-9876543399',
+                specialization: 'General Claims',
+                email: 'suresh.gupta@orientalinsurance.com'
+            };
         }
 
         function showSuccessPopup(message) {
@@ -6588,8 +7531,8 @@
                 top: 50%;
                 left: 50%;
                 transform: translate(-50%, -50%);
-                background: linear-gradient(135deg, #28a745, #20c997);
-                color: white;
+                background: white;
+                color: #333;
                 padding: 30px;
                 border-radius: 15px;
                 text-align: center;
@@ -6639,22 +7582,164 @@
         function displayClaimConfirmation(data) {
             const { claim, assignedSurveyor } = data;
             
-            // Show success popup notification
-            showSuccessPopup(`🎉 Claim Submitted Successfully!\n\nClaim ID: ${claim.id}\nStatus: ${claim.status}\nAssigned Surveyor: ${assignedSurveyor.name}\n\nYour claim is now under review. You will be contacted by our surveyor within 24-48 hours.`);
+            // Close the claims modal first
+            closeDetailModal('claims');
             
-            // Hide claim form and show confirmation
-            document.getElementById('claimFormStep').style.display = 'none';
-            document.getElementById('claimStatusStep').style.display = 'block';
+            // Show comprehensive claim success popup
+            setTimeout(() => {
+                showClaimSuccessPopup(claim, assignedSurveyor);
+            }, 500);
             
-            // Populate claim details
-            document.getElementById('claimId').textContent = claim.id;
-            document.getElementById('claimStatus').textContent = claim.status;
-            document.getElementById('assignedSurveyor').textContent = assignedSurveyor.name;
-            document.getElementById('surveyorPhone').textContent = assignedSurveyor.phone;
-            document.getElementById('displayEstimatedAmount').textContent = claim.estimatedAmount;
+            // Also update the internal state for later viewing
+            setTimeout(() => {
+                // Hide claim form and show confirmation
+                document.getElementById('claimFormStep').style.display = 'none';
+                document.getElementById('claimStatusStep').style.display = 'block';
+                
+                // Populate claim details
+                document.getElementById('claimId').textContent = claim.id;
+                document.getElementById('claimStatus').textContent = claim.status;
+                document.getElementById('assignedSurveyor').textContent = assignedSurveyor.name;
+                document.getElementById('surveyorPhone').textContent = assignedSurveyor.phone;
+                document.getElementById('displayEstimatedAmount').textContent = claim.estimatedAmount;
+                
+                // Generate timeline
+                generateClaimTimeline(claim);
+            }, 1000);
+        }
+        
+        function showClaimSuccessPopup(claimData, surveyorData) {
+            // Create popup element
+            const popup = document.createElement('div');
+            popup.style.cssText = `
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background: rgba(0,0,0,0.8);
+                z-index: 15000;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                animation: fadeIn 0.3s ease-out;
+            `;
             
-            // Generate timeline
-            generateClaimTimeline(claim);
+            popup.innerHTML = `
+                <div style="
+                    background: white;
+                    color: #333;
+                    padding: 40px;
+                    border-radius: 20px;
+                    text-align: center;
+                    box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+                    max-width: 600px;
+                    max-height: 80vh;
+                    overflow-y: auto;
+                    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+                    animation: slideIn 0.4s ease-out;
+                    margin: 20px;
+                    border: 2px solid #e9ecef;
+                ">
+                    <div style="font-size: 60px; margin-bottom: 20px;">🎉</div>
+                    <h2 style="margin: 0 0 20px 0; font-size: 28px;">Claim Submitted Successfully!</h2>
+                    
+                    <div style="background: #f8f9fa; border: 2px solid #e9ecef; padding: 25px; border-radius: 15px; margin: 20px 0; text-align: left;">
+                        <h3 style="margin: 0 0 15px 0; text-align: center; font-size: 20px;">📋 Claim Details</h3>
+                        <div style="display: grid; gap: 10px; font-size: 16px;">
+                            <div><strong>Claim ID:</strong> <span style="color: #007bff; font-weight: bold; font-size: 18px;">${claimData.id}</span></div>
+                            <div><strong>Policy Number:</strong> ${currentPolicy?.policyNumber || 'N/A'}</div>
+                            <div><strong>Customer Name:</strong> ${currentCustomer?.firstName} ${currentCustomer?.lastName}</div>
+                            <div><strong>Claim Type:</strong> ${claimData.claimType || selectedInsuranceType?.toUpperCase()} Insurance</div>
+                            <div><strong>Estimated Amount:</strong> ₹${parseInt(claimData.estimatedAmount || 0).toLocaleString()}</div>
+                            <div><strong>Submission Date:</strong> ${claimData.submissionDate || new Date().toLocaleDateString()}</div>
+                            <div><strong>Status:</strong> <span style="color: #007bff; font-weight: bold;">${claimData.status?.toUpperCase()}</span></div>
+                        </div>
+                    </div>
+                    
+                    <div style="background: #f8f9fa; border: 2px solid #e9ecef; padding: 20px; border-radius: 15px; margin: 20px 0; text-align: left;">
+                        <h3 style="margin: 0 0 15px 0; text-align: center; font-size: 18px;">👨‍💼 Assigned Surveyor</h3>
+                        <div style="text-align: center; font-size: 16px;">
+                            <div style="font-weight: bold; margin-bottom: 10px;">${surveyorData.name}</div>
+                            <div style="margin-bottom: 8px;"><strong>📞 Phone:</strong> ${surveyorData.phone}</div>
+                            <div style="margin-bottom: 8px;"><strong>📧 Email:</strong> ${surveyorData.email}</div>
+                            <div style="margin-bottom: 8px;"><strong>🎯 Specialization:</strong> ${surveyorData.specialization}</div>
+                            <div style="color: #007bff; font-weight: bold; margin-top: 10px;">✅ Surveyor will contact you within 24-48 hours</div>
+                        </div>
+                    </div>
+                    
+                    <div style="background: #f8f9fa; border: 2px solid #e9ecef; padding: 20px; border-radius: 15px; margin: 20px 0; text-align: left;">
+                        <h3 style="margin: 0 0 15px 0; text-align: center; font-size: 18px;">📌 Next Steps</h3>
+                        <ul style="margin: 0; padding-left: 20px; text-align: left;">
+                            <li style="margin: 8px 0;">Keep all relevant documents ready (bills, reports, photos)</li>
+                            <li style="margin: 8px 0;">Surveyor will contact you to schedule assessment</li>
+                            <li style="margin: 8px 0;">Provide complete information during survey</li>
+                            <li style="margin: 8px 0;">Track claim status using your Claim ID</li>
+                            <li style="margin: 8px 0;">Expect initial assessment within 3-5 business days</li>
+                        </ul>
+                    </div>
+                    
+                    <div style="background: #f8f9fa; border: 2px solid #e9ecef; padding: 15px; border-radius: 15px; margin: 20px 0;">
+                        <div style="font-size: 14px; opacity: 0.9;">
+                            <strong>📞 Customer Support:</strong> 1800-XXX-XXXX<br>
+                            <strong>📧 Email:</strong> claims@orientalinsurance.com<br>
+                            <strong>🕒 Working Hours:</strong> Mon-Fri 9:00 AM - 6:00 PM
+                        </div>
+                    </div>
+                    
+                    <div style="margin-top: 30px;">
+                        <button onclick="this.closest('div').parentElement.remove()" style="
+                            background: #6c757d;
+                            border: 2px solid #6c757d;
+                            color: white;
+                            padding: 12px 30px;
+                            border-radius: 30px;
+                            cursor: pointer;
+                            font-weight: bold;
+                            font-size: 16px;
+                            margin: 0 10px;
+                            transition: all 0.3s ease;
+                        " onmouseover="this.style.background='#5a6268'" onmouseout="this.style.background='#6c757d'">Close</button>
+                        
+                        <button onclick="window.open('tel:${surveyorData.phone}', '_self')" style="
+                            background: #007bff;
+                            border: 2px solid #007bff;
+                            color: white;
+                            padding: 12px 30px;
+                            border-radius: 30px;
+                            cursor: pointer;
+                            font-weight: bold;
+                            font-size: 16px;
+                            margin: 0 10px;
+                            transition: all 0.3s ease;
+                        " onmouseover="this.style.background='#0056b3'" onmouseout="this.style.background='#007bff'">📞 Call Surveyor</button>
+                    </div>
+                </div>
+            `;
+            
+            // Add animation keyframes if not already added
+            if (!document.querySelector('#claim-popup-styles')) {
+                const style = document.createElement('style');
+                style.id = 'claim-popup-styles';
+                style.textContent = `
+                    @keyframes fadeIn {
+                        from { opacity: 0; }
+                        to { opacity: 1; }
+                    }
+                    @keyframes slideIn {
+                        from { opacity: 0; transform: scale(0.8) translateY(-50px); }
+                        to { opacity: 1; transform: scale(1) translateY(0); }
+                    }
+                `;
+                document.head.appendChild(style);
+            }
+            
+            document.body.appendChild(popup);
+            
+            // Auto-remove after 30 seconds
+            setTimeout(() => {
+                if (popup.parentElement) popup.remove();
+            }, 30000);
         }
 
         function generateClaimTimeline(claim) {

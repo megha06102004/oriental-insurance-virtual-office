@@ -606,5 +606,68 @@
     "created_at": "2025-08-06T06:20:07.477Z",
     "updated_at": "2025-08-06T06:20:07.477Z",
     "approvedAt": "2025-08-06T06:20:07.477Z"
+  },
+  {
+    "id": "POL_1754466467624",
+    "policyNumber": "TRV/2025/1309",
+    "customerName": "Virender",
+    "email": "megha6102004@gmail.com",
+    "phone": "9999644464",
+    "address": "Samalkha New Delhi",
+    "dateOfBirth": "1970-09-05",
+    "policyType": "travel",
+    "premium": 2000,
+    "coverageAmount": 500000,
+    "startDate": "2025-08-06",
+    "endDate": "2026-08-06",
+    "status": "Active",
+    "applicationDate": "2025-08-06T07:47:47.624Z",
+    "customerDetails": {
+      "fullName": "Virender",
+      "firstName": "Virender",
+      "lastName": "Not provided",
+      "email": "megha6102004@gmail.com",
+      "phone": "9999644464",
+      "address": "Samalkha New Delhi",
+      "dateOfBirth": "1970-09-05",
+      "gender": "Not specified",
+      "occupation": "Not specified",
+      "annualIncome": "above-25lakh",
+      "bloodGroup": "Not specified",
+      "allergies": "None reported",
+      "chronicConditions": "None reported"
+    },
+    "policyDetails": {
+      "type": "travel",
+      "category": "Standard",
+      "subType": "Basic",
+      "sumInsured": 500000,
+      "premium": 2000,
+      "tenure": "1 year",
+      "paymentMode": "Annual"
+    },
+    "features": [
+      "Comprehensive coverage",
+      "24/7 customer support",
+      "Cashless claim facility",
+      "Online policy management",
+      "Quick claim processing"
+    ],
+    "benefits": [
+      "No claim bonus",
+      "Tax benefits under applicable sections",
+      "Easy renewal process",
+      "Wide network coverage",
+      "Quick settlement process"
+    ],
+    "terms": [
+      "Policy terms and conditions apply",
+      "Waiting period as per policy type",
+      "Exclusions as mentioned in policy document",
+      "Premium payment due dates must be maintained"
+    ],
+    "created_at": "2025-08-06T07:47:47.624Z",
+    "updated_at": "2025-08-06T07:47:47.624Z",
+    "approvedAt": "2025-08-06T07:47:47.624Z"
   }
 ]

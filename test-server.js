@@ -299,6 +299,597 @@ app.post('/api/claims/health', async (req, res) => {
   }
 });
 
+// Submit motor claim endpoint
+app.post('/api/claims/motor', async (req, res) => {
+  try {
+    console.log('Motor claim submission:', req.body);
+    
+    // Read existing claims
+    const claimsPath = path.join(__dirname, 'backend', 'data', 'claims.json');
+    const claimsData = await fs.readFile(claimsPath, 'utf8');
+    const claims = JSON.parse(claimsData);
+    
+    // Generate new claim ID
+    const claimId = `CLM${String(Math.floor(Math.random() * 1000)).padStart(3, '0')}`;
+    
+    // Create new motor claim object
+    const newClaim = {
+      id: claimId,
+      userId: "demo_user",
+      customerId: "CUST_AUTO",
+      policyId: "auto_generated",
+      policyNumber: req.body.policyNumber,
+      type: "Motor Claim",
+      claimType: req.body.claimType || "Accident",
+      incidentDate: req.body.incidentDate,
+      priority: "Medium",
+      claimAmount: 0,
+      estimatedAmount: parseInt(req.body.estimatedAmount) || 0,
+      approvedAmount: 0,
+      description: req.body.description,
+      incidentLocation: req.body.incidentLocation,
+      vehicleDetails: req.body.vehicleDetails || {},
+      assignedSurveyor: {
+        id: "SUR002",
+        name: "Mr. Rajesh Kumar",
+        phone: "+91-9876543301",
+        assignedDate: new Date().toISOString().split('T')[0]
+      },
+      contactNumber: "+91-9876543210",
+      documents: [],
+      timeline: [
+        {
+          step: "Claim Reported",
+          date: new Date().toISOString().split('T')[0],
+          completed: true,
+          remarks: "Motor claim submitted successfully"
+        },
+        {
+          step: "Customer Verification",
+          date: new Date().toISOString().split('T')[0],
+          completed: true,
+          remarks: "Policy and customer details verified"
+        },
+        {
+          step: "Surveyor Assignment",
+          date: new Date().toISOString().split('T')[0],
+          completed: true,
+          remarks: "Mr. Rajesh Kumar assigned for vehicle survey"
+        },
+        {
+          step: "Vehicle Inspection",
+          date: null,
+          completed: false,
+          remarks: "Vehicle damage assessment pending"
+        },
+        {
+          step: "Repair Estimate",
+          date: null,
+          completed: false,
+          remarks: "Garage estimate review pending"
+        },
+        {
+          step: "Approval Decision",
+          date: null,
+          completed: false,
+          remarks: "Final approval pending"
+        },
+        {
+          step: "Payment Processing",
+          date: null,
+          completed: false,
+          remarks: "Settlement processing"
+        }
+      ],
+      surveyReport: null,
+      status: "Under Review",
+      submissionMethod: "Online Portal",
+      created_at: new Date().toISOString(),
+      updated_at: new Date().toISOString()
+    };
+    
+    // Add new claim to claims array
+    claims.push(newClaim);
+    
+    // Save updated claims back to file
+    await fs.writeFile(claimsPath, JSON.stringify(claims, null, 2));
+    
+    console.log(`New motor claim ${claimId} saved for policy ${req.body.policyNumber}`);
+    
+    // Send claim confirmation email
+    let emailResult;
+    try {
+      // Get policy data to get customer email
+      const policiesPath = path.join(__dirname, 'backend', 'data', 'policies.json');
+      const policiesData = await fs.readFile(policiesPath, 'utf8');
+      const policies = JSON.parse(policiesData);
+      const policy = policies.find(p => p.policyNumber === req.body.policyNumber);
+      
+      if (policy && policy.email) {
+        const claimData = {
+          claimId: claimId,
+          policyNumber: req.body.policyNumber,
+          claimType: req.body.claimType || "Accident",
+          estimatedAmount: parseInt(req.body.estimatedAmount) || 0,
+          assignedSurveyor: "Mr. Rajesh Kumar"
+        };
+        
+        emailResult = await emailService.sendClaimConfirmation(claimData, policy.email);
+        console.log('📧 Motor claim email result:', emailResult);
+      } else {
+        emailResult = { success: false, message: 'Policy or email not found', mode: 'demo' };
+      }
+    } catch (emailError) {
+      console.error('📧 Motor claim email failed:', emailError.message);
+      emailResult = { success: false, message: 'Email sending failed', mode: 'demo' };
+    }
+    
+    res.json({
+      success: true,
+      message: 'Motor claim submitted successfully and saved',
+      data: {
+        claimId: claimId,
+        status: 'Under Review',
+        assignedSurveyor: {
+          name: 'Mr. Rajesh Kumar',
+          phone: '+91-9876543301',
+          specialization: 'Motor Claims & Vehicle Assessment'
+        },
+        emailSent: emailResult?.success || false,
+        emailMode: emailResult?.mode || 'demo'
+      }
+    });
+  } catch (error) {
+    console.error('Error saving motor claim:', error);
+    res.status(500).json({
+      success: false,
+      message: 'Error submitting motor claim',
+      error: error.message
+    });
+  }
+});
+
+// Submit home claim endpoint
+app.post('/api/claims/home', async (req, res) => {
+  try {
+    console.log('Home claim submission:', req.body);
+    
+    // Read existing claims
+    const claimsPath = path.join(__dirname, 'backend', 'data', 'claims.json');
+    const claimsData = await fs.readFile(claimsPath, 'utf8');
+    const claims = JSON.parse(claimsData);
+    
+    // Generate new claim ID
+    const claimId = `CLM${String(Math.floor(Math.random() * 1000)).padStart(3, '0')}`;
+    
+    // Create new home claim object
+    const newClaim = {
+      id: claimId,
+      userId: "demo_user",
+      customerId: "CUST_AUTO",
+      policyId: "auto_generated",
+      policyNumber: req.body.policyNumber,
+      type: "Home Claim",
+      claimType: req.body.claimType || "Fire",
+      incidentDate: req.body.incidentDate,
+      priority: "Medium",
+      claimAmount: 0,
+      estimatedAmount: parseInt(req.body.estimatedAmount) || 0,
+      approvedAmount: 0,
+      description: req.body.description,
+      propertyAddress: req.body.propertyAddress,
+      assignedSurveyor: {
+        id: "SUR003",
+        name: "Ms. Priya Singh",
+        phone: "+91-9876543302",
+        assignedDate: new Date().toISOString().split('T')[0]
+      },
+      contactNumber: "+91-9876543210",
+      documents: [],
+      timeline: [
+        {
+          step: "Claim Reported",
+          date: new Date().toISOString().split('T')[0],
+          completed: true,
+          remarks: "Home claim submitted successfully"
+        },
+        {
+          step: "Customer Verification",
+          date: new Date().toISOString().split('T')[0],
+          completed: true,
+          remarks: "Policy and customer details verified"
+        },
+        {
+          step: "Surveyor Assignment",
+          date: new Date().toISOString().split('T')[0],
+          completed: true,
+          remarks: "Ms. Priya Singh assigned for property survey"
+        },
+        {
+          step: "Property Inspection",
+          date: null,
+          completed: false,
+          remarks: "Property damage assessment pending"
+        },
+        {
+          step: "Loss Assessment",
+          date: null,
+          completed: false,
+          remarks: "Loss evaluation pending"
+        },
+        {
+          step: "Approval Decision",
+          date: null,
+          completed: false,
+          remarks: "Final approval pending"
+        },
+        {
+          step: "Payment Processing",
+          date: null,
+          completed: false,
+          remarks: "Settlement processing"
+        }
+      ],
+      surveyReport: null,
+      status: "Under Review",
+      submissionMethod: "Online Portal",
+      created_at: new Date().toISOString(),
+      updated_at: new Date().toISOString()
+    };
+    
+    // Add new claim to claims array
+    claims.push(newClaim);
+    
+    // Save updated claims back to file
+    await fs.writeFile(claimsPath, JSON.stringify(claims, null, 2));
+    
+    console.log(`New home claim ${claimId} saved for policy ${req.body.policyNumber}`);
+    
+    // Send claim confirmation email
+    let emailResult;
+    try {
+      // Get policy data to get customer email
+      const policiesPath = path.join(__dirname, 'backend', 'data', 'policies.json');
+      const policiesData = await fs.readFile(policiesPath, 'utf8');
+      const policies = JSON.parse(policiesData);
+      const policy = policies.find(p => p.policyNumber === req.body.policyNumber);
+      
+      if (policy && policy.email) {
+        const claimData = {
+          claimId: claimId,
+          policyNumber: req.body.policyNumber,
+          claimType: req.body.claimType || "Fire",
+          estimatedAmount: parseInt(req.body.estimatedAmount) || 0,
+          assignedSurveyor: "Ms. Priya Singh"
+        };
+        
+        emailResult = await emailService.sendClaimConfirmation(claimData, policy.email);
+        console.log('📧 Home claim email result:', emailResult);
+      } else {
+        emailResult = { success: false, message: 'Policy or email not found', mode: 'demo' };
+      }
+    } catch (emailError) {
+      console.error('📧 Home claim email failed:', emailError.message);
+      emailResult = { success: false, message: 'Email sending failed', mode: 'demo' };
+    }
+    
+    res.json({
+      success: true,
+      message: 'Home claim submitted successfully and saved',
+      data: {
+        claimId: claimId,
+        status: 'Under Review',
+        assignedSurveyor: {
+          name: 'Ms. Priya Singh',
+          phone: '+91-9876543302',
+          specialization: 'Property & Home Claims'
+        },
+        emailSent: emailResult?.success || false,
+        emailMode: emailResult?.mode || 'demo'
+      }
+    });
+  } catch (error) {
+    console.error('Error saving home claim:', error);
+    res.status(500).json({
+      success: false,
+      message: 'Error submitting home claim',
+      error: error.message
+    });
+  }
+});
+
+// Submit travel claim endpoint
+app.post('/api/claims/travel', async (req, res) => {
+  try {
+    console.log('Travel claim submission:', req.body);
+    
+    // Read existing claims
+    const claimsPath = path.join(__dirname, 'backend', 'data', 'claims.json');
+    const claimsData = await fs.readFile(claimsPath, 'utf8');
+    const claims = JSON.parse(claimsData);
+    
+    // Generate new claim ID
+    const claimId = `CLM${String(Math.floor(Math.random() * 1000)).padStart(3, '0')}`;
+    
+    // Create new travel claim object
+    const newClaim = {
+      id: claimId,
+      userId: "demo_user",
+      customerId: "CUST_AUTO",
+      policyId: "auto_generated",
+      policyNumber: req.body.policyNumber,
+      type: "Travel Claim",
+      claimType: req.body.claimType || "Medical Emergency",
+      incidentDate: req.body.incidentDate,
+      priority: "Medium",
+      claimAmount: 0,
+      estimatedAmount: parseInt(req.body.estimatedAmount) || 0,
+      approvedAmount: 0,
+      description: req.body.description,
+      travelDestination: req.body.travelDestination,
+      assignedSurveyor: {
+        id: "SUR004",
+        name: "Mr. Vikram Mehta",
+        phone: "+91-9876543303",
+        assignedDate: new Date().toISOString().split('T')[0]
+      },
+      contactNumber: "+91-9876543210",
+      documents: [],
+      timeline: [
+        {
+          step: "Claim Reported",
+          date: new Date().toISOString().split('T')[0],
+          completed: true,
+          remarks: "Travel claim submitted successfully"
+        },
+        {
+          step: "Customer Verification",
+          date: new Date().toISOString().split('T')[0],
+          completed: true,
+          remarks: "Policy and customer details verified"
+        },
+        {
+          step: "Surveyor Assignment",
+          date: new Date().toISOString().split('T')[0],
+          completed: true,
+          remarks: "Mr. Vikram Mehta assigned for claim review"
+        },
+        {
+          step: "Documentation Review",
+          date: null,
+          completed: false,
+          remarks: "Travel documents review pending"
+        },
+        {
+          step: "Claim Assessment",
+          date: null,
+          completed: false,
+          remarks: "Claim validity assessment pending"
+        },
+        {
+          step: "Approval Decision",
+          date: null,
+          completed: false,
+          remarks: "Final approval pending"
+        },
+        {
+          step: "Payment Processing",
+          date: null,
+          completed: false,
+          remarks: "Settlement processing"
+        }
+      ],
+      surveyReport: null,
+      status: "Under Review",
+      submissionMethod: "Online Portal",
+      created_at: new Date().toISOString(),
+      updated_at: new Date().toISOString()
+    };
+    
+    // Add new claim to claims array
+    claims.push(newClaim);
+    
+    // Save updated claims back to file
+    await fs.writeFile(claimsPath, JSON.stringify(claims, null, 2));
+    
+    console.log(`New travel claim ${claimId} saved for policy ${req.body.policyNumber}`);
+    
+    // Send claim confirmation email
+    let emailResult;
+    try {
+      // Get policy data to get customer email
+      const policiesPath = path.join(__dirname, 'backend', 'data', 'policies.json');
+      const policiesData = await fs.readFile(policiesPath, 'utf8');
+      const policies = JSON.parse(policiesData);
+      const policy = policies.find(p => p.policyNumber === req.body.policyNumber);
+      
+      if (policy && policy.email) {
+        const claimData = {
+          claimId: claimId,
+          policyNumber: req.body.policyNumber,
+          claimType: req.body.claimType || "Medical Emergency",
+          estimatedAmount: parseInt(req.body.estimatedAmount) || 0,
+          assignedSurveyor: "Mr. Vikram Mehta"
+        };
+        
+        emailResult = await emailService.sendClaimConfirmation(claimData, policy.email);
+        console.log('📧 Travel claim email result:', emailResult);
+      } else {
+        emailResult = { success: false, message: 'Policy or email not found', mode: 'demo' };
+      }
+    } catch (emailError) {
+      console.error('📧 Travel claim email failed:', emailError.message);
+      emailResult = { success: false, message: 'Email sending failed', mode: 'demo' };
+    }
+    
+    res.json({
+      success: true,
+      message: 'Travel claim submitted successfully and saved',
+      data: {
+        claimId: claimId,
+        status: 'Under Review',
+        assignedSurveyor: {
+          name: 'Mr. Vikram Mehta',
+          phone: '+91-9876543303',
+          specialization: 'Travel & International Claims'
+        },
+        emailSent: emailResult?.success || false,
+        emailMode: emailResult?.mode || 'demo'
+      }
+    });
+  } catch (error) {
+    console.error('Error saving travel claim:', error);
+    res.status(500).json({
+      success: false,
+      message: 'Error submitting travel claim',
+      error: error.message
+    });
+  }
+});
+
+// Generic claim endpoint for other insurance types (fire, marine, etc.)
+app.post('/api/claims/:type', async (req, res) => {
+  try {
+    const claimType = req.params.type;
+    console.log(`${claimType} claim submission:`, req.body);
+    
+    // Read existing claims
+    const claimsPath = path.join(__dirname, 'backend', 'data', 'claims.json');
+    const claimsData = await fs.readFile(claimsPath, 'utf8');
+    const claims = JSON.parse(claimsData);
+    
+    // Generate new claim ID
+    const claimId = `CLM${String(Math.floor(Math.random() * 1000)).padStart(3, '0')}`;
+    
+    // Create new generic claim object
+    const newClaim = {
+      id: claimId,
+      userId: "demo_user",
+      customerId: "CUST_AUTO",
+      policyId: "auto_generated",
+      policyNumber: req.body.policyNumber,
+      type: `${claimType.charAt(0).toUpperCase() + claimType.slice(1)} Claim`,
+      claimType: req.body.claimType || "General",
+      incidentDate: req.body.incidentDate,
+      priority: "Medium",
+      claimAmount: 0,
+      estimatedAmount: parseInt(req.body.estimatedAmount) || 0,
+      approvedAmount: 0,
+      description: req.body.description,
+      assignedSurveyor: {
+        id: "SUR005",
+        name: "Mr. Suresh Gupta",
+        phone: "+91-9876543399",
+        assignedDate: new Date().toISOString().split('T')[0]
+      },
+      contactNumber: "+91-9876543210",
+      documents: [],
+      timeline: [
+        {
+          step: "Claim Reported",
+          date: new Date().toISOString().split('T')[0],
+          completed: true,
+          remarks: `${claimType} claim submitted successfully`
+        },
+        {
+          step: "Customer Verification",
+          date: new Date().toISOString().split('T')[0],
+          completed: true,
+          remarks: "Policy and customer details verified"
+        },
+        {
+          step: "Surveyor Assignment",
+          date: new Date().toISOString().split('T')[0],
+          completed: true,
+          remarks: "Mr. Suresh Gupta assigned for claim review"
+        },
+        {
+          step: "Claim Assessment",
+          date: null,
+          completed: false,
+          remarks: "Claim details review pending"
+        },
+        {
+          step: "Approval Decision",
+          date: null,
+          completed: false,
+          remarks: "Final approval pending"
+        },
+        {
+          step: "Payment Processing",
+          date: null,
+          completed: false,
+          remarks: "Settlement processing"
+        }
+      ],
+      surveyReport: null,
+      status: "Under Review",
+      submissionMethod: "Online Portal",
+      created_at: new Date().toISOString(),
+      updated_at: new Date().toISOString()
+    };
+    
+    // Add new claim to claims array
+    claims.push(newClaim);
+    
+    // Save updated claims back to file
+    await fs.writeFile(claimsPath, JSON.stringify(claims, null, 2));
+    
+    console.log(`New ${claimType} claim ${claimId} saved for policy ${req.body.policyNumber}`);
+    
+    // Send claim confirmation email
+    let emailResult;
+    try {
+      // Get policy data to get customer email
+      const policiesPath = path.join(__dirname, 'backend', 'data', 'policies.json');
+      const policiesData = await fs.readFile(policiesPath, 'utf8');
+      const policies = JSON.parse(policiesData);
+      const policy = policies.find(p => p.policyNumber === req.body.policyNumber);
+      
+      if (policy && policy.email) {
+        const claimData = {
+          claimId: claimId,
+          policyNumber: req.body.policyNumber,
+          claimType: req.body.claimType || "General",
+          estimatedAmount: parseInt(req.body.estimatedAmount) || 0,
+          assignedSurveyor: "Mr. Suresh Gupta"
+        };
+        
+        emailResult = await emailService.sendClaimConfirmation(claimData, policy.email);
+        console.log(`📧 ${claimType} claim email result:`, emailResult);
+      } else {
+        emailResult = { success: false, message: 'Policy or email not found', mode: 'demo' };
+      }
+    } catch (emailError) {
+      console.error(`📧 ${claimType} claim email failed:`, emailError.message);
+      emailResult = { success: false, message: 'Email sending failed', mode: 'demo' };
+    }
+    
+    res.json({
+      success: true,
+      message: `${claimType} claim submitted successfully and saved`,
+      data: {
+        claimId: claimId,
+        status: 'Under Review',
+        assignedSurveyor: {
+          name: 'Mr. Suresh Gupta',
+          phone: '+91-9876543399',
+          specialization: 'General Claims'
+        },
+        emailSent: emailResult?.success || false,
+        emailMode: emailResult?.mode || 'demo'
+      }
+    });
+  } catch (error) {
+    console.error(`Error saving ${req.params.type} claim:`, error);
+    res.status(500).json({
+      success: false,
+      message: `Error submitting ${req.params.type} claim`,
+      error: error.message
+    });
+  }
+});
+
 // Auth endpoints for compatibility
 app.post('/api/auth/login', (req, res) => {
   res.json({ success: true, message: 'Login successful', token: 'demo_token' });

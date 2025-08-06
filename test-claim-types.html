@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>🧪 Claim Types Test - Oriental Insurance</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; background: #f5f5f5; }
+        .test-section { margin: 20px 0; padding: 20px; background: white; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
+        .success { border-left: 4px solid #4CAF50; }
+        .error { border-left: 4px solid #f44336; }
+        .warning { border-left: 4px solid #ff9800; }
+        button { padding: 12px 24px; margin: 8px; background: #007bff; color: white; border: none; border-radius: 4px; cursor: pointer; font-size: 14px; }
+        button:hover { background: #0056b3; }
+        .result { margin: 15px 0; padding: 15px; background: #f8f9fa; border-radius: 4px; border: 1px solid #dee2e6; }
+        .claim-details { background: #e9ecef; padding: 10px; border-radius: 4px; margin: 10px 0; }
+        h1 { color: #2c3e50; text-align: center; }
+        h2 { color: #34495e; }
+        .policy-input { padding: 8px; margin: 5px; border: 1px solid #ddd; border-radius: 4px; width: 200px; }
+    </style>
+</head>
+<body>
+    <h1>🏢 Oriental Insurance - Claim Types Testing</h1>
+    
+    <div class="test-section success">
+        <h2>✅ Health Insurance Claims Test</h2>
+        <p><strong>Expected:</strong> Should show Hospital/Medical Details</p>
+        <input type="text" class="policy-input" id="healthPolicy" placeholder="Health Policy" value="HLT/2025/5324">
+        <button onclick="testClaimType('health')">🏥 Test Health Claim</button>
+        <div id="healthResult" class="result"></div>
+    </div>
+    
+    <div class="test-section warning">
+        <h2>🚗 Motor Insurance Claims Test</h2>
+        <p><strong>Expected:</strong> Should show Vehicle/Accident Details (NOT hospital details)</p>
+        <input type="text" class="policy-input" id="motorPolicy" placeholder="Motor Policy" value="MOT/2025/6621">
+        <button onclick="testClaimType('motor')">🚗 Test Motor Claim</button>
+        <div id="motorResult" class="result"></div>
+    </div>
+    
+    <div class="test-section warning">
+        <h2>✈️ Travel Insurance Claims Test</h2>
+        <p><strong>Expected:</strong> Should show Travel Details (NOT hospital details)</p>
+        <input type="text" class="policy-input" id="travelPolicy" placeholder="Travel Policy" value="TRV/2025/1309">
+        <button onclick="testClaimType('travel')">✈️ Test Travel Claim</button>
+        <div id="travelResult" class="result"></div>
+    </div>
+    
+    <div class="test-section">
+        <h2>🏠 Home Insurance Claims Test</h2>
+        <p><strong>Expected:</strong> Should show Property Details (NOT hospital details)</p>
+        <input type="text" class="policy-input" id="homePolicy" placeholder="Home Policy" value="HOM/2025/1234">
+        <button onclick="testClaimType('home')">🏠 Test Home Claim</button>
+        <div id="homeResult" class="result"></div>
+    </div>
+    
+    <div class="test-section error">
+        <h2>📄 Download Report Testing</h2>
+        <p><strong>Test Issue:</strong> Download reports showing hospital details for ALL claim types</p>
+        <p><strong>Expected Fix:</strong> Each claim type should show appropriate details in downloaded reports</p>
+        <button onclick="testDownloadReports()">📄 Test All Download Reports</button>
+        <div id="downloadTestResult" class="result"></div>
+    </div>>
+        <button onclick="testClaimType('home')">🏠 Test Home Claim</button>
+        <div id="homeResult" class="result"></div>
+    </div>
+
+    <script>
+        async function testClaimType(type) {
+            const policyInputs = {
+                health: document.getElementById('healthPolicy').value,
+                motor: document.getElementById('motorPolicy').value,
+                travel: document.getElementById('travelPolicy').value,
+                home: document.getElementById('homePolicy').value
+            };
+            
+            const resultDivs = {
+                health: document.getElementById('healthResult'),
+                motor: document.getElementById('motorResult'),
+                travel: document.getElementById('travelResult'),
+                home: document.getElementById('homeResult')
+            };
+            
+            const policyNumber = policyInputs[type];
+            const resultDiv = resultDivs[type];
+            
+            resultDiv.innerHTML = `🔄 Testing ${type} claim for policy ${policyNumber}...`;
+            
+            try {
+                // Step 1: Check if policy exists
+                const policyResponse = await fetch(`http://localhost:5000/api/policies/number/${encodeURIComponent(policyNumber)}`);
+                const policyData = await policyResponse.json();
+                
+                if (!policyData.success) {
+                    resultDiv.innerHTML = `
+                        <div style="color: orange;">
+                            ⚠️ <strong>Policy Not Found</strong><br>
+                            Policy ${policyNumber} does not exist in the system.<br>
+                            <small>This policy needs to be created first for testing.</small>
+                        </div>
+                    `;
+                    return;
+                }
+                
+                // Step 2: Check for claims
+                const claimsResponse = await fetch(`http://localhost:5000/api/claims/policy/${encodeURIComponent(policyNumber)}`);
+                const claimsData = await claimsResponse.json();
+                
+                if (!claimsData.success || claimsData.data.length === 0) {
+                    resultDiv.innerHTML = `
+                        <div style="color: blue;">
+                            ℹ️ <strong>No Claims Found</strong><br>
+                            Policy ${policyNumber} exists but has no claims.<br>
+                            <small>You can verify this policy and check the "No Claims" message is appropriate for ${type} insurance.</small>
+                        </div>
+                    `;
+                    return;
+                }
+                
+                // Step 3: Analyze claim data
+                const claims = claimsData.data;
+                const claimAnalysis = claims.map(claim => {
+                    const claimType = claim.type?.toLowerCase() || '';
+                    const hasCorrectDetails = analyzeClaimDetails(claim, type);
+                    
+                    return {
+                        id: claim.id,
+                        type: claim.type,
+                        claimType: claim.claimType,
+                        hasCorrectDetails,
+                        detailsFound: getDetailsSummary(claim, type)
+                    };
+                });
+                
+                // Step 4: Display results
+                const passedClaims = claimAnalysis.filter(c => c.hasCorrectDetails);
+                const failedClaims = claimAnalysis.filter(c => !c.hasCorrectDetails);
+                
+                resultDiv.innerHTML = `
+                    <div style="color: ${failedClaims.length === 0 ? 'green' : 'red'};">
+                        <h3>${failedClaims.length === 0 ? '✅' : '❌'} ${type.toUpperCase()} Claims Test Results</h3>
+                        <div class="claim-details">
+                            <strong>Policy:</strong> ${policyNumber}<br>
+                            <strong>Customer:</strong> ${policyData.data.customerName}<br>
+                            <strong>Total Claims:</strong> ${claims.length}<br>
+                            <strong>Correct Details:</strong> ${passedClaims.length}/${claims.length}
+                        </div>
+                        
+                        ${claimAnalysis.map(claim => `
+                            <div style="margin: 10px 0; padding: 10px; background: ${claim.hasCorrectDetails ? '#d4edda' : '#f8d7da'}; border-radius: 4px;">
+                                <strong>Claim ${claim.id}</strong> (${claim.type})<br>
+                                <small>${claim.detailsFound}</small>
+                            </div>
+                        `).join('')}
+                        
+                        ${failedClaims.length === 0 ? 
+                            '<p><strong>🎉 All claims show correct details for ' + type + ' insurance!</strong></p>' : 
+                            '<p><strong>⚠️ Some claims still show incorrect details. Check the implementation.</strong></p>'
+                        }
+                    </div>
+                `;
+                
+            } catch (error) {
+                resultDiv.innerHTML = `
+                    <div style="color: red;">
+                        ❌ <strong>Test Failed</strong><br>
+                        Error: ${error.message}
+                    </div>
+                `;
+            }
+        }
+        
+        function analyzeClaimDetails(claim, expectedType) {
+            switch(expectedType) {
+                case 'health':
+                    return !!(claim.hospitalName || claim.treatmentDetails);
+                case 'motor':
+                    return !!(claim.vehicleDetails || claim.incidentLocation);
+                case 'travel':
+                    return !!(claim.travelDestination);
+                case 'home':
+                    return !!(claim.propertyAddress || claim.damageType);
+                default:
+                    return false;
+            }
+        }
+        
+        function getDetailsSummary(claim, expectedType) {
+            switch(expectedType) {
+                case 'health':
+                    return `Hospital: ${claim.hospitalName || 'Not specified'}, Doctor: ${claim.treatmentDetails?.doctorName || 'Not specified'}`;
+                case 'motor':
+                    return `Location: ${claim.incidentLocation || 'Not specified'}, Vehicle: ${claim.vehicleDetails?.registrationNumber || 'Not specified'}`;
+                case 'travel':
+                    return `Destination: ${claim.travelDestination || 'Not specified'}, Type: ${claim.claimType || 'Not specified'}`;
+                case 'home':
+                    return `Property: ${claim.propertyAddress || 'Not specified'}, Damage: ${claim.damageType || claim.description || 'Not specified'}`;
+                default:
+                    return 'Unknown claim type';
+            }
+        }
+        
+        function testDownloadReports() {
+            const result = document.getElementById('downloadTestResult');
+            result.innerHTML = '<p>🧪 <strong>Testing Download Report Functions...</strong></p>';
+            
+            result.innerHTML = `
+                <p><strong>📊 Download Report Test Instructions:</strong></p>
+                <div style="margin: 10px 0; padding: 15px; background: #e7f3ff; border-radius: 4px; border-left: 4px solid #007bff;">
+                    <p><strong>🔧 Fix Applied:</strong></p>
+                    <ul>
+                        <li>✅ Modified downloadClaimReport() function to detect claim type</li>
+                        <li>✅ Updated generateClaimReportHTML() function with dynamic sections</li>
+                        <li>✅ Health claims → Hospital details</li>
+                        <li>✅ Travel claims → Travel details (no hospital info)</li>
+                        <li>✅ Motor claims → Vehicle details (no hospital info)</li>
+                        <li>✅ Home claims → Property details (no hospital info)</li>
+                    </ul>
+                </div>
+                
+                <p><strong>📋 Manual Testing Steps:</strong></p>
+                <ol style="margin-left: 20px;">
+                    <li>Open the main application</li>
+                    <li>Login and view existing claims</li>
+                    <li>Click on a <strong>Travel Insurance</strong> claim</li>
+                    <li>Click "📄 Download Report" button</li>
+                    <li>Verify the report shows <strong>Travel Destination, Travel Dates</strong> instead of hospital details</li>
+                    <li>Repeat for Motor and Home insurance claims</li>
+                </ol>
+                
+                <div style="margin: 15px 0; padding: 15px; background: #d4edda; border-radius: 4px; border-left: 4px solid #28a745;">
+                    <p><strong>✅ Expected Results:</strong></p>
+                    <ul>
+                        <li>Travel claims: Show destination, travel dates, incident details</li>
+                        <li>Motor claims: Show vehicle details, incident location, police report</li>
+                        <li>Home claims: Show property address, damage assessment</li>
+                        <li>Health claims: Show hospital name, doctor, treatment details</li>
+                    </ul>
+                </div>
+            `;
+        }
+        
+        // Auto-run tests on page load
+        window.addEventListener('load', function() {
+            setTimeout(() => {
+                testClaimType('health');
+                setTimeout(() => testClaimType('motor'), 1000);
+                setTimeout(() => testClaimType('travel'), 2000);
+                setTimeout(() => testClaimType('home'), 3000);
+            }, 500);
+        });
+    </script>
+</body>
+</html>
