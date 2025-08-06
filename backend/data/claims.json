@@ -1,0 +1,571 @@
+[
+  {
+    "id": "CLM001",
+    "userId": "demo_user",
+    "customerId": "CUST001",
+    "policyId": "0d0b88f7-b954-4c89-a345-551874fdf457",
+    "policyNumber": "HLT/2025/5324",
+    "type": "Health Claim",
+    "claimType": "Hospitalization",
+    "incidentDate": "2025-08-04",
+    "priority": "High",
+    "claimAmount": 0,
+    "estimatedAmount": 75000,
+    "approvedAmount": 0,
+    "description": "Emergency surgery for appendicitis with complications",
+    "hospitalName": "Apollo Hospital Delhi",
+    "treatmentDetails": {
+      "diagnosis": "Acute Appendicitis with Peritonitis",
+      "procedure": "Laparoscopic Appendectomy",
+      "doctorName": "Dr. Suresh Kumar",
+      "admissionDate": "2025-08-04",
+      "dischargeDate": "2025-08-06",
+      "roomType": "Private"
+    },
+    "assignedSurveyor": {
+      "id": "SUR001",
+      "name": "Dr. Amit Sharma",
+      "phone": "+91-9876543300",
+      "assignedDate": "2025-08-04"
+    },
+    "contactNumber": "+91-9876543210",
+    "documents": [],
+    "timeline": [
+      {
+        "step": "Claim Reported",
+        "date": "2025-08-04",
+        "completed": true,
+        "remarks": "Health claim submitted successfully"
+      },
+      {
+        "step": "Customer Verification",
+        "date": "2025-08-04",
+        "completed": true,
+        "remarks": "Policy and customer details verified"
+      },
+      {
+        "step": "Surveyor Assignment",
+        "date": "2025-08-04",
+        "completed": true,
+        "remarks": "Dr. Amit Sharma assigned for survey"
+      },
+      {
+        "step": "Documents Collection",
+        "date": null,
+        "completed": false,
+        "remarks": "Awaiting medical documents"
+      },
+      {
+        "step": "Survey In Progress",
+        "date": null,
+        "completed": false,
+        "remarks": "Hospital visit to be scheduled"
+      },
+      {
+        "step": "Survey Report",
+        "date": null,
+        "completed": false,
+        "remarks": "Awaiting surveyor report"
+      },
+      {
+        "step": "Medical Review",
+        "date": null,
+        "completed": false,
+        "remarks": "Medical board review pending"
+      },
+      {
+        "step": "Approval Decision",
+        "date": null,
+        "completed": false,
+        "remarks": "Final approval pending"
+      },
+      {
+        "step": "Payment Processing",
+        "date": null,
+        "completed": false,
+        "remarks": "Settlement processing"
+      }
+    ],
+    "surveyReport": null,
+    "status": "Under Review",
+    "reportedDate": "2025-08-04",
+    "created_at": "2025-08-04T10:30:00.000Z",
+    "updated_at": "2025-08-04T10:30:00.000Z"
+  },
+  {
+    "id": "CLM002",
+    "userId": "demo_user",
+    "customerId": "CUST002",
+    "policyId": "13cf03a3-682d-4e5e-88d9-d29539bdf69d",
+    "policyNumber": "HLT/2025/6265",
+    "type": "Health Claim",
+    "claimType": "Emergency Treatment",
+    "incidentDate": "2025-08-05",
+    "priority": "Medium",
+    "claimAmount": 0,
+    "estimatedAmount": 45000,
+    "approvedAmount": 0,
+    "description": "Cardiac emergency - chest pain and irregular heartbeat",
+    "hospitalName": "Max Hospital Gurgaon",
+    "treatmentDetails": {
+      "diagnosis": "Atrial Fibrillation",
+      "procedure": "Cardioversion and Medication",
+      "doctorName": "Dr. Rajesh Gupta",
+      "admissionDate": "2025-08-05",
+      "dischargeDate": "2025-08-05",
+      "roomType": "Emergency"
+    },
+    "assignedSurveyor": {
+      "id": "SUR002",
+      "name": "Dr. Priya Singh",
+      "phone": "+91-9876543301",
+      "assignedDate": "2025-08-05"
+    },
+    "contactNumber": "9717963935",
+    "documents": [],
+    "timeline": [
+      {
+        "step": "Claim Reported",
+        "date": "2025-08-05",
+        "completed": true,
+        "remarks": "Emergency claim submitted"
+      },
+      {
+        "step": "Customer Verification",
+        "date": "2025-08-05",
+        "completed": true,
+        "remarks": "Policy verified - Megha Bhandari"
+      },
+      {
+        "step": "Surveyor Assignment",
+        "date": "2025-08-05",
+        "completed": true,
+        "remarks": "Dr. Priya Singh assigned"
+      },
+      {
+        "step": "Documents Collection",
+        "date": null,
+        "completed": false,
+        "remarks": "Awaiting medical reports"
+      },
+      {
+        "step": "Survey In Progress",
+        "date": null,
+        "completed": false,
+        "remarks": "Hospital verification pending"
+      },
+      {
+        "step": "Survey Report",
+        "date": null,
+        "completed": false,
+        "remarks": "Awaiting surveyor report"
+      },
+      {
+        "step": "Medical Review",
+        "date": null,
+        "completed": false,
+        "remarks": "Medical board review pending"
+      },
+      {
+        "step": "Approval Decision",
+        "date": null,
+        "completed": false,
+        "remarks": "Final approval pending"
+      },
+      {
+        "step": "Payment Processing",
+        "date": null,
+        "completed": false,
+        "remarks": "Settlement processing"
+      }
+    ],
+    "surveyReport": null,
+    "status": "Under Review",
+    "reportedDate": "2025-08-05",
+    "created_at": "2025-08-05T06:45:00.000Z",
+    "updated_at": "2025-08-05T06:45:00.000Z"
+  },
+  {
+    "id": "CLM981",
+    "userId": "demo_user",
+    "customerId": "CUST_AUTO",
+    "policyId": "auto_generated",
+    "policyNumber": "HOM/2025/9154",
+    "type": "Health Claim",
+    "claimType": "Surgery",
+    "incidentDate": "8475-03-07",
+    "priority": "Medium",
+    "claimAmount": 0,
+    "estimatedAmount": 10000,
+    "approvedAmount": 0,
+    "description": "megha bhandari",
+    "hospitalName": "gdcsfvgf",
+    "treatmentDetails": {
+      "diagnosis": "abcdefghijkl",
+      "procedure": "qweetryu",
+      "doctorName": "megha",
+      "admissionDate": "",
+      "dischargeDate": "8798-06-05",
+      "roomType": "ICU"
+    },
+    "assignedSurveyor": {
+      "id": "SUR001",
+      "name": "Dr. Amit Sharma",
+      "phone": "+91-9876543300",
+      "assignedDate": "2025-08-05"
+    },
+    "contactNumber": "+91-9876543210",
+    "documents": [],
+    "timeline": [
+      {
+        "step": "Claim Reported",
+        "date": "2025-08-05",
+        "completed": true,
+        "remarks": "Health claim submitted successfully"
+      },
+      {
+        "step": "Customer Verification",
+        "date": "2025-08-05",
+        "completed": true,
+        "remarks": "Policy and customer details verified"
+      },
+      {
+        "step": "Surveyor Assignment",
+        "date": "2025-08-05",
+        "completed": true,
+        "remarks": "Dr. Amit Sharma assigned for survey"
+      },
+      {
+        "step": "Documents Collection",
+        "date": null,
+        "completed": false,
+        "remarks": "Awaiting medical documents"
+      },
+      {
+        "step": "Medical Review",
+        "date": null,
+        "completed": false,
+        "remarks": "Medical board review pending"
+      },
+      {
+        "step": "Approval Decision",
+        "date": null,
+        "completed": false,
+        "remarks": "Final approval pending"
+      },
+      {
+        "step": "Payment Processing",
+        "date": null,
+        "completed": false,
+        "remarks": "Settlement processing"
+      }
+    ],
+    "surveyReport": null,
+    "status": "Under Review",
+    "submissionMethod": "Online Portal",
+    "created_at": "2025-08-05T10:10:44.061Z",
+    "updated_at": "2025-08-05T10:10:44.061Z"
+  },
+  {
+    "id": "CLM651",
+    "userId": "demo_user",
+    "customerId": "CUST_AUTO",
+    "policyId": "auto_generated",
+    "policyNumber": "HLT/2025/8010",
+    "type": "Health Claim",
+    "claimType": "Hospitalization",
+    "incidentDate": "2025-08-01",
+    "priority": "Medium",
+    "claimAmount": 0,
+    "estimatedAmount": 75000,
+    "approvedAmount": 0,
+    "description": "Emergency medical treatment",
+    "hospitalName": "City General Hospital",
+    "treatmentDetails": {},
+    "assignedSurveyor": {
+      "id": "SUR001",
+      "name": "Dr. Amit Sharma",
+      "phone": "+91-9876543300",
+      "assignedDate": "2025-08-05"
+    },
+    "contactNumber": "+91-9876543210",
+    "documents": [],
+    "timeline": [
+      {
+        "step": "Claim Reported",
+        "date": "2025-08-05",
+        "completed": true,
+        "remarks": "Health claim submitted successfully"
+      },
+      {
+        "step": "Customer Verification",
+        "date": "2025-08-05",
+        "completed": true,
+        "remarks": "Policy and customer details verified"
+      },
+      {
+        "step": "Surveyor Assignment",
+        "date": "2025-08-05",
+        "completed": true,
+        "remarks": "Dr. Amit Sharma assigned for survey"
+      },
+      {
+        "step": "Documents Collection",
+        "date": null,
+        "completed": false,
+        "remarks": "Awaiting medical documents"
+      },
+      {
+        "step": "Medical Review",
+        "date": null,
+        "completed": false,
+        "remarks": "Medical board review pending"
+      },
+      {
+        "step": "Approval Decision",
+        "date": null,
+        "completed": false,
+        "remarks": "Final approval pending"
+      },
+      {
+        "step": "Payment Processing",
+        "date": null,
+        "completed": false,
+        "remarks": "Settlement processing"
+      }
+    ],
+    "surveyReport": null,
+    "status": "Under Review",
+    "submissionMethod": "Online Portal",
+    "created_at": "2025-08-05T18:16:03.291Z",
+    "updated_at": "2025-08-05T18:16:03.291Z"
+  },
+  {
+    "id": "CLM946",
+    "userId": "demo_user",
+    "customerId": "CUST_AUTO",
+    "policyId": "auto_generated",
+    "policyNumber": "HLT/2025/4157",
+    "type": "Health Claim",
+    "claimType": "Hospitalization",
+    "incidentDate": "2025-08-06",
+    "priority": "Medium",
+    "claimAmount": 0,
+    "estimatedAmount": 50000,
+    "approvedAmount": 0,
+    "description": "Test medical treatment",
+    "hospitalName": "Test Hospital",
+    "treatmentDetails": {},
+    "assignedSurveyor": {
+      "id": "SUR001",
+      "name": "Dr. Amit Sharma",
+      "phone": "+91-9876543300",
+      "assignedDate": "2025-08-06"
+    },
+    "contactNumber": "+91-9876543210",
+    "documents": [],
+    "timeline": [
+      {
+        "step": "Claim Reported",
+        "date": "2025-08-06",
+        "completed": true,
+        "remarks": "Health claim submitted successfully"
+      },
+      {
+        "step": "Customer Verification",
+        "date": "2025-08-06",
+        "completed": true,
+        "remarks": "Policy and customer details verified"
+      },
+      {
+        "step": "Surveyor Assignment",
+        "date": "2025-08-06",
+        "completed": true,
+        "remarks": "Dr. Amit Sharma assigned for survey"
+      },
+      {
+        "step": "Documents Collection",
+        "date": null,
+        "completed": false,
+        "remarks": "Awaiting medical documents"
+      },
+      {
+        "step": "Medical Review",
+        "date": null,
+        "completed": false,
+        "remarks": "Medical board review pending"
+      },
+      {
+        "step": "Approval Decision",
+        "date": null,
+        "completed": false,
+        "remarks": "Final approval pending"
+      },
+      {
+        "step": "Payment Processing",
+        "date": null,
+        "completed": false,
+        "remarks": "Settlement processing"
+      }
+    ],
+    "surveyReport": null,
+    "status": "Under Review",
+    "submissionMethod": "Online Portal",
+    "created_at": "2025-08-06T06:16:33.005Z",
+    "updated_at": "2025-08-06T06:16:33.005Z"
+  },
+  {
+    "id": "CLM193",
+    "userId": "demo_user",
+    "customerId": "CUST_AUTO",
+    "policyId": "auto_generated",
+    "policyNumber": "MOT/2025/6621",
+    "type": "Motor Claim",
+    "claimType": "Accident",
+    "incidentDate": "2025-07-23",
+    "priority": "Medium",
+    "claimAmount": 0,
+    "estimatedAmount": 20000,
+    "approvedAmount": 0,
+    "description": "Suddenly a car hit me hard",
+    "incidentLocation": "Noida",
+    "vehicleDetails": {
+      "registrationNumber": "UP45AB1920",
+      "driverName": "Ram",
+      "licenseNumber": "6573657836",
+      "firNumber": "1800",
+      "garageName": "Sodhi Garage",
+      "thirdPartyInvolved": "No"
+    },
+    "assignedSurveyor": {
+      "id": "SUR002",
+      "name": "Mr. Rajesh Kumar",
+      "phone": "+91-9876543301",
+      "assignedDate": "2025-08-06"
+    },
+    "contactNumber": "+91-9876543210",
+    "documents": [],
+    "timeline": [
+      {
+        "step": "Claim Reported",
+        "date": "2025-08-06",
+        "completed": true,
+        "remarks": "Motor claim submitted successfully"
+      },
+      {
+        "step": "Customer Verification",
+        "date": "2025-08-06",
+        "completed": true,
+        "remarks": "Policy and customer details verified"
+      },
+      {
+        "step": "Surveyor Assignment",
+        "date": "2025-08-06",
+        "completed": true,
+        "remarks": "Mr. Rajesh Kumar assigned for vehicle survey"
+      },
+      {
+        "step": "Vehicle Inspection",
+        "date": null,
+        "completed": false,
+        "remarks": "Vehicle damage assessment pending"
+      },
+      {
+        "step": "Repair Estimate",
+        "date": null,
+        "completed": false,
+        "remarks": "Garage estimate review pending"
+      },
+      {
+        "step": "Approval Decision",
+        "date": null,
+        "completed": false,
+        "remarks": "Final approval pending"
+      },
+      {
+        "step": "Payment Processing",
+        "date": null,
+        "completed": false,
+        "remarks": "Settlement processing"
+      }
+    ],
+    "surveyReport": null,
+    "status": "Under Review",
+    "submissionMethod": "Online Portal",
+    "created_at": "2025-08-06T06:54:27.406Z",
+    "updated_at": "2025-08-06T06:54:27.406Z"
+  },
+  {
+    "id": "CLM109",
+    "userId": "demo_user",
+    "customerId": "CUST_AUTO",
+    "policyId": "auto_generated",
+    "policyNumber": "TRV/2025/1309",
+    "type": "Travel Claim",
+    "claimType": "Trip Cancellation",
+    "incidentDate": "2025-09-02",
+    "priority": "Medium",
+    "claimAmount": 0,
+    "estimatedAmount": 10000,
+    "approvedAmount": 0,
+    "description": "Sudden home issues",
+    "travelDestination": "Europe",
+    "assignedSurveyor": {
+      "id": "SUR004",
+      "name": "Mr. Vikram Mehta",
+      "phone": "+91-9876543303",
+      "assignedDate": "2025-08-06"
+    },
+    "contactNumber": "+91-9876543210",
+    "documents": [],
+    "timeline": [
+      {
+        "step": "Claim Reported",
+        "date": "2025-08-06",
+        "completed": true,
+        "remarks": "Travel claim submitted successfully"
+      },
+      {
+        "step": "Customer Verification",
+        "date": "2025-08-06",
+        "completed": true,
+        "remarks": "Policy and customer details verified"
+      },
+      {
+        "step": "Surveyor Assignment",
+        "date": "2025-08-06",
+        "completed": true,
+        "remarks": "Mr. Vikram Mehta assigned for claim review"
+      },
+      {
+        "step": "Documentation Review",
+        "date": null,
+        "completed": false,
+        "remarks": "Travel documents review pending"
+      },
+      {
+        "step": "Claim Assessment",
+        "date": null,
+        "completed": false,
+        "remarks": "Claim validity assessment pending"
+      },
+      {
+        "step": "Approval Decision",
+        "date": null,
+        "completed": false,
+        "remarks": "Final approval pending"
+      },
+      {
+        "step": "Payment Processing",
+        "date": null,
+        "completed": false,
+        "remarks": "Settlement processing"
+      }
+    ],
+    "surveyReport": null,
+    "status": "Under Review",
+    "submissionMethod": "Online Portal",
+    "created_at": "2025-08-06T07:49:28.140Z",
+    "updated_at": "2025-08-06T07:49:28.140Z"
+  }
+]

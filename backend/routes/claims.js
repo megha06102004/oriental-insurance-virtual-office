@@ -1,6 +1,10 @@
 const express = require('express');
 const router = express.Router();
 const { body, validationResult } = require('express-validator');
+const fileStorage = require('../utils/fileStorage');
+
+// Initialize file storage
+fileStorage.initializeDataFiles().catch(console.error);
 
 // Mock data for customers with detailed health policy information
 let customers = [
@@ -231,7 +235,7 @@ router.post('/health', [
   body('treatmentDetails.diagnosis').notEmpty().withMessage('Diagnosis is required'),
   body('treatmentDetails.procedure').notEmpty().withMessage('Procedure is required'),
   body('treatmentDetails.doctorName').notEmpty().withMessage('Doctor name is required')
-], (req, res) => {
+], async (req, res) => {
   try {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
@@ -245,22 +249,34 @@ router.post('/health', [
     const { policyNumber, claimType, incidentDate, estimatedAmount, description, 
             hospitalName, treatmentDetails } = req.body;
 
-    // Verify customer and policy
-    const policy = require('./policies').policies?.find(p => p.policyNumber === policyNumber);
+    // Verify customer and policy using fileStorage
+    const policy = await fileStorage.getPolicyByNumber(policyNumber);
     if (!policy) {
       return res.status(404).json({
         success: false,
-        message: 'Policy not found'
+        message: 'Policy not found',
+        details: 'No active policy found with this policy number. Please verify the policy number.'
       });
     }
 
-    const customer = customers.find(c => c.policies.includes(policy.id));
-    if (!customer) {
-      return res.status(404).json({
+    // Check if policy is active
+    if (policy.status !== 'approved' && policy.status !== 'active') {
+      return res.status(400).json({
         success: false,
-        message: 'Customer not found for this policy'
+        message: 'Policy not active',
+        details: `Policy status is '${policy.status}'. Only approved/active policies are eligible for claims.`
       });
     }
+
+    // Use policy customer information
+    const customer = {
+      id: policy.userId || 'CUST_' + policy.id,
+      firstName: policy.fullName ? policy.fullName.split(' ')[0] : policy.customerName?.split(' ')[0] || 'Customer',
+      lastName: policy.fullName ? policy.fullName.split(' ').slice(1).join(' ') : policy.customerName?.split(' ').slice(1).join(' ') || '',
+      email: policy.email,
+      phone: policy.phone,
+      policies: [policy.id]
+    };
 
     // Auto-assign best available surveyor
     const availableSurveyors = surveyors.filter(s => 
@@ -282,18 +298,15 @@ router.post('/health', [
     const surveyorIndex = surveyors.findIndex(s => s.id === assignedSurveyor.id);
     surveyors[surveyorIndex].currentCases += 1;
 
-    // Create new claim
-    const newClaim = {
-      id: `CLM${String(claims.length + 1).padStart(3, '0')}`,
-      userId: req.user.id,
+    // Create new claim using fileStorage
+    const claimData = {
+      userId: req.user?.id || 'demo_user', // Use demo user when no auth
       customerId: customer.id,
       policyId: policy.id,
       policyNumber: policyNumber,
       type: 'Health Claim',
       claimType: claimType,
       incidentDate: incidentDate,
-      reportedDate: new Date().toISOString().split('T')[0],
-      status: 'Under Review',
       priority: estimatedAmount > 100000 ? 'High' : estimatedAmount > 50000 ? 'Medium' : 'Low',
       claimAmount: 0,
       estimatedAmount: parseFloat(estimatedAmount),
@@ -320,12 +333,10 @@ router.post('/health', [
         { step: 'Approval Decision', date: null, completed: false, remarks: 'Final approval pending' },
         { step: 'Payment Processing', date: null, completed: false, remarks: 'Settlement processing' }
       ],
-      surveyReport: null,
-      createdAt: new Date().toISOString(),
-      updatedAt: new Date().toISOString()
+      surveyReport: null
     };
 
-    claims.push(newClaim);
+    const newClaim = await fileStorage.createClaim(claimData);
 
     res.status(201).json({
       success: true,
@@ -350,9 +361,10 @@ router.post('/health', [
 });
 
 // Get all claims for authenticated user
-router.get('/', (req, res) => {
+router.get('/', async (req, res) => {
   try {
-    const userClaims = claims.filter(claim => claim.userId === req.user.id);
+    // For demo purposes, return all claims when no authentication
+    const userClaims = await fileStorage.getClaims();
     
     res.json({
       success: true,
@@ -369,14 +381,22 @@ router.get('/', (req, res) => {
 });
 
 // Get claim by ID
-router.get('/:id', (req, res) => {
+router.get('/:id', async (req, res) => {
   try {
-    const claim = claims.find(c => c.id === req.params.id && c.userId === req.user.id);
+    const claim = await fileStorage.getClaimById(req.params.id);
     
     if (!claim) {
       return res.status(404).json({
         success: false,
         message: 'Claim not found'
+      });
+    }
+
+    // Check if user has access to this claim (skip auth check for demo)
+    if (req.user?.id && claim.userId !== req.user.id) {
+      return res.status(403).json({
+        success: false,
+        message: 'Access denied'
       });
     }
 
